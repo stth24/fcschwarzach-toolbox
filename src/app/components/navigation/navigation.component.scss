@@ -1,0 +1,32 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  /* background-color: #0077b8; */
+  border-right: 2px solid #0077b8;
+  overflow: hidden;
+  transition: max-width 0.5s ease, min-width 0.5s ease, opacity 0.2s ease;
+  //   min-width: 200px;
+}
+
+.nav-out {
+  min-width: 200px;
+  max-width: 300px;
+  opacity: 1;
+}
+
+.nav-in {
+  min-width: 0;
+  max-width: 0;
+  width: 0;
+  opacity: 0;
+}
+
+.nav-entry {
+  padding: 10px;
+
+  &:hover {
+    background-color: var(--regular-green);
+    color: white;
+    cursor: pointer;
+  }
+}

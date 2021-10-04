@@ -1,0 +1,21 @@
+<div class="loader-box"  *ngIf="teams.length < 1">
+    <div class="loader">Loading...</div>
+
+</div>
+
+
+<table *ngIf="teams.length > 0">
+    <tbody>
+        <ng-container *ngFor="let team of teams, let i = index">
+            <tr [class.unevenRow]="i%2 === 0">
+                <td><b>{{team.name}}</b></td>
+                    <ng-container *ngFor="let event of team.events">
+                        <td>
+                            <p><b>{{event.summary.value}}</b></p>
+                            <p>{{event.dtstart.value | date: 'dd.MM.yyyy HH:mm'}} Uhr</p>
+                        </td>
+                    </ng-container>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>

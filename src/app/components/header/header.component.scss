@@ -1,0 +1,25 @@
+:host {
+  display: flex;
+  background-color: var(--dark-blue);
+  color: white;
+  padding: 10px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.toggle-nav-button {
+  transition: transform 0.7s ease;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.navClosed {
+  transform: rotate(180deg);
+}
