@@ -1,21 +1,69 @@
 <div class="loader-box"  *ngIf="teams.length < 1">
     <div class="loader">Loading...</div>
-
 </div>
 
 
-<table *ngIf="teams.length > 0">
-    <tbody>
-        <ng-container *ngFor="let team of teams, let i = index">
-            <tr [class.unevenRow]="i%2 === 0">
-                <td><b>{{team.name}}</b></td>
-                    <ng-container *ngFor="let event of team.events">
-                        <td>
-                            <p><b>{{event.summary.value}}</b></p>
-                            <p>{{event.dtstart.value | date: 'dd.MM.yyyy HH:mm'}} Uhr</p>
+<ng-container  *ngIf="teams.length > 0">
+    <button (click)="toggleFilters()">Filter anzeigen/ausblenden</button>
+    <div class="filters" [class.hideFilters]="!showFilters">
+        <div class="date-filters">
+            <span>Start Date:</span> 
+            <input type="date" [value]="startDate | date: 'yyyy-MM-dd'" (change)="changeDate('startDate', $event)" />
+            <span>End Date:</span> 
+            <input type="date" [value]="endDate | date: 'yyyy-MM-dd'" (change)="changeDate('endDate', $event)" />
+        </div>
+        <div class="toggle-home-away">
+            <div class="toggle-team">
+                <input type="checkbox" (change)="createTableData()" [(ngModel)]="showHome" /> Heimspiele
+            </div>
+            <div class="toggle-team">
+                <input type="checkbox" (change)="createTableData()" [(ngModel)]="showAway" /> Auswärtsspiele
+            </div>
+        </div>
+        <div class="toggle-team-filter">
+            <div class="toggle-boxes">
+                <div class="toggle-team" *ngFor="let team of teams">
+                    <input type="checkbox" (change)="toggleTeam(team.name, $event)" [checked]="team.show" /> {{team.name}}
+                </div>
+            </div>
+            <button (click)="toggleAllTeams()">Alle an-/abwählen</button>
+        </div>
+    </div>
+
+    <div class="table-wrapper" *ngIf="matchTable.length > 0">
+        <table>
+            <thead>
+                <th class="firstColumn">Datum:</th>
+                <ng-container *ngFor="let team of teams">
+                    <th *ngIf="team.show">{{team.name}}</th>
+                </ng-container>
+            </thead>
+            <tbody>
+                <tr *ngFor="let gameday of matchTable" [class.isWeekend]="gameday.date.getDay() === 6 || gameday.date.getDay() === 0">
+                    <td class="firstColumn"><b>{{gameday.date | date: 'EEEE dd.MM.yyyy'}}</b></td>
+                    <ng-container *ngFor="let team of gameday.teams">
+                        <td [class.withoutGameTd]="team.events.length < 1"
+                        [class.withGame]="team.events.length > 0">
+                            <div *ngIf="team.events.length > 0">
+                                <p><b>{{team.events[0].summary.value}}</b></p>
+                                <p>{{team.events[0].description.value}}</p>
+                                <hr>
+                                <p>{{team.events[0].dtstart.value | date: 'HH:mm'}} Uhr</p>
+                                <hr>
+                                <p [class.location-home]="team.events[0].location.value.includes('Schwarzach')">
+                                    {{team.events[0].location.value}}
+                                </p>
+                            </div>
+                            <!-- <ng-container *ngIf="team.events.length < 1">
+                                Kein Spiel
+                            </ng-container> -->
+                            <div [class.withoutGame]="team.events.length < 1">
+                                
+                            </div>
                         </td>
                     </ng-container>
-            </tr>
-        </ng-container>
-    </tbody>
-</table>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ng-container>

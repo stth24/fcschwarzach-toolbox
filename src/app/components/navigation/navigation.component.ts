@@ -1,4 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { navigationEntries, navigationEntriesList, NavigationEntry } from './navigation-entries';
 
 @Component({
     selector: 'app-navigation',
@@ -9,20 +11,11 @@ export class NavigationComponent implements OnInit {
 
     @Input() navOpen = true;
 
-    menuEntries = [
-        {
-            label: 'Generalplan',
-            path: '/generalplan'
-        },
-        {
-            label: 'Spieleranmeldung',
-            path: '/newplayerform'
-        }
-    ]
+    menuEntries = navigationEntriesList;
 
     private nativeElement: HTMLElement;
 
-    constructor(elementRef: ElementRef) {
+    constructor(elementRef: ElementRef, private router: Router, private activatedRoute: ActivatedRoute) {
         this.nativeElement = elementRef.nativeElement;
     }
 
@@ -38,6 +31,17 @@ export class NavigationComponent implements OnInit {
 
     ngAfterViewInit() {
         this.nativeElement.classList.add('nav-out');
+    }
+
+    navigate(entry: NavigationEntry) {
+        this.router.navigate(
+            [],
+            {
+                relativeTo: this.activatedRoute,
+                queryParams: { nav: entry.id },
+                queryParamsHandling: 'merge'
+            }
+        );
     }
 
 }

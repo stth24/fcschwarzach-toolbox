@@ -1,6 +1,6 @@
 :host {
   display: flex;
-  background-color: var(--dark-blue);
+  background-color: darkred;
   color: white;
   padding: 10px;
   justify-content: flex-start;
@@ -22,4 +22,14 @@ img {
 
 .navClosed {
   transform: rotate(180deg);
+}
+
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  img {
+    height: 30px;
+  }
 }

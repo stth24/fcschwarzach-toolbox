@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
-
-// const ical = require('cal-parser'); // use require as we do not have a @types declaration
-
 import * as ical from 'cal-parser';
 
 interface IcalEventValue<T> {
@@ -17,6 +14,23 @@ interface IcalEvent {
     description: IcalEventValue<string>
 }
 
+interface TeamData {
+    name: string,
+    url: string,
+    events: IcalEvent[],
+    show: boolean
+}
+
+interface MatchDayTeamData {
+    name: string,
+    events: IcalEvent[]
+}
+
+interface MatchDayEventsByTeam {
+    date: Date,
+    teams: MatchDayTeamData[]
+}
+
 @Component({
     selector: 'app-generalplan',
     templateUrl: './generalplan.component.html',
@@ -25,12 +39,37 @@ interface IcalEvent {
 export class GeneralplanComponent implements OnInit {
     eventsByTeams: { name: string, events: any }[] = [];
 
-    teams: { name: string, url: string, events: IcalEvent[] }[] = [];
+    teams: TeamData[] = [];
 
-    url = '/api/generalplan/';
-    // url = 'http://localhost/api/generalplan';
+    matchTable: MatchDayEventsByTeam[] = [];
 
-    constructor() { }
+    startDate: Date;
+    endDate: Date;
+
+    url = environment.production ?
+        '/api/generalplan/' :
+        'http://localhost/api/generalplan';
+
+    showFilters = false;
+
+    showHome = true;
+    showAway = true;
+
+    constructor() {
+        // set startdate and enddate to first or second half of the year
+        const today = new Date();
+        if (today.getMonth() < 6) {
+            this.startDate = new Date(`${today.getFullYear()}-01-01`);
+            this.endDate = new Date(`${today.getFullYear()}-06-30`);
+        }
+        else {
+            this.startDate = new Date(`${today.getFullYear()}-07-01`);
+            this.endDate = new Date(`${today.getFullYear()}-12-31`);
+        }
+
+        this.startDate.setHours(0, 0, 0, 0);
+        this.endDate.setHours(0, 0, 0, 0);
+    }
 
     ngOnInit(): void {
         this.fetchFromWebcal();
@@ -39,7 +78,6 @@ export class GeneralplanComponent implements OnInit {
     fetchFromWebcal() {
 
         fetch(this.url)
-            // fetch("http://fcschwarzach.com/api/generalplan/")
             .then(res => {
                 res.json().then(data => {
                     if (Array.isArray(data)) {
@@ -47,19 +85,96 @@ export class GeneralplanComponent implements OnInit {
                             this.teams.push({
                                 name: d.name,
                                 url: d.url,
-                                events: ical.parseString(d.data).events
+                                events: ical.parseString(d.data).events,
+                                show: true
                             })
                         })
-                    }
 
-                    console.log(this.teams);
+                        this.createTableData();
+                    }
                 })
             })
     }
 
-    // readAndSortIcalData(data: any) {
-    //     const directEvents = sync.parseICS(data);
-    //     return Object.values(directEvents).sort((v1: any, v2: any) => v1.start > v2.start ? 1 : -1);
-    // }
+    createTableData() {
 
+        let matchTable: MatchDayEventsByTeam[] = [];
+
+        for (let currentDate = new Date(this.startDate);
+            currentDate <= this.endDate;
+            currentDate.setDate(currentDate.getDate() + 1)) {
+            let teamDataAtDate: { name: string, events: IcalEvent[] }[] = [];
+            let dataForCurrentDate = {
+                date: new Date(currentDate),
+                teams: teamDataAtDate
+            };
+
+
+
+            this.teams.filter(team => team.show).forEach(team => {
+
+                let matchesForTeamAtDate: IcalEvent[] = [];
+
+                teamDataAtDate.push({
+                    name: team.name,
+                    events: matchesForTeamAtDate
+                })
+
+                team.events.forEach(event => {
+                    const datePlusOne = new Date(currentDate);
+                    datePlusOne.setDate(datePlusOne.getDate() + 1);
+
+                    if (event.dtstart.value >= currentDate && event.dtstart.value < datePlusOne) {
+                        const homeTeam = event.summary.value.split(':')[0];
+                        const isHomeTeam =
+                            homeTeam.toLowerCase().includes('schwarzach') ||
+                            homeTeam.toLowerCase().includes('hofsteig');
+
+                        if ((isHomeTeam && this.showHome) || (!isHomeTeam && this.showAway)) {
+                            matchesForTeamAtDate.push(event);
+                        }
+                    }
+                })
+            })
+
+            let dateHasMatch = false;
+            dataForCurrentDate.teams.forEach(team => {
+                if (team.events.length > 0) {
+                    dateHasMatch = true;
+                }
+            })
+
+            if (dateHasMatch) matchTable.push(dataForCurrentDate);
+        }
+
+        this.matchTable = matchTable;
+    }
+
+    toggleFilters() {
+        this.showFilters = !this.showFilters;
+    }
+
+    changeDate(key: keyof this, event: any) {
+        this[key] = event.target.valueAsDate;
+
+        (this[key] as unknown as Date).setHours(0, 0, 0, 0);
+
+        this.createTableData();
+    }
+
+    toggleTeam(teamName: string, event: any) {
+        const teamToToggle = this.teams.find(t => t.name === teamName);
+        if (teamToToggle) {
+            teamToToggle.show = event.target.checked;
+            this.createTableData();
+        }
+    }
+
+    toggleAllTeams() {
+        let changeCheckedTo = this.teams.filter(t => t.show).length !== this.teams.length;
+
+        this.teams.forEach(t => t.show = changeCheckedTo);
+
+        this.createTableData();
+    }
 }

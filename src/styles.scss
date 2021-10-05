@@ -2,7 +2,8 @@
 
 @import "variables.scss";
 
-html {
+html,
+input {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -30,9 +31,13 @@ button {
   border-radius: 3px;
   padding: 5px 10px;
 
+  width: max-content;
+  height: max-content;
+
   &:hover {
     color: white;
     background-color: var(--dark-blue);
+    cursor: pointer;
   }
 }
 
@@ -41,4 +46,15 @@ a:visited,
 a:active {
   text-decoration: none;
   color: inherit;
+}
+
+input {
+  border: 2px solid var(--dark-blue);
+  padding: 5px 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: 0.8rem;
+  }
 }

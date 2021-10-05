@@ -1,4 +1,7 @@
-<div class="nav-entry" [routerLink]="entry.path" routerLinkActive="active" *ngFor="let entry of menuEntries">
-    <!-- <a [routerLink]="entry.path" routerLinkActive="active">{{entry.label}}</a> -->
+<div class="nav-entry" (click)="navigate(entry)" *ngFor="let entry of menuEntries">
     {{entry.label}}
 </div>
+
+<a href="http://fcschwarzach.com">
+    <div class="nav-entry">Zurück zur Homepage</div>
+</a>

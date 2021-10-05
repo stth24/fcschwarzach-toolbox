@@ -1,11 +1,10 @@
 :host {
   display: flex;
   flex-direction: column;
-  /* background-color: #0077b8; */
-  border-right: 2px solid #0077b8;
+  border-right: 2px solid var(--dark-blue);
+  background-color: white;
   overflow: hidden;
   transition: max-width 0.5s ease, min-width 0.5s ease, opacity 0.2s ease;
-  //   min-width: 200px;
 }
 
 .nav-out {
@@ -28,5 +27,13 @@
     background-color: var(--regular-green);
     color: white;
     cursor: pointer;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  :host {
+    position: absolute;
+    height: 100%;
+    z-index: 1000;
   }
 }

@@ -6,6 +6,7 @@ import { ContentComponent } from './content/content.component';
 import { NewplayerFormComponent } from './newplayer-form/newplayer-form.component';
 import { GeneralplanComponent } from './generalplan/generalplan.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +14,8 @@ import { AppRoutingModule } from '../app-routing.module';
     declarations: [HeaderComponent, NavigationComponent, ContentComponent, NewplayerFormComponent, GeneralplanComponent],
     imports: [
         CommonModule,
-        AppRoutingModule
+        AppRoutingModule,
+        FormsModule
     ],
     exports: [
         HeaderComponent,
