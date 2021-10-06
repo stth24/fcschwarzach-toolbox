@@ -55,6 +55,14 @@ export class GeneralplanComponent implements OnInit {
     showHome = true;
     showAway = true;
 
+    fetchError = {
+        status: false,
+        message: {
+            title: '',
+            text: ''
+        }
+    }
+
     constructor() {
         // set startdate and enddate to first or second half of the year
         const today = new Date();
@@ -93,6 +101,11 @@ export class GeneralplanComponent implements OnInit {
                         this.createTableData();
                     }
                 })
+            })
+            .catch(err => {
+                this.fetchError.status = true;
+                this.fetchError.message.title = "Fehler beim Laden der Daten:";
+                this.fetchError.message.text = err;
             })
     }
 
