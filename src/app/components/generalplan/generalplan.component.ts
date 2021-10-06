@@ -168,11 +168,15 @@ export class GeneralplanComponent implements OnInit {
     }
 
     changeDate(key: keyof this, event: any) {
-        this[key] = event.target.valueAsDate;
+        const value = event.target.valueAsDate;
 
-        (this[key] as unknown as Date).setHours(0, 0, 0, 0);
+        if (value) {
+            this[key] = value;
 
-        this.createTableData();
+            (this[key] as unknown as Date).setHours?.(0, 0, 0, 0);
+
+            this.createTableData();
+        };
     }
 
     toggleTeam(teamName: string, event: any) {
