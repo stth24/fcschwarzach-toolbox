@@ -9,9 +9,12 @@
     </div>
 </div>
 
-
+<!-- Filters -->
 <ng-container  *ngIf="teams.length > 0">
-    <button (click)="toggleFilters()">Filter anzeigen/ausblenden</button>
+    <div class="button-group">
+        <button (click)="toggleFilters()">Filter anzeigen/ausblenden</button>
+        <button (click)="navigateToCurrentDate()">Zu heute springen</button>
+    </div>
     <div class="filters" [class.hideFilters]="!showFilters">
         <div class="date-filters">
             <span>Start Date:</span> 
@@ -37,6 +40,7 @@
         </div>
     </div>
 
+    <!-- Table -->
     <div class="table-wrapper" *ngIf="matchTable.length > 0">
         <table>
             <thead>
@@ -46,8 +50,8 @@
                 </ng-container>
             </thead>
             <tbody>
-                <tr *ngFor="let gameday of matchTable" [class.isWeekend]="gameday.date.getDay() === 6 || gameday.date.getDay() === 0">
-                    <td class="firstColumn"><b>{{gameday.date | date: 'EEEE dd.MM.yyyy'}}</b></td>
+                <tr *ngFor="let gameday of matchTable; let i = index" [class.isWeekend]="gameday.date.getDay() === 6 || gameday.date.getDay() === 0">
+                    <td [id]="'row-' + i" class="firstColumn"><b>{{gameday.date | date: 'EEEE dd.MM.yyyy'}}</b></td>
                     <ng-container *ngFor="let team of gameday.teams">
                         <td [class.withoutGameTd]="team.events.length < 1"
                         [class.withGame]="team.events.length > 0">

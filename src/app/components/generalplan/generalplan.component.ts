@@ -99,6 +99,11 @@ export class GeneralplanComponent implements OnInit {
                         })
 
                         this.createTableData();
+
+                        // wait until loading of the UI has finished
+                        setTimeout(() => {
+                            this.navigateToCurrentDate();
+                        }, 500);
                     }
                 })
             })
@@ -193,5 +198,27 @@ export class GeneralplanComponent implements OnInit {
         this.teams.forEach(t => t.show = changeCheckedTo);
 
         this.createTableData();
+    }
+
+    navigateToCurrentDate() {
+        if (this.matchTable.length > 0) {
+            let currentDate = new Date();
+            let indexToMoveTo = -1;
+
+
+            while (indexToMoveTo < 0) {
+                this.matchTable.forEach((matchday, index) => {
+                    if (currentDate.toDateString() === matchday.date.toDateString()) {
+                        console.log('FOUND MATCH:', currentDate.toDateString(), matchday.date.toDateString(), index)
+                        indexToMoveTo = index;
+                    }
+                })
+
+                currentDate.setDate(currentDate.getDate() + 1)
+            }
+
+            document.getElementById("row-" + indexToMoveTo)?.scrollIntoView({ block: 'center', inline: 'start', behavior: 'smooth' })
+        }
+
     }
 }

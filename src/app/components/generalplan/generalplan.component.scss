@@ -32,6 +32,17 @@
   }
 }
 
+.button-group {
+  button {
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+
+  button:first-child {
+    margin-left: 0;
+  }
+}
+
 // FILTERS
 .filters {
   display: flex;
@@ -47,7 +58,7 @@
 
   border: 2px solid var(--dark-blue);
 
-  margin: 10px 0;
+  margin-bottom: 10px;
 
   overflow: auto;
   flex-wrap: wrap;
@@ -63,6 +74,8 @@
 
   padding-top: 0;
   padding-bottom: 0;
+
+  margin-bottom: 0;
 }
 
 .date-filters {
@@ -211,7 +224,10 @@ hr {
   }
 
   .firstColumn {
-    width: 60px;
+    width: 85px;
+    padding: 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 }
 
