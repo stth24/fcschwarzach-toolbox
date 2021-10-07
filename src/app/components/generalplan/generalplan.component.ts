@@ -209,7 +209,6 @@ export class GeneralplanComponent implements OnInit {
             while (indexToMoveTo < 0) {
                 this.matchTable.forEach((matchday, index) => {
                     if (currentDate.toDateString() === matchday.date.toDateString()) {
-                        console.log('FOUND MATCH:', currentDate.toDateString(), matchday.date.toDateString(), index)
                         indexToMoveTo = index;
                     }
                 })
