@@ -97,19 +97,23 @@
   margin-bottom: 10px;
 }
 
-.toggle-boxes {
-  overflow: auto;
-  flex: 1;
+.toggle-team-filter {
   display: flex;
-  flex-wrap: wrap;
+  flex: 1;
+  flex-direction: column;
+}
+
+.toggle-boxes {
+  flex: 1;
 
   margin-bottom: 10px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  justify-content: start;
 }
 
 .toggle-team {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin-right: 10px;
 
   &:last-child {
