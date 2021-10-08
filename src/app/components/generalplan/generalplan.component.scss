@@ -81,18 +81,19 @@
 .date-filters {
   display: grid;
   grid-template-columns: repeat(2, max-content);
+  grid-template-rows: repeat(3, max-content);
   grid-gap: 10px;
 
   align-items: baseline;
   margin-right: 10px;
   margin-bottom: 10px;
+
+  .date-filters-title {
+    grid-column: span 2;
+  }
 }
 
-.toggle-home-away {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
+.toggle-option-list {
   margin-right: 10px;
   margin-bottom: 10px;
 }

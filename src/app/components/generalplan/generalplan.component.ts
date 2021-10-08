@@ -55,6 +55,28 @@ export class GeneralplanComponent implements OnInit {
     showHome = true;
     showAway = true;
 
+    places = {
+        schwarzach: {
+            label: "Schwarzach",
+            stringToMatch: 'schwarzach',
+            show: true
+        },
+        wolfurt: {
+            label: "Wolfurt",
+            stringToMatch: 'wolfurt',
+            show: true
+        },
+        kennelbach: {
+            label: "Kennelbach",
+            stringToMatch: 'kennelbach',
+            show: true
+        },
+        rest: {
+            label: "Andere",
+            show: true
+        }
+    }
+
     fetchError = {
         status: false,
         message: {
@@ -138,21 +160,28 @@ export class GeneralplanComponent implements OnInit {
                     events: matchesForTeamAtDate
                 })
 
-                team.events.forEach(event => {
-                    const datePlusOne = new Date(currentDate);
-                    datePlusOne.setDate(datePlusOne.getDate() + 1);
+                team.events
+                    .filter(event => this.filterPlaces(event)) // check if place of event is toggled on
+                    .forEach(event => {
+                        const datePlusOne = new Date(currentDate);
+                        datePlusOne.setDate(datePlusOne.getDate() + 1);
 
-                    if (event.dtstart.value >= currentDate && event.dtstart.value < datePlusOne) {
-                        const homeTeam = event.summary.value.split(':')[0];
-                        const isHomeTeam =
-                            homeTeam.toLowerCase().includes('schwarzach') ||
-                            homeTeam.toLowerCase().includes('hofsteig');
+                        // check if event date is within start/end range
+                        if (event.dtstart.value >= currentDate && event.dtstart.value < datePlusOne) {
 
-                        if ((isHomeTeam && this.showHome) || (!isHomeTeam && this.showAway)) {
-                            matchesForTeamAtDate.push(event);
+                            // check if schwarzach/wolfurt team is the home team
+                            const homeTeam = event.summary.value.split(':')[0];
+                            const isHomeTeam =
+                                homeTeam.toLowerCase().includes('schwarzach') ||
+                                homeTeam.toLowerCase().includes('hofsteig');
+
+                            if ((isHomeTeam && this.showHome) || (!isHomeTeam && this.showAway)) {
+                                matchesForTeamAtDate.push(event);
+                            }
+
+
                         }
-                    }
-                })
+                    })
             })
 
             let dateHasMatch = false;
@@ -166,6 +195,28 @@ export class GeneralplanComponent implements OnInit {
         }
 
         this.matchTable = matchTable;
+    }
+
+    filterPlaces(event: IcalEvent): boolean {
+        const eventLocationLowerCase = event.location.value.toLowerCase();
+
+        if (eventLocationLowerCase.includes(this.places.schwarzach.stringToMatch)) {
+            return this.places.schwarzach.show;
+        }
+        if (eventLocationLowerCase.includes(this.places.wolfurt.stringToMatch)) {
+            return this.places.wolfurt.show;
+        }
+        if (eventLocationLowerCase.includes(this.places.kennelbach.stringToMatch)) {
+            return this.places.kennelbach.show;
+        }
+
+        if (!eventLocationLowerCase.includes(this.places.schwarzach.stringToMatch) &&
+            !eventLocationLowerCase.includes(this.places.wolfurt.stringToMatch) &&
+            !eventLocationLowerCase.includes(this.places.kennelbach.stringToMatch)) {
+            return this.places.rest.show;
+        }
+
+        return true;
     }
 
     toggleFilters() {
