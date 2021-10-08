@@ -206,7 +206,7 @@ export class GeneralplanComponent implements OnInit {
             let indexToMoveTo = -1;
 
 
-            while (indexToMoveTo < 0) {
+            while (indexToMoveTo < 0 && currentDate <= this.endDate) {
                 this.matchTable.forEach((matchday, index) => {
                     if (currentDate.toDateString() === matchday.date.toDateString()) {
                         indexToMoveTo = index;
