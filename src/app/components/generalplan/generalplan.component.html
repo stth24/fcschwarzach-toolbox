@@ -12,9 +12,14 @@
 <!-- Filters -->
 <ng-container  *ngIf="teams.length > 0">
     <div class="button-group">
-        <button (click)="toggleFilters()">Filter anzeigen/ausblenden</button>
-        <button *ngIf="matchTable.length > 0" (click)="navigateToCurrentDate()">Zu heute springen</button>
-    </div>
+        <button (click)="toggleFilters()">Filter <span class="filter-button-text">anzeigen/ausblenden</span></button>
+        <button *ngIf="matchTable.length > 0" (click)="navigateToCurrentDate()">
+            <span class="today-button-text">Zu</span> 
+            Heute 
+            <span class="today-button-text">springen</span>
+        </button>
+        <button *ngIf="matchTable.length > 0" (click)="exportExcel()">Export</button>
+     </div>
     <div class="filters" [class.hideFilters]="!showFilters">
         <div class="date-filters">
             <span class="date-filters-title"><b>Start/Ende:</b></span>
