@@ -1,2 +1,5 @@
 <app-generalplan *ngIf="navEntry && navEntry.id === navEntries.Generalplan.id"></app-generalplan>
 <app-newplayer-form *ngIf="navEntry && navEntry.id === navEntries.NewPlayerForm.id"></app-newplayer-form>
+
+<!-- Admin -->
+<div *ngIf="navEntry && loggedIn && navEntry.id === adminNavEntries.TeamsData.id">ADMIN TEAM DATA</div>

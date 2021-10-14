@@ -3,22 +3,23 @@
         {{entry.label}}
     </div>
 
-    <ng-container *ngIf="loggedIn">
-        <div class="nav-entry"  (click)="navigate(entry)" *ngFor="let entry of adminMenuEntries">
-            {{entry.label}}
-        </div>
-    </ng-container>
     
     <a href="http://fcschwarzach.com">
         <div class="nav-entry">Zurück zur Homepage</div>
     </a>
+
+    <div class="admin-entries" *ngIf="loggedIn">
+        <div class="nav-entry"  (click)="navigate(entry)" *ngFor="let entry of adminMenuEntries">
+            {{entry.label}}
+        </div>
+    </div>
 </div>
 
 <div class="entries-bottom">
     <div *ngIf="!loggedIn" class="nav-entry admin-login" (click)="adminLogin()">
         Admin Login
     </div>
-
+    
     <div *ngIf="loggedIn" class="nav-entry admin-login" (click)="adminLogout()">
         Logout
     </div>
