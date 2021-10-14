@@ -1,0 +1,28 @@
+:host {
+  display: block;
+  padding: 20px;
+}
+
+.login-data {
+  display: flex;
+  flex-direction: column;
+
+  row-gap: 20px;
+
+  input {
+    width: 300px;
+    padding: 10px;
+  }
+}
+
+.login-buttons {
+  margin-top: 20px;
+
+  display: flex;
+  column-gap: 10px;
+  justify-content: flex-end;
+}
+
+.error-message {
+  color: darkred;
+}

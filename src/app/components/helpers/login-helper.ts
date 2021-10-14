@@ -1,0 +1,1 @@
+export const LOGIN_STORAGE_KEY = 'FCS_LOGIN_TOKEN';

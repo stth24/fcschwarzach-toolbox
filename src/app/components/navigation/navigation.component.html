@@ -1,7 +1,29 @@
-<div class="nav-entry" (click)="navigate(entry)" *ngFor="let entry of menuEntries">
-    {{entry.label}}
+<div class="entries-top">
+    <div class="nav-entry" (click)="navigate(entry)" *ngFor="let entry of menuEntries">
+        {{entry.label}}
+    </div>
+
+    <ng-container *ngIf="loggedIn">
+        <div class="nav-entry"  (click)="navigate(entry)" *ngFor="let entry of adminMenuEntries">
+            {{entry.label}}
+        </div>
+    </ng-container>
+    
+    <a href="http://fcschwarzach.com">
+        <div class="nav-entry">Zurück zur Homepage</div>
+    </a>
 </div>
 
-<a href="http://fcschwarzach.com">
-    <div class="nav-entry">Zurück zur Homepage</div>
-</a>
+<div class="entries-bottom">
+    <div *ngIf="!loggedIn" class="nav-entry admin-login" (click)="adminLogin()">
+        Admin Login
+    </div>
+
+    <div *ngIf="loggedIn" class="nav-entry admin-login" (click)="adminLogout()">
+        Logout
+    </div>
+</div>
+
+<app-modal *ngIf="showAdminLogin">
+    <app-login-form (closeModal)="closeLoginModal()"></app-login-form>
+</app-modal>

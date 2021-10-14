@@ -1,0 +1,17 @@
+<div class="login-data">
+    <input type="text" 
+        placeholder="Username" 
+        [(ngModel)]="username"
+        (keydown.enter)="login()"/>
+    <input type="password" 
+        placeholder="Passwort" 
+        [(ngModel)]="password"
+        (keydown.enter)="login()"/>
+</div>
+
+<div class="login-buttons">
+    <button (click)="login()">Login</button>
+    <button (click)="close()">Abbrechen</button>
+</div>
+
+<span class="error-message">{{errorMessage}}</span>

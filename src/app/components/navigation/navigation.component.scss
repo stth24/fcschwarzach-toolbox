@@ -1,6 +1,9 @@
 :host {
+  position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+
   border-right: 2px solid var(--dark-blue);
   background-color: white;
   overflow: hidden;
@@ -27,6 +30,14 @@
     background-color: var(--regular-green);
     color: white;
     cursor: pointer;
+  }
+}
+
+.admin-login {
+  border-top: 2px solid var(--dark-blue);
+
+  &:hover {
+    background-color: var(--dark-gray);
   }
 }
 

@@ -1,0 +1,30 @@
+:host {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.full-transparent-bg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: black;
+  opacity: 0.5;
+  z-index: 1100;
+}
+
+.container {
+  opacity: 1;
+  border: 4px solid var(--dark-blue);
+  background-color: white;
+  z-index: 1101;
+}
