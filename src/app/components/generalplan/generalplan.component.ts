@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import * as ical from 'cal-parser';
-import * as xlsx from 'xlsx';
-import { saveAs } from 'file-saver';
-import { DatePipe } from '@angular/common';
 
 interface IcalEventValue<T> {
     value: T
@@ -273,48 +270,5 @@ export class GeneralplanComponent implements OnInit {
             document.getElementById("row-" + indexToMoveTo)?.scrollIntoView({ block: 'center', inline: 'start', behavior: 'smooth' })
         }
 
-    }
-
-    exportExcel() {
-        const dataToExport: any[] = [];
-
-        dataToExport.push([undefined, ...this.teams.filter(t => t.show).map(t => t.name)]);
-
-        this.matchTable.forEach(atDate => {
-            const pipe = new DatePipe('en-US');
-
-            const line1 = [];
-            const line2 = [];
-            const line3 = [];
-
-            line1.push(atDate.date);
-            line2.push(undefined);
-            line3.push(undefined);
-
-            line1.push(...atDate.teams.map(team => team.events[0]?.summary.value));
-            line2.push(...atDate.teams.map(team => {
-                const date = team.events[0]?.dtstart.value;
-
-                return pipe.transform(date, 'HH:mm');
-            }));
-            line3.push(...atDate.teams.map(team => team.events[0]?.location.value));
-
-            dataToExport.push(line1, line2, line3);
-        });
-
-        const worksheet = xlsx.utils.json_to_sheet(dataToExport);
-        const workbook: xlsx.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-
-        // set column witdth
-        const wscols = [
-            { wch: 10 },
-            ...this.teams.filter(t => t.show).map(t => { return { wch: 60 } })
-        ];
-
-        worksheet['!cols'] = wscols;
-
-        const buffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-        let blob = new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8;" });
-        saveAs(blob, "matchdates.xlsx");
     }
 }
