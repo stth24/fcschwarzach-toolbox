@@ -234,6 +234,11 @@ hr {
     text-overflow: ellipsis;
     overflow: hidden;
   }
+
+  .filter-button-text,
+  .today-button-text {
+    display: none;
+  }
 }
 
 // SPINNER
