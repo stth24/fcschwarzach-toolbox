@@ -4,8 +4,8 @@ require "./helpers/jwtHandler.php";
 
 // print_r($_POST);
 
-$name = $_POST['username'] ?? '';
-$pw = $_POST['pw'] ?? '';
+$name = $_POST['username'] ? $_POST['username'] : '';
+$pw = $_POST['pw'] ? $_POST['pw'] :'';
 
 // exit if username or pw is invalid
 if($name != USERNAME || $pw != PASSWORD) {

@@ -4,7 +4,7 @@ require "../helpers/mysqlHandler.php";
 
 
 // read token from query param
-$tokenFromHeader = $_POST["token"] ?? "";
+$tokenFromHeader = $_POST["token"] ? $_POST["token"] : "";
 
 verifyJwt($tokenFromHeader);
 

@@ -6,6 +6,7 @@ require "./data/secret_jwt_key.php";
 
 
 function createJwt($username) {
+    date_default_timezone_set('Europe/Istanbul');
     $now = new DateTime();
     $expiresInSeconds = 60 * 60;
     

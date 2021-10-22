@@ -26,3 +26,23 @@
 .error-message {
   color: darkred;
 }
+
+@media only screen and (max-width: 600px) {
+  :host {
+    padding: 5px;
+    margin: 10px;
+  }
+
+  .login-data {
+    row-gap: 10px;
+
+    input {
+      padding: 5px;
+      width: 250px;
+    }
+  }
+
+  .login-buttons {
+    margin-top: 10px;
+  }
+}
