@@ -146,8 +146,8 @@ export class ApiService {
             const body = new FormData();
             body.append('token', getLoginToken());
             body.append('id', team.id.toString());
-            body.append('name', team.name);
-            body.append('url', team.url);
+            body.append('name', team.name.trim());
+            body.append('url', team.url.trim());
 
             const options = {
                 method: 'POST',
