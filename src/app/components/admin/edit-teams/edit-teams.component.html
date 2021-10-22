@@ -1,0 +1,26 @@
+<h1>Team Daten bearbeiten:</h1>
+<div class="grid" >
+    <ng-container *ngIf="teams.length > 0">
+        <ng-container *ngFor="let team of teams">
+            <input class="input-name" type="text" [(ngModel)]="team.name" />
+            <textarea [(ngModel)]="team.url" class="input-url" cols="120" rows="1" ></textarea>
+            <button [disabled]="checkTeamChanged(team)" (click)="saveTeamChanges(team)">Speichern</button>
+            <button class="delete-button" (click)="deleteTeam(team)">Löschen</button>
+            <hr class="team-line">
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="showAddTeam">
+        <input class="input-name" type="text" placeholder="Neuer Teamname" [(ngModel)]="newTeamName" />
+        <textarea class="input-url" cols="120" rows="1" placeholder="Team URL" [(ngModel)]="newTeamUrl"></textarea>
+        <button (click)="addTeam()" [disabled]="!newTeamName || !newTeamUrl">Hinzufügen</button>
+        <button (click)="toggleShowAddTeam()">Abbrechen</button>
+    </ng-container>
+</div>
+
+<button *ngIf="!showAddTeam" (click)="toggleShowAddTeam()">Neues Team hinzufügen</button>
+
+
+<app-confirm-cancel-modal 
+    *ngIf="showModal" 
+    [message]="modalMessage" 
+    (close)="closeModal($event)"></app-confirm-cancel-modal>

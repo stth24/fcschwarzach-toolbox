@@ -17,4 +17,13 @@ export const navigationEntries = {
     }
 }
 
+export const adminNavigationEntries = {
+    TeamsData: {
+        id: 'teamsdata',
+        label: 'Team Daten',
+        tag: 'app-teams-data'
+    }
+}
+
 export const navigationEntriesList = [navigationEntries.Generalplan, navigationEntries.NewPlayerForm];
+export const adminNavigationEntriesList = [adminNavigationEntries.TeamsData];

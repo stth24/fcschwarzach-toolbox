@@ -1,2 +1,9 @@
-<app-generalplan *ngIf="navEntry && navEntry.id === navEntries.Generalplan.id"></app-generalplan>
-<app-newplayer-form *ngIf="navEntry && navEntry.id === navEntries.NewPlayerForm.id"></app-newplayer-form>
+<ng-container *ngIf="navEntry">
+    <app-generalplan *ngIf="navEntry.id === navEntries.Generalplan.id"></app-generalplan>
+    <app-newplayer-form *ngIf="navEntry.id === navEntries.NewPlayerForm.id"></app-newplayer-form>
+
+    <!-- Admin -->
+    <ng-container *ngIf="loggedIn">
+        <app-edit-teams *ngIf="navEntry.id === adminNavEntries.TeamsData.id"></app-edit-teams>
+    </ng-container>
+</ng-container>

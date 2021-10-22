@@ -1,35 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import * as ical from 'cal-parser';
+import { IcalEvent, MatchDayEventsByTeam, TeamData } from 'src/app/model/generalplan.model';
+import { ApiService } from 'src/app/api/api.service';
 
-interface IcalEventValue<T> {
-    value: T
-}
-
-interface IcalEvent {
-    dtstart: IcalEventValue<Date>,
-    location: IcalEventValue<string>,
-    summary: IcalEventValue<string>,
-    url: IcalEventValue<string>,
-    description: IcalEventValue<string>
-}
-
-interface TeamData {
-    name: string,
-    url: string,
-    events: IcalEvent[],
-    show: boolean
-}
-
-interface MatchDayTeamData {
-    name: string,
-    events: IcalEvent[]
-}
-
-interface MatchDayEventsByTeam {
-    date: Date,
-    teams: MatchDayTeamData[]
-}
 
 @Component({
     selector: 'app-generalplan',
@@ -40,6 +14,7 @@ export class GeneralplanComponent implements OnInit {
     eventsByTeams: { name: string, events: any }[] = [];
 
     teams: TeamData[] = [];
+    teamsUiState = new Map<TeamData, { show: boolean }>();
 
     matchTable: MatchDayEventsByTeam[] = [];
 
@@ -85,7 +60,7 @@ export class GeneralplanComponent implements OnInit {
         }
     }
 
-    constructor() {
+    constructor(private apiService: ApiService) {
         // set startdate and enddate to first or second half of the year
         const today = new Date();
         if (today.getMonth() < 6) {
@@ -106,28 +81,18 @@ export class GeneralplanComponent implements OnInit {
     }
 
     fetchFromWebcal() {
+        this.apiService.getGeneralplanData()
+            .then(data => {
+                this.teams = data;
 
-        fetch(this.url)
-            .then(res => {
-                res.json().then(data => {
-                    if (Array.isArray(data)) {
-                        data.forEach((d: any) => {
-                            this.teams.push({
-                                name: d.name,
-                                url: d.url,
-                                events: ical.parseString(d.data).events,
-                                show: true
-                            })
-                        })
+                data.forEach(t => this.teamsUiState.set(t, { show: true }))
 
-                        this.createTableData();
+                this.createTableData();
 
-                        // wait until loading of the UI has finished
-                        setTimeout(() => {
-                            this.navigateToCurrentDate();
-                        }, 500);
-                    }
-                })
+                // wait until loading of the UI has finished
+                setTimeout(() => {
+                    this.navigateToCurrentDate();
+                }, 500);
             })
             .catch(err => {
                 this.fetchError.status = true;
@@ -151,7 +116,7 @@ export class GeneralplanComponent implements OnInit {
 
 
 
-            this.teams.filter(team => team.show).forEach(team => {
+            this.teams.filter(team => this.teamsUiState.get(team)?.show).forEach(team => {
 
                 let matchesForTeamAtDate: IcalEvent[] = [];
 
@@ -238,15 +203,20 @@ export class GeneralplanComponent implements OnInit {
     toggleTeam(teamName: string, event: any) {
         const teamToToggle = this.teams.find(t => t.name === teamName);
         if (teamToToggle) {
-            teamToToggle.show = event.target.checked;
+            const teamUiState = this.teamsUiState.get(teamToToggle);
+            if (teamUiState) teamUiState.show = event.target.checked;
+
             this.createTableData();
         }
     }
 
     toggleAllTeams() {
-        let changeCheckedTo = this.teams.filter(t => t.show).length !== this.teams.length;
+        let changeCheckedTo = this.teams.filter(t => this.teamsUiState.get(t)?.show).length !== this.teams.length;
 
-        this.teams.forEach(t => t.show = changeCheckedTo);
+        this.teams.forEach(t => {
+            const teamUiState = this.teamsUiState.get(t);
+            if (teamUiState) teamUiState.show = changeCheckedTo;
+        });
 
         this.createTableData();
     }

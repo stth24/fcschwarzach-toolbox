@@ -7,11 +7,15 @@ import { NewplayerFormComponent } from './newplayer-form/newplayer-form.componen
 import { GeneralplanComponent } from './generalplan/generalplan.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { ModalComponent } from './ui-components/modal/modal.component';
+import { LoginFormComponent } from './login-form/login-form.component';
+import { EditTeamsComponent } from './admin/edit-teams/edit-teams.component';
+import { ConfirmCancelModalComponent } from './ui-components/confirm-cancel-modal/confirm-cancel-modal.component';
 
 
 
 @NgModule({
-    declarations: [HeaderComponent, NavigationComponent, ContentComponent, NewplayerFormComponent, GeneralplanComponent],
+    declarations: [HeaderComponent, NavigationComponent, ContentComponent, NewplayerFormComponent, GeneralplanComponent, ModalComponent, LoginFormComponent, EditTeamsComponent, ConfirmCancelModalComponent],
     imports: [
         CommonModule,
         AppRoutingModule,

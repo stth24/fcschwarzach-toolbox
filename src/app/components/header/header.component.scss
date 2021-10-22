@@ -7,6 +7,10 @@
   align-items: center;
 }
 
+.logged-in {
+  background-color: var(--dark-gray);
+}
+
 img {
   height: 40px;
   margin-right: 10px;
@@ -27,6 +31,9 @@ img {
 @media only screen and (max-width: 600px), screen and (max-height: 600px) {
   h1 {
     font-size: 1.2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   img {
