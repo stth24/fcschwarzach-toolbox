@@ -75,7 +75,7 @@
                 <div class="toggle-team" *ngFor="let team of teams">
                     <input type="checkbox" 
                         (change)="toggleTeam(team.name, $event)" 
-                        [checked]="team.show" 
+                        [checked]="teamsUiState.get(team)?.show" 
                         [name]="team.name"/> 
                     <label [for]="team.name">{{team.name}}</label>
                 </div>
@@ -90,7 +90,7 @@
             <thead>
                 <th class="firstColumn">Datum:</th>
                 <ng-container *ngFor="let team of teams">
-                    <th *ngIf="team.show">{{team.name}}</th>
+                    <th *ngIf="teamsUiState.get(team)?.show">{{team.name}}</th>
                 </ng-container>
             </thead>
             <tbody>

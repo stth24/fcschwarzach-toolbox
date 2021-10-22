@@ -2,11 +2,12 @@
 require "vendor/autoload.php";
 use Firebase\JWT\JWT;
 
-define("SECRET_KEY", "example_key");
+require "./data/secret_jwt_key.php";
+
 
 function createJwt($username) {
     $now = new DateTime();
-    $expiresInSeconds = 60;
+    $expiresInSeconds = 60 * 60;
     
     $payload = array(
         "iss" => 'http://fcschwarzach.com',

@@ -3,7 +3,8 @@
 @import "variables.scss";
 
 html,
-input {
+input,
+textarea {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -39,6 +40,16 @@ button {
     background-color: var(--dark-blue);
     cursor: pointer;
   }
+
+  &:disabled {
+    border-color: var(--dark-gray);
+    background-color: lightgray;
+    color: var(--dark-gray);
+  }
+
+  &:disabled:hover {
+    cursor: default;
+  }
 }
 
 a,
@@ -48,9 +59,14 @@ a:active {
   color: inherit;
 }
 
-input {
+input,
+textarea {
   border: 2px solid var(--dark-blue);
   padding: 5px 10px;
+}
+
+textarea {
+  font-size: 0.9rem;
 }
 
 @media only screen and (max-width: 600px) {

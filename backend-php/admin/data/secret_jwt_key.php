@@ -1,0 +1,4 @@
+<?php
+
+// CHANGE THIS IN ACTUAL PRODUCTION ENVIRONMENT
+define("SECRET_KEY", "example_key");

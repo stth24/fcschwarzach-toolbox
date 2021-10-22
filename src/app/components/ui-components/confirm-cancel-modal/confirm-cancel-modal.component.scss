@@ -1,0 +1,14 @@
+.content {
+  display: flex;
+  flex-direction: column;
+
+  row-gap: 20px;
+
+  padding: 10px;
+}
+
+.buttons {
+  display: flex;
+  column-gap: 10px;
+  justify-content: flex-end;
+}

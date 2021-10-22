@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ApiService } from 'src/app/api/api.service';
 import { LOGIN_STORAGE_KEY } from '../helpers/login-helper';
 import { StateService } from '../services/state/state.service';
 import { adminNavigationEntriesList, navigationEntries, navigationEntriesList, NavigationEntry } from './navigation-entries';
@@ -29,7 +30,8 @@ export class NavigationComponent implements OnInit {
         elementRef: ElementRef,
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private stateService: StateService) {
+        private stateService: StateService,
+        private apiService: ApiService) {
         this.nativeElement = elementRef.nativeElement;
     }
 
@@ -66,36 +68,8 @@ export class NavigationComponent implements OnInit {
     }
 
     adminLogin() {
-        const token = localStorage.getItem(LOGIN_STORAGE_KEY);
-
-        if (token) {
-            const body = new FormData();
-            body.append('token', token);
-
-            const options = {
-                method: 'POST',
-                body
-            };
-
-            fetch('http://localhost/api/admin/getdata.php', options)
-                .then(res => {
-                    if (res.status === 200) {
-                        this.stateService.updateState({
-                            loggedIn: true
-                        })
-                    }
-                    else {
-                        localStorage.removeItem(LOGIN_STORAGE_KEY);
-                        this.showAdminLogin = true;
-                    }
-                })
-                .catch(err => {
-                    this.showAdminLogin = true;
-                });
-        }
-        else {
-            this.showAdminLogin = true;
-        }
+        this.apiService.verifyToken()
+            .catch(() => this.showAdminLogin = true);
     }
 
     adminLogout() {
