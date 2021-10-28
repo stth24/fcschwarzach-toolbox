@@ -167,7 +167,7 @@ th {
   top: 0;
   z-index: 2;
   border-top: none;
-  background-color: white;
+  background-color: var(--background);
   border-bottom: 2px solid var(--dark-blue); //needs to be always visible and not disappear via scroll
 }
 
