@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/api/api.service';
 import { LOGIN_STORAGE_KEY } from '../helpers/login-helper';
 import { StateService } from '../services/state/state.service';
-import { adminNavigationEntriesList, navigationEntries, navigationEntriesList, NavigationEntry } from './navigation-entries';
+import { adminNavigationEntriesList, navigationEntriesList, NavigationEntry } from './navigation-entries';
 
 @Component({
     selector: 'app-navigation',

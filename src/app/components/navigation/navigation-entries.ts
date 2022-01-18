@@ -1,29 +1,31 @@
+import { Component } from "@angular/core";
+import { EditTeamsComponent } from "../admin/edit-teams/edit-teams.component";
+import { GeneralplanComponent } from "../generalplan/generalplan.component";
+import { NewplayerFormComponent } from "../newplayer-form/newplayer-form.component";
+
 export interface NavigationEntry {
     id: string,
     label: string,
-    tag: any
+    component: any
 }
 
-export const navigationEntries = {
-    Generalplan: {
+export const navigationEntriesList: NavigationEntry[] = [
+    {
         id: 'generalplan',
         label: 'Generalplan',
-        tag: 'app-generalplan'
+        component: GeneralplanComponent
     },
-    NewPlayerForm: {
+    {
         id: 'newplayerform',
         label: 'Spieleranmeldung',
-        tag: 'app-newplayer-form'
+        component: NewplayerFormComponent
     }
-}
+]
 
-export const adminNavigationEntries = {
-    TeamsData: {
+export const adminNavigationEntriesList: NavigationEntry[] = [
+    {
         id: 'teamsdata',
         label: 'Team Daten',
-        tag: 'app-teams-data'
+        component: EditTeamsComponent
     }
-}
-
-export const navigationEntriesList = [navigationEntries.Generalplan, navigationEntries.NewPlayerForm];
-export const adminNavigationEntriesList = [adminNavigationEntries.TeamsData];
+]
