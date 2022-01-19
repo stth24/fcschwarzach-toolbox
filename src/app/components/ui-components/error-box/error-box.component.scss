@@ -1,0 +1,26 @@
+:host,
+.error-message-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+:host {
+  flex: 1;
+}
+
+.error-message-box {
+  border: 2px solid var(--dark-gray);
+  padding: 30px;
+  text-align: center;
+
+  h2 {
+    color: darkred;
+    margin-bottom: 10px;
+  }
+
+  h3 {
+    font-weight: 500;
+  }
+}

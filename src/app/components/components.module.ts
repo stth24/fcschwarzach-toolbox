@@ -12,11 +12,13 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { EditTeamsComponent } from './admin/edit-teams/edit-teams.component';
 import { ConfirmCancelModalComponent } from './ui-components/confirm-cancel-modal/confirm-cancel-modal.component';
 import { WeekplanComponent } from './weekplan/weekplan.component';
+import { LoaderComponent } from './ui-components/loader/loader.component';
+import { ErrorBoxComponent } from './ui-components/error-box/error-box.component';
 
 
 
 @NgModule({
-    declarations: [HeaderComponent, NavigationComponent, ContentComponent, NewplayerFormComponent, GeneralplanComponent, ModalComponent, LoginFormComponent, EditTeamsComponent, ConfirmCancelModalComponent, WeekplanComponent],
+    declarations: [HeaderComponent, NavigationComponent, ContentComponent, NewplayerFormComponent, GeneralplanComponent, ModalComponent, LoginFormComponent, EditTeamsComponent, ConfirmCancelModalComponent, WeekplanComponent, LoaderComponent, ErrorBoxComponent],
     imports: [
         CommonModule,
         AppRoutingModule,

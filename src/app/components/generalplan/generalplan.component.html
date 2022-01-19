@@ -1,13 +1,9 @@
-<div class="loader-box"  *ngIf="teams.length < 1 && !fetchError.status">
-    <div class="loader">Loading...</div>
-</div>
+<app-loader *ngIf="teams.length < 1 && !fetchError.status"></app-loader>
 
-<div class="error-message" *ngIf="fetchError.status">
-    <div class="error-message-box">
-        <h2>{{fetchError.message.title}}</h2>
-        <h3>{{fetchError.message.text}}</h3>
-    </div>
-</div>
+<app-error-box *ngIf="fetchError.status"
+    [title]="fetchError.message.title"
+    [message]="fetchError.message.text">
+</app-error-box>
 
 <!-- Filters -->
 <ng-container  *ngIf="teams.length > 0">

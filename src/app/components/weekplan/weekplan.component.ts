@@ -20,41 +20,7 @@ export interface EventDetail {
     type: EventType
 }
 
-const EXAMPLE_EVENTS: WeeklyEvent[] = [
-    {
-        name: 'KM Training',
-        timeDetails: [{
-            durationInMin: 90,
-            startTime: { hour: '18', minute: '30' },
-            day: 4,
-            location: 'Kunstrasen Wolfurt'
-        }]
-    },
-    {
-        name: '1b Training',
-        timeDetails: [{
-            durationInMin: 90,
-            startTime: { hour: '19', minute: '30' },
-            day: 4,
-            location: 'Fußballplatz Schwarzach'
-        }]
-    },
-    {
-        name: 'U7 Training',
-        timeDetails: [{
-            day: 1,
-            startTime: { hour: '17', minute: '00' },
-            durationInMin: 60,
-            location: 'Fußballplatz Schwarzach'
-        },
-        {
-            durationInMin: 60,
-            startTime: { hour: '18', minute: '00' },
-            day: 3,
-            location: 'Halle MS Schwarzach'
-        }]
-    },
-]
+
 
 
 @Component({
@@ -71,6 +37,16 @@ export class WeekplanComponent implements OnInit {
     firstDayOfSelectedWeek: Date = new Date();
 
     teams: TeamData[] | undefined;
+    events: WeeklyEvent[] | undefined;
+
+    loading = true;
+    fetchError = {
+        status: false,
+        message: {
+            title: '',
+            text: ''
+        }
+    }
 
     constructor(private apiService: ApiService) {
         this.resetToCurrentWeek();
@@ -80,17 +56,33 @@ export class WeekplanComponent implements OnInit {
         this.apiService.getGeneralplanData()
             .then(data => {
                 this.teams = data;
+                this.loading = false;
 
                 this.createTableData();
             })
             .catch(err => {
-                // this.fetchError.status = true;
-                // this.fetchError.message.title = "Fehler beim Laden der Daten:";
-                // this.fetchError.message.text = err;
-                alert(err);
+                this.loading = false;
+
+                this.fetchError.status = true;
+                this.fetchError.message.title = "Fehler beim Laden der Daten:";
+                this.fetchError.message.text = err;
             })
 
-        this.createTableData();
+        this.apiService.getWeeklyEvents()
+            .then(data => {
+                this.events = data;
+                this.loading = false;
+
+                this.createTableData();
+            })
+            .catch(err => {
+                this.loading = false;
+
+                this.fetchError.status = true;
+                this.fetchError.message.title = "Fehler beim Laden der Daten:";
+                this.fetchError.message.text = err;
+            })
+
     }
 
     resetToCurrentWeek() {
@@ -140,17 +132,19 @@ export class WeekplanComponent implements OnInit {
         this.currentWeek.forEach(dayEvent => {
             const eventsAtDay: EventDetail[] = []
 
-            EXAMPLE_EVENTS.forEach(event => {
-                event.timeDetails
-                    .filter(timeDetail => timeDetail.day === dayEvent.date.getDay()) // check if day matches
-                    .forEach(timeDetail => {
-                        eventsAtDay.push({
-                            name: event.name,
-                            timeDetail,
-                            type: EventType.repeating
+            if (this.events) {
+                this.events.forEach(event => {
+                    event.timeDetails
+                        .filter(timeDetail => timeDetail.day === dayEvent.date.getDay()) // check if day matches
+                        .forEach(timeDetail => {
+                            eventsAtDay.push({
+                                name: event.name,
+                                timeDetail,
+                                type: EventType.repeating
+                            })
                         })
-                    })
-            })
+                })
+            }
 
 
             if (this.teams) {
