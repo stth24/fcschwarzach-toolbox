@@ -1,0 +1,36 @@
+<div class="header">
+    <button (click)="previousWeek()">Previous</button>
+    <span class="header-date">{{firstDayOfSelectedWeek | date: 'dd.MM.yyyy'}} </span>
+    <button (click)="onResetToCurrentWeek()">AktuelleWoche</button>
+    <button (click)="nextWeek()">Next</button>
+</div>
+
+<div class="container">
+    <div class="day" 
+        *ngFor="let currentDayEntry of currentWeek"
+        [class.isWeekend]="currentDayEntry.date.getDay() === 6 || currentDayEntry.date.getDay() === 0">
+        <div class="day-header">
+            {{currentDayEntry.date | date: 'EEEE dd.MM.yyyy'}}
+        </div>
+        <ng-container *ngFor="let event of currentDayEntry.events">
+            <div class="event-entry" [class.single-event]="event.type === eventType.oneTime">
+                    <span class="event-name">{{event.name}}</span>
+                    <div class="event-entry-details">
+                        <span>Start:</span>
+                        <span>{{event.timeDetail.startTime.hour + ':' + event.timeDetail.startTime.minute}} Uhr</span>
+
+                        <!-- we dont need to show duration if none is available -->
+                        <ng-container *ngIf="event.timeDetail.durationInMin > 0">
+                            <span>Dauer:</span>
+                            <span>{{event.timeDetail.durationInMin}}min</span>
+                        </ng-container>
+
+                        <span>Ort:</span>
+                        <span>{{event.timeDetail.location}}</span>
+                    </div>
+                </div>
+        </ng-container>
+
+        <!-- No events at this day -->
+        <div class="without-entry" *ngIf="currentDayEntry.events.length < 1"></div>
+</div>
