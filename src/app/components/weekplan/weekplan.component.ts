@@ -20,7 +20,34 @@ export interface EventDetail {
     type: EventType
 }
 
+class LoadingTask {
+    private complete = false;
 
+    get finished(): boolean {
+        return this.complete;
+    }
+
+    finish() {
+        this.complete = true;
+    }
+}
+
+class LoadingProgress {
+    loadingTasks: LoadingTask[] = [];
+    completeTasks: LoadingTask[] = [];
+
+    createTask() {
+        const newTask = new LoadingTask();
+        this.loadingTasks.push(newTask);
+        return newTask;
+    }
+
+    completeLoadingTask(toComplete: LoadingTask) {
+        toComplete.finish();
+        this.loadingTasks = this.loadingTasks.filter(task => !task.finished);
+        this.completeTasks.push(toComplete);
+    }
+}
 
 
 @Component({
@@ -39,7 +66,9 @@ export class WeekplanComponent implements OnInit {
     teams: TeamData[] | undefined;
     events: WeeklyEvent[] | undefined;
 
-    loading = true;
+    loadingProgress = new LoadingProgress();
+
+
     fetchError = {
         status: false,
         message: {
@@ -53,37 +82,44 @@ export class WeekplanComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        const generalplanLoading = this.loadingProgress.createTask();
+
         this.apiService.getGeneralplanData()
             .then(data => {
                 this.teams = data;
-                this.loading = false;
+                this.loadingProgress.completeLoadingTask(generalplanLoading);
 
                 this.createTableData();
             })
             .catch(err => {
-                this.loading = false;
+                generalplanLoading.finish();
 
                 this.fetchError.status = true;
                 this.fetchError.message.title = "Fehler beim Laden der Daten:";
                 this.fetchError.message.text = err;
             })
+
+
+
+        const weeklyLoading = this.loadingProgress.createTask();
 
         this.apiService.getWeeklyEvents()
             .then(data => {
                 this.events = data;
-                this.loading = false;
+                this.loadingProgress.completeLoadingTask(weeklyLoading);
 
                 this.createTableData();
             })
             .catch(err => {
-                this.loading = false;
+                weeklyLoading.finish();
 
                 this.fetchError.status = true;
                 this.fetchError.message.title = "Fehler beim Laden der Daten:";
                 this.fetchError.message.text = err;
             })
-
     }
+
+
 
     resetToCurrentWeek() {
         const today = new Date();

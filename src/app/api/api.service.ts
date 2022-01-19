@@ -226,43 +226,10 @@ export class ApiService {
 
     getWeeklyEvents() {
         return new Promise<WeeklyEvent[]>((resolve, reject) => {
-            const EXAMPLE_EVENTS: WeeklyEvent[] = [
-                {
-                    name: 'KM Training',
-                    timeDetails: [{
-                        durationInMin: 90,
-                        startTime: { hour: '18', minute: '30' },
-                        day: 4,
-                        location: 'Kunstrasen Wolfurt'
-                    }]
-                },
-                {
-                    name: '1b Training',
-                    timeDetails: [{
-                        durationInMin: 90,
-                        startTime: { hour: '19', minute: '30' },
-                        day: 4,
-                        location: 'Fußballplatz Schwarzach'
-                    }]
-                },
-                {
-                    name: 'U7 Training',
-                    timeDetails: [{
-                        day: 1,
-                        startTime: { hour: '17', minute: '00' },
-                        durationInMin: 60,
-                        location: 'Fußballplatz Schwarzach'
-                    },
-                    {
-                        durationInMin: 60,
-                        startTime: { hour: '18', minute: '00' },
-                        day: 3,
-                        location: 'Halle MS Schwarzach'
-                    }]
-                },
-            ]
-
-            resolve(EXAMPLE_EVENTS);
+            fetch(this.getUrl() + '/weekplan')
+                .then(res => res.json())
+                .then((data: WeeklyEvent[]) => resolve(data))
+                .catch(error => reject(error))
         })
     }
 }
