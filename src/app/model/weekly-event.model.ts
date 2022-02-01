@@ -1,14 +1,15 @@
 export interface TimeDetails {
-    day: number,
-    startTime: {
-        hour: string,
-        minute: string
-    }
-    durationInMin: number,
+    id: string,
+    weeklyEventId: string,
+    day: string,
+    startTimeHour: string,
+    startTimeMinute: string,
+    durationInMin: string,
     location: string
 }
 
 export interface WeeklyEvent {
+    id: string,
     name: string,
     timeDetails: TimeDetails[],
 }

@@ -106,6 +106,9 @@ export class WeekplanComponent implements OnInit {
         this.apiService.getWeeklyEvents()
             .then(data => {
                 this.events = data;
+
+                console.log('GOT DATA', this.events);
+
                 this.loadingProgress.completeLoadingTask(weeklyLoading);
 
                 this.createTableData();
@@ -171,7 +174,7 @@ export class WeekplanComponent implements OnInit {
             if (this.events) {
                 this.events.forEach(event => {
                     event.timeDetails
-                        .filter(timeDetail => timeDetail.day === dayEvent.date.getDay()) // check if day matches
+                        .filter(timeDetail => Number.parseInt(timeDetail.day) === dayEvent.date.getDay()) // check if day matches
                         .forEach(timeDetail => {
                             eventsAtDay.push({
                                 name: event.name,
@@ -195,13 +198,13 @@ export class WeekplanComponent implements OnInit {
                         })
                         .forEach(event => {
                             const timeDetail: TimeDetails = {
-                                day: event.dtstart.value.getDay(),
-                                durationInMin: -1,
+                                id: '',
+                                weeklyEventId: '',
+                                day: event.dtstart.value.getDay().toString(),
+                                durationInMin: '',
                                 location: event.location.value,
-                                startTime: {
-                                    hour: (event.dtstart.value.getHours().toString().length < 2 ? '0' : '') + event.dtstart.value.getHours().toString(),
-                                    minute: (event.dtstart.value.getMinutes().toString().length < 2 ? '0' : '') + event.dtstart.value.getMinutes().toString()
-                                }
+                                startTimeHour: (event.dtstart.value.getHours().toString().length < 2 ? '0' : '') + event.dtstart.value.getHours().toString(),
+                                startTimeMinute: (event.dtstart.value.getMinutes().toString().length < 2 ? '0' : '') + event.dtstart.value.getMinutes().toString()
                             }
 
                             eventsAtDay.push({
@@ -215,11 +218,11 @@ export class WeekplanComponent implements OnInit {
 
             dayEvent.events = [...eventsAtDay];
             dayEvent.events.sort((a, b) => {
-                if (Number.parseInt(a.timeDetail.startTime.hour) < Number.parseInt(b.timeDetail.startTime.hour)) return -1;
-                if (Number.parseInt(a.timeDetail.startTime.hour) > Number.parseInt(b.timeDetail.startTime.hour)) return 1;
+                if (Number.parseInt(a.timeDetail.startTimeHour) < Number.parseInt(b.timeDetail.startTimeHour)) return -1;
+                if (Number.parseInt(a.timeDetail.startTimeHour) > Number.parseInt(b.timeDetail.startTimeHour)) return 1;
 
-                if (Number.parseInt(a.timeDetail.startTime.hour) === Number.parseInt(b.timeDetail.startTime.hour)) {
-                    return Number.parseInt(a.timeDetail.startTime.minute) < Number.parseInt(b.timeDetail.startTime.minute) ? -1 : 1;
+                if (Number.parseInt(a.timeDetail.startTimeHour) === Number.parseInt(b.timeDetail.startTimeHour)) {
+                    return Number.parseInt(a.timeDetail.startTimeMinute) < Number.parseInt(b.timeDetail.startTimeMinute) ? -1 : 1;
                 }
 
                 return 1;

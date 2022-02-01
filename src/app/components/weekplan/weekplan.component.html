@@ -29,10 +29,10 @@
                         <span class="event-name">{{event.name}}</span>
                         <div class="event-entry-details">
                             <span class="event-details-topic">Start:</span>
-                            <span>{{event.timeDetail.startTime.hour + ':' + event.timeDetail.startTime.minute}} Uhr</span>
+                            <span>{{event.timeDetail.startTimeHour + ':' + event.timeDetail.startTimeMinute}} Uhr</span>
     
                             <!-- we dont need to show duration if none is available -->
-                            <ng-container *ngIf="event.timeDetail.durationInMin > 0">
+                            <ng-container *ngIf="event.timeDetail.durationInMin">
                                 <span class="event-details-topic">Dauer:</span>
                                 <span>{{event.timeDetail.durationInMin}}min</span>
                             </ng-container>
