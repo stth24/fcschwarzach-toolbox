@@ -14,7 +14,7 @@ verifyJwt($tokenFromHeader);
 if(!empty($_POST["id"])) {
     $id = $_POST["id"];
 
-    $sql = "DELETE FROM `teams` WHERE `id` = " . $id;
+    $sql = "DELETE FROM `weekly_event` WHERE `id` = " . $id;
     deleteFromDB($sql);
 
     echo "Delete executed successfuly";

@@ -11,12 +11,11 @@ verifyJwt($tokenFromHeader);
 
 
 //insert into db
-if(!empty($_POST["id"]) && !empty($_POST["name"]) && !empty($_POST["url"])) {
+if(!empty($_POST["id"]) && !empty($_POST["name"])) {
     $id = $_POST["id"];
-    $teamname = $_POST["name"];
-    $url = $_POST["url"];
+    $eventname = $_POST["name"];
 
-    $sql = "UPDATE `teams` SET `name`='" . $teamname . "',`url`='" . $url . "' WHERE `id` = " . $id;
+    $sql = "UPDATE `weekly_event` SET `name`='" . $eventname . "' WHERE `id` = " . $id;
     insertUpdateIntoDB($sql);
 
     

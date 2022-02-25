@@ -22,7 +22,6 @@ for ($i = 0; $i < count($resultAsArray); $i++) {
         if($resultAsArray[$i]['id'] == $detail['weeklyEventid']) {
             array_push($arr, $detail);
         }
-
     }
 
     $resultAsArray[$i]['timeDetails'] = $arr;
