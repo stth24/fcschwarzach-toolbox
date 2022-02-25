@@ -5,6 +5,7 @@ import { Team } from "../model/team.model";
 import { getLoginToken, removeLoginToken, setLoginToken } from "../components/helpers/login-helper";
 import { Injectable } from "@angular/core";
 import { StateService } from "../components/services/state/state.service";
+import { WeeklyEvent } from "../model/weekly-event.model";
 
 @Injectable({
     providedIn: 'root'
@@ -222,4 +223,13 @@ export class ApiService {
         })
     }
 
+
+    getWeeklyEvents() {
+        return new Promise<WeeklyEvent[]>((resolve, reject) => {
+            fetch(this.getUrl() + '/weekplan')
+                .then(res => res.json())
+                .then((data: WeeklyEvent[]) => resolve(data))
+                .catch(error => reject(error))
+        })
+    }
 }

@@ -1,0 +1,130 @@
+:host {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  gap: 20px;
+  align-content: center;
+}
+
+.header {
+  display: flex;
+  gap: 10px;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+  max-width: 100%;
+
+  .header-date {
+    font-weight: bold;
+  }
+
+  .progress-box {
+    display: flex;
+    gap: 10px;
+  }
+}
+
+.header,
+.container {
+  width: max-content;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(7, max-content);
+  overflow: auto;
+  border: 2px solid var(--dark-blue);
+  box-sizing: border-box;
+  overflow: auto;
+  max-width: 100%;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  border-right: 2px solid var(--dark-blue);
+
+  &:last-child {
+    border-right: none;
+  }
+
+  .day-header {
+    position: sticky; //always show th even on scroll down
+    top: 0;
+    z-index: 2;
+
+    font-weight: bold;
+    border-bottom: 2px solid var(--dark-blue);
+    background-color: var(--dark-blue);
+    color: white;
+    padding: 5px 10px;
+  }
+}
+
+.isWeekend {
+  background-color: var(--regular-green);
+}
+
+.event-entry {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 300px;
+
+  overflow: hidden;
+  border-bottom: 2px solid var(--dark-blue);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .event-name {
+    background-color: var(--medium-blue);
+    font-weight: bold;
+    border-bottom: 1px solid var(--dark-blue);
+  }
+
+  .event-entry-details {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    row-gap: 5px;
+    column-gap: 10px;
+
+    overflow: hidden;
+  }
+
+  .event-name,
+  .event-entry-details span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &:nth-child(2n) {
+      max-width: 235px;
+    }
+  }
+
+  .event-name,
+  .event-entry-details {
+    padding: 5px 10px;
+  }
+
+  .event-details-topic {
+    font-weight: bold;
+  }
+}
+
+.single-event {
+  .event-name {
+    color: darkred;
+  }
+}
+
+.without-entry {
+  background-color: black;
+  opacity: 0.2;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}

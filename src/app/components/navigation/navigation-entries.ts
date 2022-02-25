@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { EditTeamsComponent } from "../admin/edit-teams/edit-teams.component";
 import { GeneralplanComponent } from "../generalplan/generalplan.component";
 import { NewplayerFormComponent } from "../newplayer-form/newplayer-form.component";
+import { WeekplanComponent } from "../weekplan/weekplan.component";
 
 export interface NavigationEntry {
     id: string,
@@ -19,6 +20,11 @@ export const navigationEntriesList: NavigationEntry[] = [
         id: 'newplayerform',
         label: 'Spieleranmeldung',
         component: NewplayerFormComponent
+    },
+    {
+        id: 'weekplan',
+        label: "Wochenplan",
+        component: WeekplanComponent
     }
 ]
 
