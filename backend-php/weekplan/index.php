@@ -1,6 +1,5 @@
 <?php
 
-<?php
 require "../helpers/mysqlHandler.php";
 
 // Read from DB
