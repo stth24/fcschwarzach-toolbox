@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { EditTeamsComponent } from "../admin/edit-teams/edit-teams.component";
+import { EditWeeklyEventsComponent } from "../admin/edit-weekly-events/edit-weekly-events.component";
 import { GeneralplanComponent } from "../generalplan/generalplan.component";
 import { NewplayerFormComponent } from "../newplayer-form/newplayer-form.component";
 import { WeekplanComponent } from "../weekplan/weekplan.component";
@@ -33,5 +34,10 @@ export const adminNavigationEntriesList: NavigationEntry[] = [
         id: 'teamsdata',
         label: 'Team Daten',
         component: EditTeamsComponent
+    },
+    {
+        id: 'weeklyevents',
+        label: "Wöchentliche Events",
+        component: EditWeeklyEventsComponent
     }
 ]

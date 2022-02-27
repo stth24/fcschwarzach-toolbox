@@ -107,8 +107,6 @@ export class WeekplanComponent implements OnInit {
             .then(data => {
                 this.events = data;
 
-                console.log('GOT DATA', this.events);
-
                 this.loadingProgress.completeLoadingTask(weeklyLoading);
 
                 this.createTableData();
@@ -199,7 +197,7 @@ export class WeekplanComponent implements OnInit {
                         .forEach(event => {
                             const timeDetail: TimeDetails = {
                                 id: '',
-                                weeklyEventId: '',
+                                weeklyEventid: '',
                                 day: event.dtstart.value.getDay().toString(),
                                 durationInMin: '',
                                 location: event.location.value,

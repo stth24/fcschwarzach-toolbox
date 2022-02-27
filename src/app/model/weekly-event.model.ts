@@ -1,6 +1,6 @@
 export interface TimeDetails {
     id: string,
-    weeklyEventId: string,
+    weeklyEventid: string,
     day: string,
     startTimeHour: string,
     startTimeMinute: string,

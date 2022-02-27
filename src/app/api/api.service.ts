@@ -5,7 +5,8 @@ import { Team } from "../model/team.model";
 import { getLoginToken, removeLoginToken, setLoginToken } from "../components/helpers/login-helper";
 import { Injectable } from "@angular/core";
 import { StateService } from "../components/services/state/state.service";
-import { WeeklyEvent } from "../model/weekly-event.model";
+import { TimeDetails, WeeklyEvent } from "../model/weekly-event.model";
+import { Form } from "@angular/forms";
 
 @Injectable({
     providedIn: 'root'
@@ -20,6 +21,15 @@ export class ApiService {
         return prefix + '/api';
     }
 
+    private handleErrorResponse(reject: (reason?: any) => void, status: number) {
+        if (status === 401) {
+            this.handleTokenNotValid(reject);
+        }
+        else {
+            reject();
+        }
+    }
+
     private handleTokenNotValid(reject: (reason?: any) => void) {
         alert('Ihre Session ist abgelaufen. Sie werden jetzt ausgeloggt!');
 
@@ -27,8 +37,83 @@ export class ApiService {
             loggedIn: false
         });
 
-        removeLoginToken()
+        removeLoginToken();
         reject();
+    }
+
+    private deleteRequest(id: string, url: string) {
+        return new Promise<void>((resolve, reject) => {
+            const body = new FormData();
+            body.append('token', getLoginToken());
+            body.append('id', id);
+
+            const options = {
+                method: 'POST',
+                body
+            };
+
+            fetch(url, options)
+                .then(res => {
+                    if (res.status === 200) {
+                        resolve();
+                    }
+                    else {
+                        this.handleErrorResponse(reject, res.status);
+                    }
+                })
+                .catch(err => {
+                    reject();
+                })
+        })
+    }
+
+    private insertRequest<T>(body: FormData, url: string) {
+        return new Promise<T>((resolve, reject) => {
+            body.append('token', getLoginToken());
+
+            const options = {
+                method: 'POST',
+                body
+            };
+
+            fetch(url, options)
+                .then(res => {
+                    if (res.status === 200) {
+                        res.json().then((data: T[]) => resolve(data[0]));
+                    }
+                    else {
+                        this.handleErrorResponse(reject, res.status)
+                    }
+                })
+                .catch(err => {
+                    reject();
+                })
+        })
+    }
+
+    private updateRequest(body: FormData, url: string) {
+        return new Promise<void>((resolve, reject) => {
+            body.append('token', getLoginToken());
+
+            const options = {
+                method: 'POST',
+                body
+            };
+
+            fetch(url, options)
+                .then(res => {
+                    if (res.status === 200) {
+                        resolve();
+                    }
+                    else {
+                        this.handleTokenNotValid(reject);
+                        reject();
+                    }
+                })
+                .catch(err => {
+                    reject();
+                })
+        })
     }
 
     login(username: string, password: string) {
@@ -143,84 +228,32 @@ export class ApiService {
     }
 
     updateTeam(team: Team) {
-        return new Promise<void>((resolve, reject) => {
-            const body = new FormData();
-            body.append('token', getLoginToken());
-            body.append('id', team.id.toString());
-            body.append('name', team.name.trim());
-            body.append('url', team.url.trim());
+        const body = new FormData();
+        body.append('id', team.id.toString());
+        body.append('name', team.name.trim());
+        body.append('url', team.url.trim());
 
-            const options = {
-                method: 'POST',
-                body
-            };
-
-            fetch(this.getUrl() + '/admin/updateteam.php', options)
-                .then(res => {
-                    if (res.status === 200) {
-                        resolve();
-                    }
-                    else {
-                        this.handleTokenNotValid(reject);
-                    }
-                })
-                .catch(err => {
-                    reject();
-                })
-        })
+        return this.updateRequest(
+            body,
+            this.getUrl() + '/admin/updateteam.php'
+        )
     }
 
     insertTeam(name: string, url: string) {
-        return new Promise<Team>((resolve, reject) => {
-            const body = new FormData();
-            body.append('token', getLoginToken());
-            body.append('name', name);
-            body.append('url', url);
+        const body = new FormData();
+        body.append('name', name);
+        body.append('url', url);
 
-            const options = {
-                method: 'POST',
-                body
-            };
-
-            fetch(this.getUrl() + '/admin/setteam.php', options)
-                .then(res => {
-                    if (res.status === 200) {
-                        res.json().then((data: Team[]) => resolve(data[0]));
-                    }
-                    else {
-                        this.handleTokenNotValid(reject);
-                    }
-                })
-                .catch(err => {
-                    reject();
-                })
-        })
+        return this.insertRequest<Team>(
+            body,
+            this.getUrl() + '/admin/setteam.php'
+        )
     }
 
     deleteTeam(id: number) {
-        return new Promise<void>((resolve, reject) => {
-            const body = new FormData();
-            body.append('token', getLoginToken());
-            body.append('id', id.toString());
-
-            const options = {
-                method: 'POST',
-                body
-            };
-
-            fetch(this.getUrl() + '/admin/deleteteam.php', options)
-                .then(res => {
-                    if (res.status === 200) {
-                        resolve();
-                    }
-                    else {
-                        this.handleTokenNotValid(reject);
-                    }
-                })
-                .catch(err => {
-                    reject();
-                })
-        })
+        return this.deleteRequest(
+            id.toString(),
+            this.getUrl() + '/admin/deleteteam.php');
     }
 
 
@@ -231,5 +264,70 @@ export class ApiService {
                 .then((data: WeeklyEvent[]) => resolve(data))
                 .catch(error => reject(error))
         })
+    }
+
+    deleteWeeklyEvent(id: string) {
+        return this.deleteRequest(
+            id,
+            this.getUrl() + '/admin/deleteweeklyevent.php');
+    }
+
+    insertWeeklyEvent(name: string) {
+        const body = new FormData();
+        body.append('name', name);
+
+        return this.insertRequest<WeeklyEvent>(
+            body,
+            this.getUrl() + '/admin/setweeklyevent.php'
+        )
+    }
+
+    updateWeeklyEvent(id: string, name: string) {
+        const body = new FormData();
+        body.append('id', id);
+        body.append('name', name);
+
+        return this.updateRequest(
+            body,
+            this.getUrl() + '/admin/updateweeklyevent.php'
+        )
+    }
+
+    deleteWeeklyTimeDetail(id: string) {
+        return this.deleteRequest(
+            id,
+            this.getUrl() + '/admin/deletetimedetails.php');
+    }
+
+    private createTimeDetailsFormData(timeDetail: TimeDetails) {
+        const body = new FormData();
+        body.append('durationInMin', timeDetail.durationInMin);
+        body.append('day', timeDetail.day);
+        body.append('location', timeDetail.location);
+        body.append('startTimeHour', timeDetail.startTimeHour);
+        body.append('startTimeMinute', timeDetail.startTimeMinute);
+
+        return body;
+    }
+
+    updateTimeDetail(timeDetail: TimeDetails) {
+        const body = this.createTimeDetailsFormData(timeDetail);
+        body.append('id', timeDetail.id);
+
+        return this.updateRequest(
+            body,
+            this.getUrl() + '/admin/updatetimedetails.php'
+        )
+    }
+
+
+    insertTimeDetail(timeDetail: TimeDetails) {
+        const body = this.createTimeDetailsFormData(timeDetail);
+        body.append('weeklyEventid', timeDetail.weeklyEventid);
+
+        return this.insertRequest<TimeDetails>(
+            body,
+            this.getUrl() + '/admin/settimedetails.php'
+        )
     }
 }

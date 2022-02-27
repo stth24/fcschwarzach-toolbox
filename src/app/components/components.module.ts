@@ -14,11 +14,13 @@ import { ConfirmCancelModalComponent } from './ui-components/confirm-cancel-moda
 import { WeekplanComponent } from './weekplan/weekplan.component';
 import { LoaderComponent } from './ui-components/loader/loader.component';
 import { ErrorBoxComponent } from './ui-components/error-box/error-box.component';
+import { EditWeeklyEventsComponent } from './admin/edit-weekly-events/edit-weekly-events.component';
+import { HourMinutePipe } from './helpers/hour-minute.pipe';
 
 
 
 @NgModule({
-    declarations: [HeaderComponent, NavigationComponent, ContentComponent, NewplayerFormComponent, GeneralplanComponent, ModalComponent, LoginFormComponent, EditTeamsComponent, ConfirmCancelModalComponent, WeekplanComponent, LoaderComponent, ErrorBoxComponent],
+    declarations: [HeaderComponent, NavigationComponent, ContentComponent, NewplayerFormComponent, GeneralplanComponent, ModalComponent, LoginFormComponent, EditTeamsComponent, ConfirmCancelModalComponent, WeekplanComponent, LoaderComponent, ErrorBoxComponent, EditWeeklyEventsComponent, HourMinutePipe],
     imports: [
         CommonModule,
         AppRoutingModule,
