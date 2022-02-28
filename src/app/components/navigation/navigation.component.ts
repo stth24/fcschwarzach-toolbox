@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ApiService } from 'src/app/api/api.service';
 import { LoginTokenHandler } from '../helpers/login-helper';
 import { StateService } from '../services/state/state.service';
@@ -22,7 +23,9 @@ export class NavigationComponent implements OnInit {
 
     loggedIn = false;
 
-    stateSubscription: Subscription | undefined;
+    unsubscribe = new Subject<void>();
+
+    selectedEntry: string | undefined;
 
     private nativeElement: HTMLElement;
 
@@ -36,8 +39,12 @@ export class NavigationComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.stateSubscription = this.stateService.getStateStream().subscribe(state => {
+        this.stateService.getStateStream().pipe(takeUntil(this.unsubscribe)).subscribe(state => {
             this.loggedIn = state.loggedIn;
+        })
+
+        this.activatedRoute.queryParams.pipe(takeUntil(this.unsubscribe)).subscribe(params => {
+            this.selectedEntry = params.nav;
         })
     }
 
@@ -53,7 +60,8 @@ export class NavigationComponent implements OnInit {
     }
 
     ngOnDestroy() {
-        this.stateSubscription?.unsubscribe();
+        this.unsubscribe.next();
+        this.unsubscribe.complete();
     }
 
     navigate(entry: NavigationEntry) {

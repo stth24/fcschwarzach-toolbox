@@ -1,6 +1,9 @@
 <div class="entries-top">
-    <div class="nav-entry" (click)="navigate(entry)" *ngFor="let entry of menuEntries">
-        {{entry.label}}
+    <div class="nav-entry" 
+        *ngFor="let entry of menuEntries"
+        [class.selected-entry]="entry.id === selectedEntry"
+        (click)="navigate(entry)">
+        {{entry.id === selectedEntry ? '>' : ''}} {{entry.label}}
     </div>
 
     
@@ -9,8 +12,11 @@
     </a>
 
     <div class="admin-entries" *ngIf="loggedIn">
-        <div class="nav-entry"  (click)="navigate(entry)" *ngFor="let entry of adminMenuEntries">
-            {{entry.label}}
+        <div class="nav-entry"  
+            *ngFor="let entry of adminMenuEntries"
+            [class.selected-entry]="entry.id === selectedEntry" 
+            (click)="navigate(entry)">
+            {{entry.id === selectedEntry ? '>' : ''}} {{entry.label}}
         </div>
     </div>
 </div>

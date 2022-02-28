@@ -29,10 +29,15 @@
   padding: 10px;
 
   &:hover {
-    background-color: var(--regular-green);
+    background-color: var(--dark-blue);
     color: white;
     cursor: pointer;
   }
+}
+
+.selected-entry {
+  background-color: var(--regular-green);
+  color: white;
 }
 
 .admin-entries {
