@@ -2,7 +2,7 @@ import { environment } from "src/environments/environment";
 import * as ical from 'cal-parser';
 import { TeamData } from "../model/generalplan.model";
 import { Team } from "../model/team.model";
-import { getLoginToken, removeLoginToken, setLoginToken } from "../components/helpers/login-helper";
+import { LoginTokenHandler } from "../components/helpers/login-helper";
 import { Injectable } from "@angular/core";
 import { StateService } from "../components/services/state/state.service";
 import { TimeDetails, WeeklyEvent } from "../model/weekly-event.model";
@@ -37,14 +37,14 @@ export class ApiService {
             loggedIn: false
         });
 
-        removeLoginToken();
+        LoginTokenHandler.removeLoginToken();
         reject();
     }
 
     private deleteRequest(id: string, url: string) {
         return new Promise<void>((resolve, reject) => {
             const body = new FormData();
-            body.append('token', getLoginToken());
+            body.append('token', LoginTokenHandler.getLoginToken());
             body.append('id', id);
 
             const options = {
@@ -69,7 +69,7 @@ export class ApiService {
 
     private insertRequest<T>(body: FormData, url: string) {
         return new Promise<T>((resolve, reject) => {
-            body.append('token', getLoginToken());
+            body.append('token', LoginTokenHandler.getLoginToken());
 
             const options = {
                 method: 'POST',
@@ -93,7 +93,7 @@ export class ApiService {
 
     private updateRequest(body: FormData, url: string) {
         return new Promise<void>((resolve, reject) => {
-            body.append('token', getLoginToken());
+            body.append('token', LoginTokenHandler.getLoginToken());
 
             const options = {
                 method: 'POST',
@@ -131,7 +131,7 @@ export class ApiService {
                 .then(res => {
                     if (res.status === 200) {
                         res.text().then(token => {
-                            setLoginToken(token)
+                            LoginTokenHandler.setLoginToken(token)
 
                             this.stateService.updateState({
                                 loggedIn: true
@@ -151,7 +151,7 @@ export class ApiService {
 
     verifyToken() {
         return new Promise<void>((resolve, reject) => {
-            const token = getLoginToken();
+            const token = LoginTokenHandler.getLoginToken();
 
             if (token) {
                 const body = new FormData();

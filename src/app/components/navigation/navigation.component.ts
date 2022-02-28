@@ -1,8 +1,8 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/api/api.service';
-import { LOGIN_STORAGE_KEY } from '../helpers/login-helper';
+import { LoginTokenHandler } from '../helpers/login-helper';
 import { StateService } from '../services/state/state.service';
 import { adminNavigationEntriesList, navigationEntriesList, NavigationEntry } from './navigation-entries';
 
@@ -73,7 +73,7 @@ export class NavigationComponent implements OnInit {
     }
 
     adminLogout() {
-        localStorage.removeItem(LOGIN_STORAGE_KEY);
+        LoginTokenHandler.removeLoginToken();
 
         this.stateService.updateState({
             loggedIn: false
