@@ -1,8 +1,94 @@
-<h2>Anmeldeformular für neue Spieler:</h2>
+<h1>Anmeldeformular für neue Spieler:</h1>
 <span>(unterstützt durch Google Forms)</span>
 
-<p>
+<ng-template #formButtonTemplate>
     <a target="_blank" href="https://forms.gle/b66TVyk2YvGEGEEw9">
         <button>Zum Formular</button>
     </a>
+</ng-template>
+
+<ng-template #clickZoomTemplate let-src="src" let-height="height">
+    <div class="click-zoom">
+        <label>
+            <input type="checkbox">
+            <img [src]="src" [height]="height"/>
+        </label>
+    </div>
+</ng-template>
+
+<p>
+    <ng-container *ngTemplateOutlet="formButtonTemplate"></ng-container>
+</p>
+
+<h2>Grundlegende Informationen</h2>
+<p>
+    Vielen Dank für Ihr Interesse an einer Anmeldung Ihrer Tocher/ Ihres Sohnes beim FC Schwarzach!  
+</p>
+<p>
+    Für eine korrekte Anmeldung beim Fußballverband brauchen wir noch ein paar persönliche Informationen.
+</p>
+<p>
+    <b>Ihre Daten werden natürlich mit größter Sorgfalt behandelt.</b>
+</p>
+
+<p>
+    Wir benötigen von Ihnen folgende Informationen für die Anmeldung:
+</p>
+<ul>
+    <li>Vorname</li>
+    <li>Nachname</li>
+    <li>Geburtsdatum des Kindes</li>
+    <li>Adresse</li>
+    <li>Vor- und Nachname eines Elternteiles</li>
+    <li>E-Mail Adresse</li>
+    <li>Telefonnummer</li>
+</ul>
+
+<p>Außerdem benötigen wir folgende Dokumente:</p>
+<ul>
+    <li>Passfoto des Kindes (zur Ausstellung des Spielerpasses)</li>
+    <li>Geburtsurkunde</li>
+    <li>Staatsbürgerschaftsnachweis</li>
+    <li><i>Meldebestätigung (nur bei Nicht-österreichischer Staatsbürgerschaft!)</i></li>
+</ul>
+
+<h2>Anmeldeprozess:</h2>
+<p>
+    Bei Klick auf den Button <ng-container *ngTemplateOutlet="formButtonTemplate"></ng-container> werden Sie auf das Google Forms-Dokument (siehe Abbildung) des FC Schwarzach weitergeleitet.
+</p>
+
+<ng-container *ngTemplateOutlet="clickZoomTemplate;context:{src: 'assets/anmeldeformular.png', height: '400'}"></ng-container>
+
+
+<p>
+    Hier finden Sie alle Eingabefelder zu den oben beschriebenen Informationen. 
+</p>
+<p>
+    Außerdem finden Sie am Ende des Formulars die Upload-Dialoge zum Hochladen der erforderlichen Dokumente (Passfoto, Geburtsurkunde, etc.):
+</p>
+
+<ng-container *ngTemplateOutlet="clickZoomTemplate;context:{src: 'assets/anmeldeformular_upload.png', height: '400'}"></ng-container>
+
+
+<p>
+    Wenn Sie alle Felder korrekt ausgefüllt haben, klicken auf "Senden", um das alle Informationen und Dokumente an uns weiterzuleiten.
+</p>
+
+<ng-container *ngTemplateOutlet="clickZoomTemplate;context:{src: 'assets/anmeldeformular_senden.png', height: '400'}"></ng-container>
+
+<h2>Weiteres Vorgehen:</h2>
+
+<p>
+    Nachdem Sie die Daten an uns weitergeleitet haben, werden wir diese an den VFV übermitteln und Sie für weitere Schritte entweder per E-Mail oder telefonisch kontaktieren.
+</p>
+
+<p>
+    Bei Fragen zum Anmeldeprozess wenden Sie sich an entweder den zuständigen Trainer oder auch gern an <b>fc.schwarzach@vol.at</b>
+</p>
+<p>
+    <b>Vielen Dank für Ihr Interesse am FC Schwarzach!</b>
+</p>
+
+<p>
+    <ng-container *ngTemplateOutlet="formButtonTemplate"></ng-container>
 </p>
