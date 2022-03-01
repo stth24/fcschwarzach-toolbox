@@ -11,7 +11,7 @@
     <div class="click-zoom">
         <label>
             <input type="checkbox">
-            <img [src]="src" [height]="height"/>
+            <img [src]="src" [style]="'max-height: ' + height +'px'"/>
         </label>
     </div>
 </ng-template>
@@ -74,7 +74,7 @@
     Wenn Sie alle Felder korrekt ausgefüllt haben, klicken auf "Senden", um das alle Informationen und Dokumente an uns weiterzuleiten.
 </p>
 
-<ng-container *ngTemplateOutlet="clickZoomTemplate;context:{src: 'assets/anmeldeformular_senden.png', height: '400'}"></ng-container>
+<ng-container *ngTemplateOutlet="clickZoomTemplate;context:{src: 'assets/anmeldeformular_senden.png', height: '300'}"></ng-container>
 
 <h2>Weiteres Vorgehen:</h2>
 
