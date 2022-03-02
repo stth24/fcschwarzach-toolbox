@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         // check if there already is a valid token and login
-        this.apiService.verifyToken();
+        this.apiService.verifyToken().catch(() => console.log('No Token set'));
     }
 
     toggleMenu() {

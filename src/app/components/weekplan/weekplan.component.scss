@@ -54,13 +54,15 @@
   }
 
   .day-header {
-    position: sticky; //always show th even on scroll down
+    position: sticky; //always show header even on scroll down
     top: 0;
     z-index: 2;
 
     font-weight: bold;
     border-bottom: 1px solid var(--dark-blue);
     padding: 5px 10px;
+
+    background-color: var(--background);
   }
 }
 .event-entry {
@@ -123,15 +125,16 @@
     width: 100%;
 
     .day {
-      border-bottom: 2px solid black;
-
-      .day-header {
-        background-color: var(--background);
-      }
+      border-bottom: 1px solid var(--dark-blue);
     }
 
     .day:last-child {
       border-bottom: none;
+    }
+
+    .event-details-topic,
+    .location-home {
+      font-weight: bold;
     }
 
     .without-entry {
