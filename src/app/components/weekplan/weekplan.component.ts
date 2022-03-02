@@ -206,7 +206,7 @@ export class WeekplanComponent implements OnInit {
                             }
 
                             eventsAtDay.push({
-                                name: `${team.name}: ${event.summary.value} (${event.description.value})`,
+                                name: `${event.summary.value} (${event.description.value})`,
                                 timeDetail,
                                 type: EventType.oneTime
                             })

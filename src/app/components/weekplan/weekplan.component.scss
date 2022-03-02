@@ -35,7 +35,7 @@
   display: grid;
   grid-template-columns: repeat(7, max-content);
   overflow: auto;
-  border: 2px solid var(--dark-blue);
+  border: 1px solid var(--dark-blue);
   box-sizing: border-box;
   overflow: auto;
   max-width: 100%;
@@ -44,7 +44,10 @@
 .day {
   display: flex;
   flex-direction: column;
-  border-right: 2px solid var(--dark-blue);
+  border-right: 1px solid var(--dark-blue);
+
+  gap: 10px;
+  padding-bottom: 10px;
 
   &:last-child {
     border-right: none;
@@ -56,17 +59,10 @@
     z-index: 2;
 
     font-weight: bold;
-    border-bottom: 2px solid var(--dark-blue);
-    background-color: var(--dark-blue);
-    color: white;
+    border-bottom: 1px solid var(--dark-blue);
     padding: 5px 10px;
   }
 }
-
-.isWeekend {
-  background-color: var(--regular-green);
-}
-
 .event-entry {
   display: flex;
   flex-direction: column;
@@ -74,16 +70,18 @@
   max-width: 300px;
 
   overflow: hidden;
-  border-bottom: 2px solid var(--dark-blue);
 
-  &:last-child {
-    border-bottom: none;
-  }
+  background-color: var(--medium-blue);
+
+  margin: 0 10px;
+  padding: 10px;
+  border-radius: 10px;
 
   .event-name {
-    background-color: var(--medium-blue);
     font-weight: bold;
-    border-bottom: 1px solid var(--dark-blue);
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 2px solid var(--dark-blue);
   }
 
   .event-entry-details {
@@ -105,26 +103,16 @@
     }
   }
 
-  .event-name,
-  .event-entry-details {
-    padding: 5px 10px;
-  }
-
   .event-details-topic {
-    font-weight: bold;
+    font-weight: var(--semi-bold);
   }
 }
 
 .single-event {
-  .event-name {
-    color: darkred;
-  }
+  background-color: var(--regular-green);
 }
 
-.without-entry {
-  background-color: black;
-  opacity: 0.2;
-  display: flex;
-  width: 100%;
-  height: 100%;
+.location-home {
+  color: darkred;
+  font-weight: var(--semi-bold);
 }

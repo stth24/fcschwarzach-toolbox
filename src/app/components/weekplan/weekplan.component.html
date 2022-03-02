@@ -7,9 +7,9 @@
 
 <ng-container *ngIf="loadingProgress.completeTasks.length > 0 && !fetchError.status">
     <div class="header">
-        <button (click)="previousWeek()">Voherige</button>
-        <span class="header-date">{{firstDayOfSelectedWeek | date: 'dd.MM.yyyy'}} </span>
         <button (click)="onResetToCurrentWeek()">Aktuelle Woche</button>
+        <span class="header-date">{{firstDayOfSelectedWeek | date: 'dd.MM.yyyy'}} </span>
+        <button (click)="previousWeek()">Voherige</button>
         <button (click)="nextWeek()">Nächste</button>
         <div class="progress-box" *ngIf="loadingProgress.loadingTasks.length > 0">
             <progress  [value]="loadingProgress.loadingTasks.length / (loadingProgress.completeTasks.length + loadingProgress.loadingTasks.length)"></progress>
@@ -22,7 +22,8 @@
             *ngFor="let currentDayEntry of currentWeek"
             [class.isWeekend]="currentDayEntry.date.getDay() === 6 || currentDayEntry.date.getDay() === 0">
             <div class="day-header">
-                {{currentDayEntry.date | date: 'EEEE dd.MM.yyyy'}}
+                <div>{{currentDayEntry.date | date: 'EEEE'}}</div>
+                <div>{{currentDayEntry.date | date: 'dd.MM.yyyy'}}</div>
             </div>
             <ng-container *ngFor="let event of currentDayEntry.events">
                 <div class="event-entry" [class.single-event]="event.type === eventType.oneTime">
@@ -38,13 +39,10 @@
                             </ng-container>
     
                             <span class="event-details-topic">Ort:</span>
-                            <span>{{event.timeDetail.location}}</span>
+                            <span [class.location-home]="event.timeDetail.location.includes('Schwarzach')">{{event.timeDetail.location}}</span>
                         </div>
                     </div>
             </ng-container>
-
-            <!-- No events at this day -->
-            <div class="without-entry" *ngIf="currentDayEntry.events.length < 1"></div>
         </div>
     </div>
 </ng-container>
