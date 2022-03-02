@@ -116,3 +116,29 @@
   color: darkred;
   font-weight: var(--semi-bold);
 }
+
+@media only screen and (max-width: 600px) {
+  .container {
+    grid-template-columns: auto;
+    width: 100%;
+
+    .day {
+      border-bottom: 2px solid black;
+
+      .day-header {
+        background-color: var(--background);
+      }
+    }
+
+    .day:last-child {
+      border-bottom: none;
+    }
+
+    .without-entry {
+      padding: 10px;
+      &::after {
+        content: "Kein Ereignis an diesem Tag!";
+      }
+    }
+  }
+}

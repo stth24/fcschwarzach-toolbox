@@ -43,6 +43,9 @@
                         </div>
                     </div>
             </ng-container>
+            
+            <!-- No events at this day -->
+            <div class="without-entry" *ngIf="currentDayEntry.events.length < 1"></div>
         </div>
     </div>
 </ng-container>
