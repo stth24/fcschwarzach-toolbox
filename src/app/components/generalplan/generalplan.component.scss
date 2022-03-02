@@ -1,3 +1,5 @@
+$border-size: 1px;
+
 :host {
   display: flex;
   flex: 1;
@@ -29,7 +31,7 @@
 
   opacity: 1;
 
-  border: 2px solid var(--dark-blue);
+  border: $border-size solid var(--dark-blue);
 
   margin-bottom: 10px;
 
@@ -99,7 +101,7 @@
 .table-wrapper {
   display: flex;
   overflow: auto;
-  border: 2px solid var(--dark-blue);
+  border: $border-size solid var(--dark-blue);
   flex: 1;
 }
 
@@ -113,8 +115,8 @@ table {
 
 th,
 td {
-  border-left: 2px solid var(--dark-blue);
-  border-top: 2px solid var(--dark-blue);
+  border-left: $border-size solid var(--dark-blue);
+  border-top: $border-size solid var(--dark-blue);
   text-align: left;
   vertical-align: top;
   padding: 5px 10px;
@@ -141,7 +143,7 @@ th {
   z-index: 2;
   border-top: none;
   background-color: var(--background);
-  border-bottom: 2px solid var(--dark-blue); //needs to be always visible and not disappear via scroll
+  border-bottom: $border-size solid var(--dark-blue); //needs to be always visible and not disappear via scroll
 }
 
 .firstColumn {
@@ -149,8 +151,8 @@ th {
   left: 0;
   z-index: 1;
   border-left: none;
-  border-right: 2px solid var(--dark-blue);
-  background-color: white;
+  border-right: $border-size solid var(--dark-blue);
+  background-color: var(--background);
 
   width: 100px;
 }
@@ -159,31 +161,25 @@ thead .firstColumn {
   z-index: 3;
 }
 
-.isWeekend {
-  background-color: var(--regular-green);
+.withGame {
+  min-width: 200px;
 
-  & td:first-child {
-    // prevent being overridden by .firstColumn
-    background-color: var(--regular-green);
+  .match-event {
+    border-radius: 10px;
+    padding: 10px;
+    flex-direction: column;
+    background-color: var(--medium-blue);
   }
 }
 
-.withGame {
-  min-width: 200px;
+.isWeekend .match-event {
+  background-color: var(--regular-green);
 }
 
 .withoutGameTd {
   padding: 0;
   height: 100%;
   width: 100%;
-}
-
-.withoutGame {
-  background-color: black;
-  opacity: 0.2;
-  display: flex;
-  width: 100%;
-  height: 100%;
 }
 
 .location-home {

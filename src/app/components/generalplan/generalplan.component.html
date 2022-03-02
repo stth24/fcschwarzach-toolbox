@@ -95,11 +95,14 @@
             </thead>
             <tbody>
                 <tr *ngFor="let gameday of matchTable; let i = index" [class.isWeekend]="gameday.date.getDay() === 6 || gameday.date.getDay() === 0">
-                    <td [id]="'row-' + i" class="firstColumn"><b>{{gameday.date | date: 'EEEE dd.MM.yyyy'}}</b></td>
+                    <td [id]="'row-' + i" class="firstColumn">
+                        <p><b>{{gameday.date | date: 'EEEE'}}</b></p>
+                        <p><b>{{gameday.date | date: 'dd.MM.yyyy'}}</b></p>
+                    </td>
                     <ng-container *ngFor="let team of gameday.teams">
                         <td [class.withoutGameTd]="team.events.length < 1"
                         [class.withGame]="team.events.length > 0">
-                            <div *ngIf="team.events.length > 0">
+                            <div class="match-event" *ngIf="team.events.length > 0">
                                 <p><b>{{team.events[0].summary.value}}</b></p>
                                 <p>{{team.events[0].description.value}}</p>
                                 <hr>
@@ -108,12 +111,6 @@
                                 <p [class.location-home]="team.events[0].location.value.includes('Schwarzach')">
                                     {{team.events[0].location.value}}
                                 </p>
-                            </div>
-                            <!-- <ng-container *ngIf="team.events.length < 1">
-                                Kein Spiel
-                            </ng-container> -->
-                            <div [class.withoutGame]="team.events.length < 1">
-                                
                             </div>
                         </td>
                     </ng-container>
