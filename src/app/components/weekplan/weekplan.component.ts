@@ -57,6 +57,19 @@ class LoadingProgress {
 })
 export class WeekplanComponent implements OnInit {
 
+    readonly colors = [
+        'var(--medium-blue)',
+        'coral',
+        'yellow',
+        'violet',
+        'darkseagreen',
+        'chocolate',
+        'gold',
+        'lightblue',
+    ];
+
+    uiState: Map<string, string> = new Map(); // key: weekly Event Id, value: color
+
     eventType = EventType;
 
     currentWeek: DayEntry[] = [];
@@ -224,6 +237,18 @@ export class WeekplanComponent implements OnInit {
                 }
 
                 return 1;
+            })
+        })
+
+        // assign colors to events
+        let colorIndex = 0;
+        this.currentWeek.forEach(day => {
+            day.events.forEach(event => {
+                // check if this event id already has an entry
+                if (!this.uiState.has(event.timeDetail.weeklyEventid)) {
+                    this.uiState.set(event.timeDetail.weeklyEventid, this.colors[colorIndex % this.colors.length]);
+                    colorIndex++;
+                }
             })
         })
     }
