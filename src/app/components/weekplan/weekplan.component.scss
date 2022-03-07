@@ -16,6 +16,10 @@
   flex-wrap: wrap;
   max-width: 100%;
 
+  .header-change-week-button {
+    font-weight: bold;
+  }
+
   .header-date {
     font-weight: bold;
   }
@@ -126,6 +130,7 @@
 
     .day {
       border-bottom: 1px solid var(--dark-blue);
+      border-right: none;
     }
 
     .day:last-child {
@@ -139,6 +144,7 @@
 
     .without-entry {
       padding: 10px;
+
       &::after {
         content: "Kein Ereignis an diesem Tag!";
       }

@@ -8,9 +8,9 @@
 <ng-container *ngIf="loadingProgress.completeTasks.length > 0 && !fetchError.status">
     <div class="header">
         <button (click)="onResetToCurrentWeek()">Aktuelle Woche</button>
+        <button class="header-change-week-button" (click)="previousWeek()"> < </button>
         <span class="header-date">{{firstDayOfSelectedWeek | date: 'dd.MM.yyyy'}} </span>
-        <button (click)="previousWeek()">Voherige</button>
-        <button (click)="nextWeek()">Nächste</button>
+        <button class="header-change-week-button" (click)="nextWeek()"> > </button>
         <div class="progress-box" *ngIf="loadingProgress.loadingTasks.length > 0">
             <progress  [value]="loadingProgress.loadingTasks.length / (loadingProgress.completeTasks.length + loadingProgress.loadingTasks.length)"></progress>
             <span>Ladefortschritt: {{loadingProgress.loadingTasks.length / (loadingProgress.completeTasks.length + loadingProgress.loadingTasks.length) * 100}}%</span>
