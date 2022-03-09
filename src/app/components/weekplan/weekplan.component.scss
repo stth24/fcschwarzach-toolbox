@@ -43,6 +43,7 @@
   box-sizing: border-box;
   overflow: auto;
   max-width: 100%;
+  font-size: 0.8rem;
 }
 
 .day {
@@ -123,6 +124,18 @@
   font-weight: var(--semi-bold);
 }
 
+@media only screen and (max-width: 2000px) {
+  .event-entry {
+    max-width: 200px;
+  }
+}
+
+@media only screen and (max-width: 1500px) {
+  .event-entry {
+    max-width: 150px;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .container {
     grid-template-columns: auto;
@@ -135,6 +148,10 @@
 
     .day:last-child {
       border-bottom: none;
+    }
+
+    .event-entry {
+      max-width: 300px;
     }
 
     .event-details-topic,
