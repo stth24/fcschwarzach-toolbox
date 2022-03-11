@@ -27,6 +27,7 @@
             </div>
             <ng-container *ngFor="let event of currentDayEntry.events">
                 <div class="event-entry" 
+                    [class.event-home]="event.timeDetail.location.includes('Schwarzach') && event.type === eventType.oneTime"
                     [class.single-event]="event.type === eventType.oneTime"
                     [style]="'background-color: ' +  (event.type !== eventType.oneTime ? uiState.get(event.timeDetail.weeklyEventid) : '')">
                         <span class="event-name">{{event.name}}</span>
