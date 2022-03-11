@@ -103,6 +103,8 @@ $border-size: 1px;
   overflow: auto;
   border: $border-size solid var(--dark-blue);
   flex: 1;
+
+  font-size: 0.8rem;
 }
 
 table {

@@ -93,21 +93,11 @@
 
   .event-entry-details {
     display: grid;
-    grid-template-columns: repeat(2, max-content);
+    grid-template-columns: min-content auto;
     row-gap: 5px;
     column-gap: 10px;
 
     overflow: hidden;
-  }
-
-  .event-name,
-  .event-entry-details span {
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    &:nth-child(2n) {
-      max-width: 235px;
-    }
   }
 
   .event-details-topic {
