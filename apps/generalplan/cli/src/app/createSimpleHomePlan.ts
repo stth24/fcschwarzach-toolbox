@@ -1,7 +1,6 @@
 import * as exceljs from 'exceljs';
 import * as path from 'path';
 import { fetchFromWebcal } from './fetchFromWebcal';
-import { teams } from './teams';
 
 function createTable(teamEvents, startDate: Date, endDate: Date, resolve, reject) {
     const workbook = new exceljs.Workbook();
@@ -60,9 +59,7 @@ function createTable(teamEvents, startDate: Date, endDate: Date, resolve, reject
 
 
 export function createSimpleHomePlan(startDate: Date, endDate: Date) {
-    const eventsByTeams = [];
-
     return new Promise<void>((resolve, reject) => {
-        fetchFromWebcal(teams, 0, eventsByTeams, createTable, startDate, endDate, resolve, reject);
+        fetchFromWebcal(createTable, startDate, endDate, resolve, reject);
     })
 }

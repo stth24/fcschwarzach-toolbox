@@ -1,38 +1,49 @@
 import * as ical from 'node-ical';
 import { fetch } from './dynamicFetchImport';
-import { Team } from "./teams";
 
 export function fetchFromWebcal(
-    teams: Team[],
-    index: number,
-    eventsByTeams,
     createTable: (eventsByTeams, startDate: Date, endDate: Date, resolve, reject) => void,
     startDate: Date,
     endDate: Date,
     resolve,
     reject) {
-    const url = teams[index].url.replace('webcal://', 'http://');
 
-    console.log('Team: ', teams[index].name);
+    const url = 'https://fcschwarzach.com/api/generalplan';
+
     console.log('Fetch from ' + url);
     console.log();
 
     fetch(url)
-        .then((res) => {
-            res.text().then(data => {
-                eventsByTeams.push({
-                    name: teams[index].name,
-                    events: readAndSortIcalData(data)
-                });
-                index++;
+        .then(res => {
+            if (res.status === 200) {
+                res.json().then(data => {
+                    const teams = [];
 
-                if (index >= teams.length) {
-                    createTable(eventsByTeams, startDate, endDate, resolve, reject);
-                }
-                else {
-                    fetchFromWebcal(teams, index, eventsByTeams, createTable, startDate, endDate, resolve, reject);
-                }
-            });
+                    if (Array.isArray(data)) {
+                        data.forEach((d: any) => {
+                            teams.push({
+                                name: d.name,
+                                url: d.url,
+                                events: readAndSortIcalData(d.data)
+                            })
+                        })
+                        createTable(teams, startDate, endDate, resolve, reject);
+
+                    }
+                    else {
+                        console.log('Cannot parse data!');
+                        resolve();
+                    }
+                })
+            }
+            else {
+                console.log('An unexpected Error occurred');
+                resolve();
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            reject();
         })
 }
 
