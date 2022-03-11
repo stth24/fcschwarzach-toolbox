@@ -23,37 +23,5 @@ createPlan(startDate, endDate).then(() => {
     })
 })
 
-// import { fetch } from './app/dynamicFetchImport';
-
-// fetch('https://fcschwarzach.com/api/generalplan')
-//     .then(res => {
-//         if (res.status === 200) {
-//             res.json().then(data => {
-//                 const teams = [];
-
-//                 if (Array.isArray(data)) {
-//                     data.forEach((d: any) => {
-//                         teams.push({
-//                             name: d.name,
-//                             url: d.url,
-//                             events: d.data
-//                         })
-//                     })
-//                     console.log('RESULT', teams);
-
-//                 }
-//                 else {
-//                     console.log('Cannot parse data!');
-//                 }
-//             })
-//         }
-//         else {
-//             console.log('An unexpected Error occurred');
-//         }
-//     })
-//     .catch(err => {
-//         console.log(err);
-//     })
-
 
 
