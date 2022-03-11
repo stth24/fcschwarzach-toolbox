@@ -1,0 +1,96 @@
+{
+  "projectType": "application",
+  "root": "apps/toolbox/frontend",
+  "sourceRoot": "apps/toolbox/frontend/src",
+  "prefix": "fcschwarzach-toolbox",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/toolbox/frontend",
+        "index": "apps/toolbox/frontend/src/index.html",
+        "main": "apps/toolbox/frontend/src/main.ts",
+        "polyfills": "apps/toolbox/frontend/src/polyfills.ts",
+        "tsConfig": "apps/toolbox/frontend/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/toolbox/frontend/src/favicon.ico",
+          "apps/toolbox/frontend/src/assets"
+        ],
+        "styles": ["apps/toolbox/frontend/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/toolbox/frontend/src/environments/environment.ts",
+              "with": "apps/toolbox/frontend/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "none",
+          "baseHref": "./"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "toolbox-frontend:build:production"
+        },
+        "development": {
+          "browserTarget": "toolbox-frontend:build:development",
+          "ssl": true
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "toolbox-frontend:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/toolbox/frontend/src/**/*.ts",
+          "apps/toolbox/frontend/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/toolbox/frontend"],
+      "options": {
+        "jestConfig": "apps/toolbox/frontend/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

@@ -4,5 +4,15 @@
 			"path": "."
 		}
     ],
-    "settings": {}
+    "settings": {
+        "eslint.alwaysShowStatus": true,
+        "editor.tabSize": 4,
+        "editor.formatOnSave": true,
+        "[typescript]": {
+            "editor.defaultFormatter": "vscode.typescript-language-features",
+            "editor.codeActionsOnSave": {
+                "source.organizeImports": true
+            }
+        }
+    }
 }
