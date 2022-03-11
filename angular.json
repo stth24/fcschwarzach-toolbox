@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "backend-api": "apps/backend/api",
+    "generalplan-cli": "apps/generalplan/cli",
     "toolbox-frontend": "apps/toolbox/frontend",
     "toolbox-frontend-e2e": "apps/toolbox/frontend-e2e"
   }
