@@ -11,11 +11,19 @@
         <button class="header-change-week-button" (click)="previousWeek()"> < </button>
         <span class="header-date">{{firstDayOfSelectedWeek | date: 'dd.MM.yyyy'}} </span>
         <button class="header-change-week-button" (click)="nextWeek()"> > </button>
+        <button (click)="toggleFilters()" *ngIf="teams">Filter</button>
         <div class="progress-box" *ngIf="loadingProgress.loadingTasks.length > 0">
             <progress  [value]="loadingProgress.loadingTasks.length / (loadingProgress.completeTasks.length + loadingProgress.loadingTasks.length)"></progress>
             <span>Ladefortschritt: {{loadingProgress.loadingTasks.length / (loadingProgress.completeTasks.length + loadingProgress.loadingTasks.length) * 100}}%</span>
         </div>
     </div>
+
+    <app-match-filters *ngIf="teams"
+        [showFilters]="showFilters" 
+        [showDateFilters]="false"
+        [filters]="filters"
+        [teams]="teams"
+        (updatedFilters)="createTableData()"></app-match-filters>
     
     <div class="container">
         <div class="day" 

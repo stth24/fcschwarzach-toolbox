@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../app/api/api.service';
 import { IcalEvent, MatchDayEventsByTeam, TeamData } from '../../../app/model/generalplan.model';
 import { environment } from '../../../environments/environment';
-import { filterPlaces, getFilterPlaces, setFilterStartAndEndDate } from '../ui-components/match-filters/filter-helpers';
+import { checkHomeAwayFilter, filterPlaces, getFilterPlaces, setDefaultTeamsUiFilterState, setFilterStartAndEndDate } from '../ui-components/match-filters/filter-helpers';
 import { Filters } from '../ui-components/match-filters/match-filters.component';
 
 @Component({
@@ -54,7 +54,7 @@ export class GeneralplanComponent implements OnInit {
             .then(data => {
                 this.teams = data;
 
-                data.forEach(t => this.filters.teamsUiState.set(t, { show: true }))
+                setDefaultTeamsUiFilterState(this.teams, this.filters);
 
                 this.createTableData();
 
@@ -85,38 +85,36 @@ export class GeneralplanComponent implements OnInit {
 
 
 
-            this.teams.filter(team => this.filters.teamsUiState.get(team)?.show).forEach(team => {
+            this.teams
+                .filter(team => this.filters.teamsUiState.get(team)?.show)
+                .forEach(team => {
 
-                const matchesForTeamAtDate: IcalEvent[] = [];
+                    const matchesForTeamAtDate: IcalEvent[] = [];
 
-                teamDataAtDate.push({
-                    name: team.name,
-                    events: matchesForTeamAtDate
-                })
-
-                team.events
-                    .filter(event => filterPlaces(event, this.filters)) // check if place of event is toggled on
-                    .forEach(event => {
-                        const datePlusOne = new Date(currentDate);
-                        datePlusOne.setDate(datePlusOne.getDate() + 1);
-
-                        // check if event date is within start/end range
-                        if (event.dtstart.value >= currentDate && event.dtstart.value < datePlusOne) {
-
-                            // check if schwarzach/wolfurt team is the home team
-                            const homeTeam = event.summary.value.split(':')[0];
-                            const isHomeTeam =
-                                homeTeam.toLowerCase().includes('schwarzach') ||
-                                homeTeam.toLowerCase().includes('hofsteig');
-
-                            if ((isHomeTeam && this.filters.showHome) || (!isHomeTeam && this.filters.showAway)) {
-                                matchesForTeamAtDate.push(event);
-                            }
-
-
-                        }
+                    teamDataAtDate.push({
+                        name: team.name,
+                        events: matchesForTeamAtDate
                     })
-            })
+
+                    team.events
+                        .filter(event => filterPlaces(event, this.filters)) // check if place of event is toggled on
+                        .forEach(event => {
+                            const datePlusOne = new Date(currentDate);
+                            datePlusOne.setDate(datePlusOne.getDate() + 1);
+
+                            // check if event date is within start/end range
+                            if (event.dtstart.value >= currentDate && event.dtstart.value < datePlusOne) {
+
+                                // check if schwarzach/wolfurt team is the home team
+                                const homeTeam = event.summary.value.split(':')[0];
+                                checkHomeAwayFilter(
+                                    homeTeam,
+                                    this.filters,
+                                    () => matchesForTeamAtDate.push(event)
+                                );
+                            }
+                        })
+                })
 
             let dateHasMatch = false;
             dataForCurrentDate.teams.forEach(team => {

@@ -27,6 +27,7 @@ export interface Filters {
 export class MatchFiltersComponent {
 
     @Input() showFilters = false;
+    @Input() showDateFilters = true;
     @Input() filters: Filters = {
         endDate: new Date(),
         startDate: new Date(),
@@ -77,7 +78,7 @@ export class MatchFiltersComponent {
 
             (this.filters[key] as unknown as Date).setHours?.(0, 0, 0, 0);
 
-            // this.createTableData();
+            this.updatedFilters.emit();
         };
     }
 
@@ -87,7 +88,6 @@ export class MatchFiltersComponent {
             const teamUiState = this.filters.teamsUiState.get(teamToToggle);
             if (teamUiState) teamUiState.show = event.target.checked;
 
-            // this.createTableData();
             this.updatedFilters.emit();
         }
     }
@@ -100,7 +100,6 @@ export class MatchFiltersComponent {
             if (teamUiState) teamUiState.show = changeCheckedTo;
         });
 
-        // this.createTableData();
         this.updatedFilters.emit();
     }
 

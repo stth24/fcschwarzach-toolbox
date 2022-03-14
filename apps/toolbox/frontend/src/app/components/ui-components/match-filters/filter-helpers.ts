@@ -1,4 +1,4 @@
-import { IcalEvent } from "../../../model/generalplan.model";
+import { IcalEvent, TeamData } from "../../../model/generalplan.model";
 import { Filters, PlaceFilter } from "./match-filters.component";
 
 export function getFilterPlaces(): { [key: string]: PlaceFilter } {
@@ -62,4 +62,18 @@ export function setFilterStartAndEndDate(filters: Filters) {
 
     filters.startDate.setHours(0, 0, 0, 0);
     filters.endDate.setHours(0, 0, 0, 0);
+}
+
+export function setDefaultTeamsUiFilterState(teams: TeamData[], filters: Filters) {
+    teams.forEach(t => filters.teamsUiState.set(t, { show: true }))
+}
+
+export function checkHomeAwayFilter(homeTeam: string, filters: Filters, onSuccess: () => void) {
+    const isHomeTeam =
+        homeTeam.toLowerCase().includes('schwarzach') ||
+        homeTeam.toLowerCase().includes('hofsteig');
+
+    if ((isHomeTeam && filters.showHome) || (!isHomeTeam && filters.showAway)) {
+        onSuccess();
+    }
 }

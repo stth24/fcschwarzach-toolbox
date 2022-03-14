@@ -1,6 +1,6 @@
 <!-- Filters -->
 <div class="filters" [class.hideFilters]="!showFilters">
-    <div class="date-filters">
+    <div class="date-filters" *ngIf="showDateFilters">
         <span class="date-filters-title"><b>Start/Ende:</b></span>
         <span>Start Datum:</span> 
         <input type="date" [value]="filters.startDate | date: 'yyyy-MM-dd'" (change)="changeDate('startDate', $event)" />

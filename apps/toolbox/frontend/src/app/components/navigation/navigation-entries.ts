@@ -17,14 +17,14 @@ export const navigationEntriesList: NavigationEntry[] = [
         component: GeneralplanComponent
     },
     {
-        id: 'newplayerform',
-        label: 'Spieleranmeldung',
-        component: NewplayerFormComponent
-    },
-    {
         id: 'weekplan',
         label: "Wochenplan",
         component: WeekplanComponent
+    },
+    {
+        id: 'newplayerform',
+        label: 'Spieleranmeldung',
+        component: NewplayerFormComponent
     }
 ]
 

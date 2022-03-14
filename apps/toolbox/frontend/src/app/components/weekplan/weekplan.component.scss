@@ -3,11 +3,12 @@
   display: flex;
   flex-direction: column;
   overflow: auto;
-  gap: 20px;
   align-content: center;
 }
 
 .header {
+  margin-bottom: 10px;
+
   display: flex;
   gap: 10px;
 
@@ -142,7 +143,7 @@
       padding: 10px;
 
       &::after {
-        content: "Kein Ereignis an diesem Tag!";
+        content: 'Kein Ereignis an diesem Tag!';
       }
     }
   }

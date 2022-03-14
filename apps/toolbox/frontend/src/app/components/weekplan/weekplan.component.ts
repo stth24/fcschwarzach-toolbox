@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../app/api/api.service';
 import { TeamData } from '../../../app/model/generalplan.model';
 import { TimeDetails, WeeklyEvent } from '../../../app/model/weekly-event.model';
+import { checkHomeAwayFilter, filterPlaces, getFilterPlaces, setDefaultTeamsUiFilterState } from '../ui-components/match-filters/filter-helpers';
+import { Filters } from '../ui-components/match-filters/match-filters.component';
 
 
 export interface DayEntry {
@@ -81,6 +83,16 @@ export class WeekplanComponent implements OnInit {
 
     loadingProgress = new LoadingProgress();
 
+    filters: Filters = {
+        startDate: new Date(),
+        endDate: new Date(),
+        showHome: true,
+        showAway: true,
+        places: getFilterPlaces(),
+        teamsUiState: new Map<TeamData, { show: boolean }>()
+    }
+
+    showFilters = false;
 
     fetchError = {
         status: false,
@@ -101,6 +113,8 @@ export class WeekplanComponent implements OnInit {
             .then(data => {
                 this.teams = data;
                 this.loadingProgress.completeLoadingTask(generalplanLoading);
+
+                setDefaultTeamsUiFilterState(this.teams, this.filters);
 
                 this.createTableData();
             })
@@ -133,6 +147,9 @@ export class WeekplanComponent implements OnInit {
             })
     }
 
+    toggleFilters() {
+        this.showFilters = !this.showFilters;
+    }
 
 
     resetToCurrentWeek() {
@@ -198,33 +215,43 @@ export class WeekplanComponent implements OnInit {
 
 
             if (this.teams) {
-                this.teams.forEach(team => {
-                    team.events
-                        .filter(event => {
-                            const datePlusOne = new Date(dayEvent.date);
-                            datePlusOne.setDate(datePlusOne.getDate() + 1);
+                this.teams
+                    .filter(team => this.filters.teamsUiState.get(team)?.show)
+                    .forEach(team => {
+                        team.events
+                            .filter(event => filterPlaces(event, this.filters)) // check if place of event is toggled on
+                            .filter(event => {
+                                const datePlusOne = new Date(dayEvent.date);
+                                datePlusOne.setDate(datePlusOne.getDate() + 1);
 
-                            // check if event date is within start/end range
-                            return event.dtstart.value >= dayEvent.date && event.dtstart.value < datePlusOne
-                        })
-                        .forEach(event => {
-                            const timeDetail: TimeDetails = {
-                                id: '',
-                                weeklyEventid: '',
-                                day: event.dtstart.value.getDay().toString(),
-                                durationInMin: '',
-                                location: event.location.value,
-                                startTimeHour: (event.dtstart.value.getHours().toString().length < 2 ? '0' : '') + event.dtstart.value.getHours().toString(),
-                                startTimeMinute: (event.dtstart.value.getMinutes().toString().length < 2 ? '0' : '') + event.dtstart.value.getMinutes().toString()
-                            }
-
-                            eventsAtDay.push({
-                                name: `${event.summary.value} (${event.description.value})`,
-                                timeDetail,
-                                type: EventType.oneTime
+                                // check if event date is within start/end range
+                                return event.dtstart.value >= dayEvent.date && event.dtstart.value < datePlusOne
                             })
-                        })
-                })
+                            .forEach(event => {
+                                const timeDetail: TimeDetails = {
+                                    id: '',
+                                    weeklyEventid: '',
+                                    day: event.dtstart.value.getDay().toString(),
+                                    durationInMin: '',
+                                    location: event.location.value,
+                                    startTimeHour: (event.dtstart.value.getHours().toString().length < 2 ? '0' : '') + event.dtstart.value.getHours().toString(),
+                                    startTimeMinute: (event.dtstart.value.getMinutes().toString().length < 2 ? '0' : '') + event.dtstart.value.getMinutes().toString()
+                                }
+
+                                const homeTeam = event.summary.value.split(':')[0];
+                                checkHomeAwayFilter(
+                                    homeTeam,
+                                    this.filters,
+                                    () => eventsAtDay.push({
+                                        name: `${event.summary.value} (${event.description.value})`,
+                                        timeDetail,
+                                        type: EventType.oneTime
+                                    })
+                                );
+
+
+                            })
+                    })
             }
 
             dayEvent.events = [...eventsAtDay];
