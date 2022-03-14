@@ -16,11 +16,12 @@ import { LoaderComponent } from './ui-components/loader/loader.component';
 import { ErrorBoxComponent } from './ui-components/error-box/error-box.component';
 import { EditWeeklyEventsComponent } from './admin/edit-weekly-events/edit-weekly-events.component';
 import { HourMinutePipe } from './helpers/hour-minute.pipe';
+import { MatchFiltersComponent } from './ui-components/match-filters/match-filters.component';
 
 
 
 @NgModule({
-    declarations: [HeaderComponent, NavigationComponent, ContentComponent, NewplayerFormComponent, GeneralplanComponent, ModalComponent, LoginFormComponent, EditTeamsComponent, ConfirmCancelModalComponent, WeekplanComponent, LoaderComponent, ErrorBoxComponent, EditWeeklyEventsComponent, HourMinutePipe],
+    declarations: [HeaderComponent, NavigationComponent, ContentComponent, NewplayerFormComponent, GeneralplanComponent, ModalComponent, LoginFormComponent, EditTeamsComponent, ConfirmCancelModalComponent, WeekplanComponent, LoaderComponent, ErrorBoxComponent, EditWeeklyEventsComponent, HourMinutePipe, MatchFiltersComponent],
     imports: [
         CommonModule,
         AppRoutingModule,

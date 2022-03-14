@@ -1,0 +1,47 @@
+<!-- Filters -->
+<div class="filters" [class.hideFilters]="!showFilters">
+    <div class="date-filters">
+        <span class="date-filters-title"><b>Start/Ende:</b></span>
+        <span>Start Datum:</span> 
+        <input type="date" [value]="filters.startDate | date: 'yyyy-MM-dd'" (change)="changeDate('startDate', $event)" />
+        <span>End Datum:</span> 
+        <input type="date" [value]="filters.endDate | date: 'yyyy-MM-dd'" (change)="changeDate('endDate', $event)" />
+    </div>
+
+    <!-- Toggle Home/Away -->
+    <div class="toggle-option-list">
+        <span><b>Heim/Auswärts:</b></span>
+        <div class="toggle-option">
+            <input type="checkbox" (change)="updatedFilters.emit()" [(ngModel)]="filters.showHome" /> Heimspiele
+        </div>
+        <div class="toggle-option">
+            <input type="checkbox" (change)="updatedFilters.emit()" [(ngModel)]="filters.showAway" /> Auswärtsspiele
+        </div>
+    </div>
+    
+    <!-- Toggle places -->
+    <div class="toggle-option-list"> 
+        <span><b>Spielort:</b></span>
+
+        <div class="toggle-option" *ngFor="let place of filters.places | keyvalue:keepOriginalOrder">
+            <input type="checkbox" 
+                [name]="'place-' + place.key"
+                (change)="updatedFilters.emit()"
+                [(ngModel)]="place.value.show"/> 
+            <label [for]="'place-' + place.key">{{place.value.label}}</label>
+        </div>        
+    </div>
+    <div class="toggle-team-filter">
+        <span><b>Teams:</b></span>
+        <div class="toggle-boxes">
+            <div class="toggle-team" *ngFor="let team of teams">
+                <input type="checkbox" 
+                    (change)="toggleTeam(team.name, $event)" 
+                    [checked]="filters.teamsUiState.get(team)?.show" 
+                    [name]="team.name"/> 
+                <label [for]="team.name">{{team.name}}</label>
+            </div>
+        </div>
+        <button (click)="toggleAllTeams()">Alle an-/abwählen</button>
+    </div>
+</div>

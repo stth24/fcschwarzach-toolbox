@@ -5,7 +5,6 @@
     [message]="fetchError.message.text">
 </app-error-box>
 
-<!-- Filters -->
 <ng-container  *ngIf="teams.length > 0">
     <div class="button-group">
         <button (click)="toggleFilters()">Filter <span class="filter-button-text">anzeigen/ausblenden</span></button>
@@ -15,74 +14,13 @@
             <span class="today-button-text">springen</span>
         </button>
     </div>
-    <div class="filters" [class.hideFilters]="!showFilters">
-        <div class="date-filters">
-            <span class="date-filters-title"><b>Start/Ende:</b></span>
-            <span>Start Datum:</span> 
-            <input type="date" [value]="startDate | date: 'yyyy-MM-dd'" (change)="changeDate('startDate', $event)" />
-            <span>End Datum:</span> 
-            <input type="date" [value]="endDate | date: 'yyyy-MM-dd'" (change)="changeDate('endDate', $event)" />
-        </div>
 
-        <!-- Toggle Home/Away -->
-        <div class="toggle-option-list">
-            <span><b>Heim/Auswärts:</b></span>
-            <div class="toggle-option">
-                <input type="checkbox" (change)="createTableData()" [(ngModel)]="showHome" /> Heimspiele
-            </div>
-            <div class="toggle-option">
-                <input type="checkbox" (change)="createTableData()" [(ngModel)]="showAway" /> Auswärtsspiele
-            </div>
-        </div>
-        
-        <!-- Toggle places -->
-        <div class="toggle-option-list"> 
-            <span><b>Spielort:</b></span>
-            <div class="toggle-option">
-                <input type="checkbox" 
-                    name="place-schwarzach" 
-                    (change)="createTableData()"
-                    [(ngModel)]="places.schwarzach.show"/> 
-                <label for="place-schwarzach">{{places.schwarzach.label}}</label>
-            </div>
-            <div class="toggle-option">
-                <input type="checkbox" 
-                    name="place-wolfurt"
-                    (change)="createTableData()"
-                    [(ngModel)]="places.wolfurt.show"/> 
-                <label for="place-wolfurt">{{places.wolfurt.label}}</label>
-            </div>
-
-            <div class="toggle-option">
-                <input type="checkbox" 
-                    name="place-kennelbach"
-                    (change)="createTableData()"
-                    [(ngModel)]="places.kennelbach.show"/> 
-                <label for="place-kennelbach">{{places.kennelbach.label}}</label>
-            </div>
-
-            <div class="toggle-option">
-                <input type="checkbox" 
-                    name="place-rest"
-                    (change)="createTableData()"
-                    [(ngModel)]="places.rest.show"/> 
-                <label for="place-rest">{{places.rest.label}}</label>
-            </div>
-        </div>
-        <div class="toggle-team-filter">
-            <span><b>Teams:</b></span>
-            <div class="toggle-boxes">
-                <div class="toggle-team" *ngFor="let team of teams">
-                    <input type="checkbox" 
-                        (change)="toggleTeam(team.name, $event)" 
-                        [checked]="teamsUiState.get(team)?.show" 
-                        [name]="team.name"/> 
-                    <label [for]="team.name">{{team.name}}</label>
-                </div>
-            </div>
-            <button (click)="toggleAllTeams()">Alle an-/abwählen</button>
-        </div>
-    </div>
+    <!-- Filters -->
+    <app-match-filters 
+        [showFilters]="showFilters" 
+        [filters]="filters" 
+        [teams]="teams" 
+        (updatedFilters)="createTableData()"></app-match-filters>
 
     <!-- Table -->
     <div class="table-wrapper" *ngIf="matchTable.length > 0">
@@ -90,7 +28,7 @@
             <thead>
                 <th class="firstColumn">Datum:</th>
                 <ng-container *ngFor="let team of teams">
-                    <th *ngIf="teamsUiState.get(team)?.show">{{team.name}}</th>
+                    <th *ngIf="filters.teamsUiState.get(team)?.show">{{team.name}}</th>
                 </ng-container>
             </thead>
             <tbody>

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../../../environments/environment';
-import { IcalEvent, MatchDayEventsByTeam, TeamData } from '../../../app/model/generalplan.model';
 import { ApiService } from '../../../app/api/api.service';
-
+import { IcalEvent, MatchDayEventsByTeam, TeamData } from '../../../app/model/generalplan.model';
+import { environment } from '../../../environments/environment';
+import { filterPlaces, getFilterPlaces, setFilterStartAndEndDate } from '../ui-components/match-filters/filter-helpers';
+import { Filters } from '../ui-components/match-filters/match-filters.component';
 
 @Component({
     selector: 'app-generalplan',
@@ -13,12 +14,9 @@ export class GeneralplanComponent implements OnInit {
     eventsByTeams: { name: string, events: any }[] = [];
 
     teams: TeamData[] = [];
-    teamsUiState = new Map<TeamData, { show: boolean }>();
+
 
     matchTable: MatchDayEventsByTeam[] = [];
-
-    startDate: Date;
-    endDate: Date;
 
     url = environment.production ?
         '/api/generalplan/' :
@@ -26,29 +24,13 @@ export class GeneralplanComponent implements OnInit {
 
     showFilters = false;
 
-    showHome = true;
-    showAway = true;
-
-    places = {
-        schwarzach: {
-            label: "Schwarzach",
-            stringToMatch: 'schwarzach',
-            show: true
-        },
-        wolfurt: {
-            label: "Wolfurt",
-            stringToMatch: 'wolfurt',
-            show: true
-        },
-        kennelbach: {
-            label: "Kennelbach",
-            stringToMatch: 'kennelbach',
-            show: true
-        },
-        rest: {
-            label: "Andere",
-            show: true
-        }
+    filters: Filters = {
+        startDate: new Date(),
+        endDate: new Date(),
+        showHome: true,
+        showAway: true,
+        places: getFilterPlaces(),
+        teamsUiState: new Map<TeamData, { show: boolean }>()
     }
 
     fetchError = {
@@ -60,19 +42,7 @@ export class GeneralplanComponent implements OnInit {
     }
 
     constructor(private apiService: ApiService) {
-        // set startdate and enddate to first or second half of the year
-        const today = new Date();
-        if (today.getMonth() < 6) {
-            this.startDate = new Date(`${today.getFullYear()}-01-01`);
-            this.endDate = new Date(`${today.getFullYear()}-06-30`);
-        }
-        else {
-            this.startDate = new Date(`${today.getFullYear()}-07-01`);
-            this.endDate = new Date(`${today.getFullYear()}-12-31`);
-        }
-
-        this.startDate.setHours(0, 0, 0, 0);
-        this.endDate.setHours(0, 0, 0, 0);
+        setFilterStartAndEndDate(this.filters);
     }
 
     ngOnInit(): void {
@@ -84,7 +54,7 @@ export class GeneralplanComponent implements OnInit {
             .then(data => {
                 this.teams = data;
 
-                data.forEach(t => this.teamsUiState.set(t, { show: true }))
+                data.forEach(t => this.filters.teamsUiState.set(t, { show: true }))
 
                 this.createTableData();
 
@@ -104,8 +74,8 @@ export class GeneralplanComponent implements OnInit {
 
         const matchTable: MatchDayEventsByTeam[] = [];
 
-        for (let currentDate = new Date(this.startDate);
-            currentDate <= this.endDate;
+        for (let currentDate = new Date(this.filters.startDate);
+            currentDate <= this.filters.endDate;
             currentDate.setDate(currentDate.getDate() + 1)) {
             const teamDataAtDate: { name: string, events: IcalEvent[] }[] = [];
             const dataForCurrentDate = {
@@ -115,7 +85,7 @@ export class GeneralplanComponent implements OnInit {
 
 
 
-            this.teams.filter(team => this.teamsUiState.get(team)?.show).forEach(team => {
+            this.teams.filter(team => this.filters.teamsUiState.get(team)?.show).forEach(team => {
 
                 const matchesForTeamAtDate: IcalEvent[] = [];
 
@@ -125,7 +95,7 @@ export class GeneralplanComponent implements OnInit {
                 })
 
                 team.events
-                    .filter(event => this.filterPlaces(event)) // check if place of event is toggled on
+                    .filter(event => filterPlaces(event, this.filters)) // check if place of event is toggled on
                     .forEach(event => {
                         const datePlusOne = new Date(currentDate);
                         datePlusOne.setDate(datePlusOne.getDate() + 1);
@@ -139,7 +109,7 @@ export class GeneralplanComponent implements OnInit {
                                 homeTeam.toLowerCase().includes('schwarzach') ||
                                 homeTeam.toLowerCase().includes('hofsteig');
 
-                            if ((isHomeTeam && this.showHome) || (!isHomeTeam && this.showAway)) {
+                            if ((isHomeTeam && this.filters.showHome) || (!isHomeTeam && this.filters.showAway)) {
                                 matchesForTeamAtDate.push(event);
                             }
 
@@ -161,63 +131,8 @@ export class GeneralplanComponent implements OnInit {
         this.matchTable = matchTable;
     }
 
-    filterPlaces(event: IcalEvent): boolean {
-        const eventLocationLowerCase = event.location.value.toLowerCase();
-
-        if (eventLocationLowerCase.includes(this.places.schwarzach.stringToMatch)) {
-            return this.places.schwarzach.show;
-        }
-        if (eventLocationLowerCase.includes(this.places.wolfurt.stringToMatch)) {
-            return this.places.wolfurt.show;
-        }
-        if (eventLocationLowerCase.includes(this.places.kennelbach.stringToMatch)) {
-            return this.places.kennelbach.show;
-        }
-
-        if (!eventLocationLowerCase.includes(this.places.schwarzach.stringToMatch) &&
-            !eventLocationLowerCase.includes(this.places.wolfurt.stringToMatch) &&
-            !eventLocationLowerCase.includes(this.places.kennelbach.stringToMatch)) {
-            return this.places.rest.show;
-        }
-
-        return true;
-    }
-
     toggleFilters() {
         this.showFilters = !this.showFilters;
-    }
-
-    changeDate(key: keyof this, event: any) {
-        const value = event.target.valueAsDate;
-
-        if (value) {
-            this[key] = value;
-
-            (this[key] as unknown as Date).setHours?.(0, 0, 0, 0);
-
-            this.createTableData();
-        };
-    }
-
-    toggleTeam(teamName: string, event: any) {
-        const teamToToggle = this.teams.find(t => t.name === teamName);
-        if (teamToToggle) {
-            const teamUiState = this.teamsUiState.get(teamToToggle);
-            if (teamUiState) teamUiState.show = event.target.checked;
-
-            this.createTableData();
-        }
-    }
-
-    toggleAllTeams() {
-        const changeCheckedTo = this.teams.filter(t => this.teamsUiState.get(t)?.show).length !== this.teams.length;
-
-        this.teams.forEach(t => {
-            const teamUiState = this.teamsUiState.get(t);
-            if (teamUiState) teamUiState.show = changeCheckedTo;
-        });
-
-        this.createTableData();
     }
 
     navigateToCurrentDate() {
@@ -226,7 +141,7 @@ export class GeneralplanComponent implements OnInit {
             let indexToMoveTo = -1;
 
 
-            while (indexToMoveTo < 0 && currentDate <= this.endDate) {
+            while (indexToMoveTo < 0 && currentDate <= this.filters.endDate) {
                 this.matchTable.forEach((matchday, index) => {
                     if (currentDate.toDateString() === matchday.date.toDateString()) {
                         indexToMoveTo = index;
