@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { adminNavigationEntriesList, navigationEntriesList, NavigationEntry } from '../navigation/navigation-entries';
+import { navigationEntriesList, NavigationEntry } from '../navigation/navigation-entries';
 import { StateService } from '../services/state/state.service';
 
 @Component({
@@ -43,11 +43,10 @@ export class ContentComponent implements AfterViewInit {
     }
 
     loadContent() {
-        this.navEntry = navigationEntriesList.find(n => n.id === this.paramId);
-
-        if (!this.navEntry && this.loggedIn) {
-            this.navEntry = adminNavigationEntriesList.find(n => n.id === this.paramId);
-        }
+        this.navEntry =
+            navigationEntriesList
+                .filter(elem => !this.loggedIn ? !elem.admin : true)
+                .find(n => n.id === this.paramId);
 
         this.container?.clear(); // remove all children from container
 

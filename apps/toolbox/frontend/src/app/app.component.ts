@@ -15,6 +15,11 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         // check if there already is a valid token and login
         this.apiService.verifyToken().catch(() => console.log('No Token set'));
+
+        // if sceen width is less than 600px do no show navigation initially
+        if (window.screen.width < 601) {
+            this.navOpen = false;
+        }
     }
 
     toggleMenu() {

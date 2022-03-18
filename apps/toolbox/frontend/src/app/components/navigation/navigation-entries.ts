@@ -7,36 +7,41 @@ import { WeekplanComponent } from "../weekplan/weekplan.component";
 export interface NavigationEntry {
     id: string,
     label: string,
-    component: any
+    component: any,
+    admin: boolean
+}
+
+export const GeneralplanNavigationEntry: NavigationEntry = {
+    id: 'generalplan',
+    label: 'Generalplan',
+    component: GeneralplanComponent,
+    admin: false
 }
 
 export const navigationEntriesList: NavigationEntry[] = [
-    {
-        id: 'generalplan',
-        label: 'Generalplan',
-        component: GeneralplanComponent
-    },
+    GeneralplanNavigationEntry,
     {
         id: 'weekplan',
         label: "Wochenplan",
-        component: WeekplanComponent
+        component: WeekplanComponent,
+        admin: false
     },
     {
         id: 'newplayerform',
         label: 'Spieleranmeldung',
-        component: NewplayerFormComponent
-    }
-]
-
-export const adminNavigationEntriesList: NavigationEntry[] = [
+        component: NewplayerFormComponent,
+        admin: false
+    },
     {
         id: 'teamsdata',
         label: 'Team Daten',
-        component: EditTeamsComponent
+        component: EditTeamsComponent,
+        admin: true
     },
     {
         id: 'weeklyevents',
         label: "Wöchentliche Events",
-        component: EditWeeklyEventsComponent
+        component: EditWeeklyEventsComponent,
+        admin: true
     }
 ]
