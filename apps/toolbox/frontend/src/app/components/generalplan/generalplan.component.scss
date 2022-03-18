@@ -1,4 +1,5 @@
 $border-size: 1px;
+$border-color: lightgray;
 
 :host {
   display: flex;
@@ -18,90 +19,10 @@ $border-size: 1px;
   }
 }
 
-// FILTERS
-.filters {
-  display: flex;
-  padding: 10px 10px;
-
-  transition: padding 0.5s ease, margin 0.5s ease, max-height 0.5s ease,
-    min-height 0.5s ease, opacity 0.2s ease;
-
-  min-height: 100px;
-  max-height: 300px;
-
-  opacity: 1;
-
-  border: $border-size solid var(--dark-blue);
-
-  margin-bottom: 10px;
-
-  overflow: auto;
-  flex-wrap: wrap;
-}
-
-.hideFilters {
-  min-height: 0px;
-  max-height: 0px;
-
-  opacity: 0;
-
-  margin: 0;
-
-  padding-top: 0;
-  padding-bottom: 0;
-
-  margin-bottom: 0;
-}
-
-.date-filters {
-  display: grid;
-  grid-template-columns: repeat(2, max-content);
-  grid-template-rows: repeat(3, max-content);
-  grid-gap: 10px;
-
-  align-items: baseline;
-  margin-right: 10px;
-  margin-bottom: 10px;
-
-  .date-filters-title {
-    grid-column: span 2;
-  }
-}
-
-.toggle-option-list {
-  margin-right: 10px;
-  margin-bottom: 10px;
-}
-
-.toggle-team-filter {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-}
-
-.toggle-boxes {
-  flex: 1;
-
-  margin-bottom: 10px;
-
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-  justify-content: start;
-}
-
-.toggle-team {
-  margin-right: 10px;
-
-  &:last-child {
-    margin-right: 0;
-  }
-}
-
 // Matches table
 .table-wrapper {
   display: flex;
   overflow: auto;
-  border: $border-size solid var(--dark-blue);
   flex: 1;
 
   font-size: 0.8rem;
@@ -117,8 +38,8 @@ table {
 
 th,
 td {
-  border-left: $border-size solid var(--dark-blue);
-  border-top: $border-size solid var(--dark-blue);
+  border-left: $border-size solid $border-color;
+  border-top: $border-size solid $border-color;
   text-align: left;
   vertical-align: top;
   padding: 5px 10px;
@@ -145,7 +66,7 @@ th {
   z-index: 2;
   border-top: none;
   background-color: var(--background);
-  border-bottom: $border-size solid var(--dark-blue); //needs to be always visible and not disappear via scroll
+  border-bottom: $border-size solid $border-color; //needs to be always visible and not disappear via scroll
 }
 
 .firstColumn {
@@ -153,7 +74,7 @@ th {
   left: 0;
   z-index: 1;
   border-left: none;
-  border-right: $border-size solid var(--dark-blue);
+  border-right: $border-size solid $border-color;
   background-color: var(--background);
 
   width: 100px;

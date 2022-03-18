@@ -1,3 +1,5 @@
+$border-color: lightgray;
+
 :host {
   width: 100%;
   display: flex;
@@ -40,7 +42,6 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   overflow: auto;
-  border: 1px solid var(--dark-blue);
   box-sizing: border-box;
   overflow: auto;
   max-width: 100%;
@@ -50,7 +51,7 @@
 .day {
   display: flex;
   flex-direction: column;
-  border-right: 1px solid var(--dark-blue);
+  border-right: 1px solid $border-color;
 
   gap: 10px;
   padding-bottom: 10px;
@@ -65,7 +66,7 @@
     z-index: 2;
 
     font-weight: bold;
-    border-bottom: 1px solid var(--dark-blue);
+    border-bottom: 1px solid $border-color;
     padding: 5px 10px;
 
     background-color: var(--background);
@@ -126,7 +127,7 @@
     width: 100%;
 
     .day {
-      border-bottom: 1px solid var(--dark-blue);
+      border-bottom: 1px solid $border-color;
       border-right: none;
     }
 
