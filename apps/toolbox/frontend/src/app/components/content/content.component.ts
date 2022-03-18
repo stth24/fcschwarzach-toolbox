@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ComponentFactoryResolver, ViewChild, ViewContainerRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { navigateToParam } from '../helpers/navigation-helper';
 import { navigationEntriesList, NavigationEntry } from '../navigation/navigation-entries';
 import { StateService } from '../services/state/state.service';
 
@@ -15,13 +16,18 @@ export class ContentComponent implements AfterViewInit {
 
     navEntry: NavigationEntry | undefined;
 
+    navigationEntriesListForDefault = navigationEntriesList.filter(elem => !this.loggedIn ? !elem.admin : true);
+
     paramId = '';
 
     loggedIn = false;
 
+    showDefaultContent = true;
+
     stateServiceSubscription: Subscription | undefined;
 
     constructor(
+        private router: Router,
         private activatedRoute: ActivatedRoute,
         private stateService: StateService,
         private componentFactoryResolver: ComponentFactoryResolver) {
@@ -33,6 +39,7 @@ export class ContentComponent implements AfterViewInit {
 
         this.stateService.getStateStream().subscribe(state => {
             this.loggedIn = state.loggedIn;
+            this.navigationEntriesListForDefault = navigationEntriesList.filter(elem => !this.loggedIn ? !elem.admin : true)
 
             this.loadContent();
         })
@@ -40,6 +47,10 @@ export class ContentComponent implements AfterViewInit {
 
     ngAfterViewInit() {
         this.loadContent();
+    }
+
+    navigate(entry: NavigationEntry) {
+        navigateToParam(entry, this.router, this.activatedRoute);
     }
 
     loadContent() {
@@ -53,6 +64,12 @@ export class ContentComponent implements AfterViewInit {
         if (this.navEntry) {
             // reload view child
             this.container?.createComponent(this.componentFactoryResolver.resolveComponentFactory(this.navEntry?.component));
+            this.showDefaultContent = false;
         }
+        else {
+            this.showDefaultContent = true;
+        }
+
+
     }
 }

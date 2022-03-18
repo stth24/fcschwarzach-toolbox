@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ApiService } from '../../../app/api/api.service';
 import { LoginTokenHandler } from '../helpers/login-helper';
+import { navigateToParam } from '../helpers/navigation-helper';
 import { StateService } from '../services/state/state.service';
 import { GeneralplanNavigationEntry, navigationEntriesList, NavigationEntry } from './navigation-entries';
 
@@ -41,14 +42,10 @@ export class NavigationComponent implements OnInit, OnChanges, AfterViewInit, On
     ngOnInit(): void {
         this.stateService.getStateStream().pipe(takeUntil(this.unsubscribe)).subscribe(state => {
             this.loggedIn = state.loggedIn;
-
-            this.checkSelectedEntryIsValid();
         })
 
         this.activatedRoute.queryParams.pipe(takeUntil(this.unsubscribe)).subscribe(params => {
             this.selectedEntry = params['nav'];
-
-            this.checkSelectedEntryIsValid();
         })
     }
 
@@ -68,22 +65,8 @@ export class NavigationComponent implements OnInit, OnChanges, AfterViewInit, On
         this.unsubscribe.complete();
     }
 
-    checkSelectedEntryIsValid() {
-        // if the param doesnt match anything automatically re-route to generalplan
-        if (!navigationEntriesList.filter(elem => !this.loggedIn ? !elem.admin : true).find(elem => elem.id === this.selectedEntry)) {
-            this.navigate(GeneralplanNavigationEntry);
-        }
-    }
-
     navigate(entry: NavigationEntry) {
-        this.router.navigate(
-            [],
-            {
-                relativeTo: this.activatedRoute,
-                queryParams: { nav: entry.id },
-                queryParamsHandling: 'merge'
-            }
-        );
+        navigateToParam(entry, this.router, this.activatedRoute);
     }
 
     adminLogin() {
@@ -97,6 +80,8 @@ export class NavigationComponent implements OnInit, OnChanges, AfterViewInit, On
         this.stateService.updateState({
             loggedIn: false
         })
+
+        this.navigate(GeneralplanNavigationEntry);
     }
 
     closeLoginModal() {

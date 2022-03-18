@@ -4,3 +4,9 @@
   display: flex;
   flex: 1;
 }
+
+.nav-item:hover {
+  color: darkred;
+  cursor: pointer;
+  text-decoration: underline;
+}
