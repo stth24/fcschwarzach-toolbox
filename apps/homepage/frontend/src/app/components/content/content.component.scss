@@ -1,0 +1,100 @@
+:host {
+  background-color: var(--background);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-part {
+  padding: 30px 50px;
+  /* border-bottom: 2px solid lightgray; */
+  margin: 0 5%;
+
+  display: grid;
+  grid-template-columns: 200px auto;
+
+  /* color: white; */
+}
+
+.main-part:nth-child(2n) {
+  background-color: var(--dark-gray);
+  color: white;
+}
+
+.main-part h1 {
+  position: sticky;
+  top: 0;
+  height: max-content;
+  /* background-color: white; */
+}
+
+.main-part:nth-child(2n) h1,
+.main-part:nth-child(2n) h2 {
+  color: white;
+}
+
+.part-content {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 20px;
+}
+
+/* NEWS */
+.news-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min-content, 300px));
+  gap: 20px;
+}
+
+.news-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 20px;
+  padding-bottom: 20px;
+  background-color: var(--dark-gray);
+  /* background-color: lightgray; */
+  /* border-radius: 10px; */
+
+  color: white;
+}
+
+.news-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  /* color: gold; */
+  /* color: var(--dark-blue); */
+}
+
+.news-pic {
+  width: 100%;
+}
+
+/* VEREIN */
+.funktionen-content {
+  display: grid;
+  /* grid-template-columns: repeat(4, auto); */
+  grid-template-columns: repeat(auto-fill, minmax(min-content, 300px));
+  gap: 30px;
+}
+
+.person-item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  padding-bottom: 20px;
+  background-color: lightgray;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: black;
+}
+
+.person-img {
+  width: 100%;
+}
+
+.person-name {
+  font-size: 1.3rem;
+  font-weight: bold;
+}

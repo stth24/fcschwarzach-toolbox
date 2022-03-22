@@ -1,0 +1,74 @@
+<div class="main-part" id="news">
+    <h1>News</h1>
+    <div class="news-content" id="news-content">
+        <div class="news-item" *ngFor="let item of news">
+            <span class="news-title">{{item.title}}</span>
+            <img class="news-pic" [src]="item?.image?.path" />
+            <p class="news-text">
+                {{item?.text}}
+            </p>
+        </div>
+    </div>
+</div>
+<div class="main-part" id="verein">
+    <h1>Verein</h1>
+    <div class="verein-content">
+        <h2>Funktionäre:</h2>
+        <div class="funktionen-content">
+            <div class="person-item" *ngFor="let person of vorstand">
+                <span class="person-name">{{person.name}}</span>
+                <span>{{person.funktion}}</span>
+                <img class="person-img" [src]="person.image.path" />
+                <span>{{person.email}}</span>
+                <span>{{person.phone}}</span>
+            </div>
+        </div>
+        <h2>Vereinsgeschichte</h2>
+        <div class="part-content">
+            <p class="main-part-text" id="history-text" [innerText]="historyText"></p>
+        </div>
+    </div>
+    
+</div>
+<div class="main-part" id="nachwuchs">
+    <h1>Nachwuchs</h1>
+    <div class="part-content">
+        
+        <p class="main-part-text">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde obcaecati, sapiente reiciendis dicta nostrum, ipsa corporis esse cupiditate iusto voluptas vel eaque molestias ut repellendus necessitatibus similique adipisci? Laudantium, harum.
+        </p>
+    </div>
+</div>
+<div class="main-part" id="teams">
+    <h1>Teams</h1>
+    <div class="part-content">
+        <p class="main-part-text">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde obcaecati, sapiente reiciendis dicta nostrum, ipsa corporis esse cupiditate iusto voluptas vel eaque molestias ut repellendus necessitatibus similique adipisci? Laudantium, harum.
+        </p>
+    </div>
+</div>
+<div class="main-part">
+    <h1>Part 5</h1>
+    <div class="part-content">
+        <p class="main-part-text">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde obcaecati, sapiente reiciendis dicta nostrum, ipsa corporis esse cupiditate iusto voluptas vel eaque molestias ut repellendus necessitatibus similique adipisci? Laudantium, harum.
+        </p>
+    </div>
+</div>
+<div class="main-part" id="kontakt" *ngIf="kontakt">
+    <h1>Kontakt</h1>
+    <div class="part-content">
+        <p class="main-part-text">
+            {{kontakt.addresse}}
+        </p>
+        <p class="main-part-text">
+            {{kontakt.plz}} {{kontakt.ort}}
+        </p>
+        <p class="main-part-text">
+            {{kontakt.email}}
+        </p>
+        <p class="main-part-text">
+            {{kontakt.phone}}
+        </p>
+    </div>
+</div>

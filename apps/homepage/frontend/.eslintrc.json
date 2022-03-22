@@ -21,7 +21,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "fcschwarzach-toolbox",
+            "prefix": "app",
             "style": "kebab-case"
           }
         ]
