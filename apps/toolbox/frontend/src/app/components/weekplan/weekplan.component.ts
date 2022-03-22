@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../app/api/api.service';
 import { TeamData } from '../../../app/model/generalplan.model';
 import { TimeDetails, WeeklyEvent } from '../../../app/model/weekly-event.model';
-import { checkHomeAwayFilter, filterPlaces, getFilterPlaces, setDefaultTeamsUiFilterState } from '../ui-components/match-filters/filter-helpers';
+import { checkHomeAwayFilter, filterAbgesagt, filterPlaces, getFilterPlaces, setDefaultTeamsUiFilterState } from '../ui-components/match-filters/filter-helpers';
 import { Filters } from '../ui-components/match-filters/match-filters.component';
 
 
@@ -219,6 +219,7 @@ export class WeekplanComponent implements OnInit {
                     .filter(team => this.filters.teamsUiState.get(team)?.show)
                     .forEach(team => {
                         team.events
+                            .filter(event => filterAbgesagt(event))
                             .filter(event => filterPlaces(event, this.filters)) // check if place of event is toggled on
                             .filter(event => {
                                 const datePlusOne = new Date(dayEvent.date);

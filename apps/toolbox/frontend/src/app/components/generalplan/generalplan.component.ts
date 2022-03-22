@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../app/api/api.service';
 import { IcalEvent, MatchDayEventsByTeam, TeamData } from '../../../app/model/generalplan.model';
 import { environment } from '../../../environments/environment';
-import { checkHomeAwayFilter, filterPlaces, getFilterPlaces, setDefaultTeamsUiFilterState, setFilterStartAndEndDate } from '../ui-components/match-filters/filter-helpers';
+import { checkHomeAwayFilter, filterAbgesagt, filterPlaces, getFilterPlaces, setDefaultTeamsUiFilterState, setFilterStartAndEndDate } from '../ui-components/match-filters/filter-helpers';
 import { Filters } from '../ui-components/match-filters/match-filters.component';
 
 @Component({
@@ -97,6 +97,7 @@ export class GeneralplanComponent implements OnInit {
                     })
 
                     team.events
+                        .filter(event => filterAbgesagt(event))
                         .filter(event => filterPlaces(event, this.filters)) // check if place of event is toggled on
                         .forEach(event => {
                             const datePlusOne = new Date(currentDate);

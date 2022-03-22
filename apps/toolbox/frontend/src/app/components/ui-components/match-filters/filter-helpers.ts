@@ -26,6 +26,10 @@ export function getFilterPlaces(): { [key: string]: PlaceFilter } {
     }
 }
 
+export function filterAbgesagt(event: IcalEvent): boolean {
+    return !event.summary.value.toLowerCase().includes('abgesagt');
+}
+
 export function filterPlaces(event: IcalEvent, filters: Filters): boolean {
     const eventLocationLowerCase = event.location.value.toLowerCase();
 
