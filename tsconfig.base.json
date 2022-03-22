@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@fcschwarzach/shared-base-styles": [
+        "libs/shared/base-styles/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

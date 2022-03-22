@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/base-styles",
+  "sourceRoot": "libs/shared/base-styles/src",
+  "prefix": "fcschwarzach",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/base-styles"],
+      "options": {
+        "jestConfig": "libs/shared/base-styles/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/base-styles/src/**/*.ts",
+          "libs/shared/base-styles/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
