@@ -1,11 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import "variables.scss";
+@import 'variables.scss';
 
 html,
 input,
 textarea {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 html,
@@ -30,7 +30,6 @@ h4 {
 button {
   border: 2px solid var(--dark-blue);
   background-color: white;
-  border-radius: 3px;
   padding: 5px 10px;
 
   width: max-content;
