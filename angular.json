@@ -3,6 +3,8 @@
   "projects": {
     "backend-api": "apps/backend/api",
     "generalplan-cli": "apps/generalplan/cli",
+    "homepage-frontend": "apps/homepage/frontend",
+    "homepage-frontend-e2e": "apps/homepage/frontend-e2e",
     "toolbox-frontend": "apps/toolbox/frontend",
     "toolbox-frontend-e2e": "apps/toolbox/frontend-e2e"
   }
