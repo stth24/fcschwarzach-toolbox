@@ -7,7 +7,6 @@ import { HOST } from '../../api/url';
     styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
-    openAdmin() {
-        window.open(new URL(HOST + 'cockpit-master'), 'blank');
-    }
+
+    HOST = HOST;
 }
