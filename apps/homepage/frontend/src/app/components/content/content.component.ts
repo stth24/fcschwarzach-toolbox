@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ApiService } from '../../api/api.service';
-import { Kontakt, News, Vorstandsmitglied } from '../../model/model';
+import { Kontakt, Mannschaft, News, Vorstandsmitglied } from '../../model/model';
 
 @Component({
     selector: 'app-content',
     templateUrl: './content.component.html',
-    styleUrls: ['./content.component.scss']
+    styleUrls: ['./content.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class ContentComponent implements OnInit {
 
@@ -13,6 +14,9 @@ export class ContentComponent implements OnInit {
     vorstand: Vorstandsmitglied[] = [];
     historyText = 'Lädt...';
     kontakt: Kontakt | undefined;
+    mannschaften: Mannschaft[] = [];
+
+    currentNewsElement = 0;
 
     constructor(private apiService: ApiService) { }
 
@@ -28,5 +32,18 @@ export class ContentComponent implements OnInit {
 
         this.apiService.getKontaktFromApi()
             .then(kontakt => this.kontakt = kontakt);
+
+        this.apiService.getMannschaftenFromApi()
+            .then(teams => this.mannschaften = teams);
+    }
+
+    scrollSlider(left: boolean) {
+        this.currentNewsElement += left ? -1 : 1;
+        if (this.currentNewsElement < 0) {
+            this.currentNewsElement = this.news.length;
+        }
+        if (this.currentNewsElement >= this.news.length) {
+            this.currentNewsElement = 0;
+        }
     }
 }

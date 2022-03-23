@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { checkHomeAwayFilter, filterAbgesagt, filterPlaces, Filters, getFilterPlaces, IcalEvent, MatchDayEventsByTeam, setDefaultTeamsUiFilterState, setFilterStartAndEndDate, TeamData } from '@fcschwarzach/shared-generalplan-api';
 import { ApiService } from '../../../app/api/api.service';
-import { IcalEvent, MatchDayEventsByTeam, TeamData } from '../../../app/model/generalplan.model';
 import { environment } from '../../../environments/environment';
-import { checkHomeAwayFilter, filterAbgesagt, filterPlaces, getFilterPlaces, setDefaultTeamsUiFilterState, setFilterStartAndEndDate } from '../ui-components/match-filters/filter-helpers';
-import { Filters } from '../ui-components/match-filters/match-filters.component';
 
 @Component({
     selector: 'app-generalplan',

@@ -1,0 +1,29 @@
+:host {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min-content, 300px));
+  gap: 20px;
+}
+
+.km-game {
+  //we need !important to override .tile from parent
+  background-color: var(--regular-green) !important;
+  color: black !important;
+}
+
+.game-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.line {
+  width: 100%;
+  border: 1px solid var(--dark-blue);
+}
+
+.game-date {
+  font-weight: bold;
+}
+
+.location-home {
+  border: 10px solid darkred;
+}

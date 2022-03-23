@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/generalplan-api",
+  "sourceRoot": "libs/shared/generalplan-api/src",
+  "prefix": "fcschwarzach",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/generalplan-api"],
+      "options": {
+        "jestConfig": "libs/shared/generalplan-api/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/generalplan-api/src/**/*.ts",
+          "libs/shared/generalplan-api/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

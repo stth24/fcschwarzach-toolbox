@@ -27,3 +27,8 @@ export interface Kontakt {
     email: string,
     phone: string
 }
+
+export interface Mannschaft {
+    name: string,
+    image: Image
+}

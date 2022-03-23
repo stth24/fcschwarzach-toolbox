@@ -1,11 +1,19 @@
 import { Injectable } from '@angular/core';
-import { ClubHistory, Kontakt, News, Vorstandsmitglied } from '../model/model';
-import { GET_HISTORY, GET_KONTAKT, GET_NEWS, GET_VORSTAND, HOST } from './url';
+import { GeneralplanApiService } from '@fcschwarzach/shared-generalplan-api';
+import { environment } from '../../environments/environment';
+import { ClubHistory, Kontakt, Mannschaft, News, Vorstandsmitglied } from '../model/model';
+import { GET_HISTORY, GET_KONTAKT, GET_MANNSCHAFTEN, GET_NEWS, GET_VORSTAND, HOST } from './url';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ApiService {
+    private getPrefix(): string {
+        return environment.production ? '' : 'http://localhost';
+    }
+
+    constructor(private generalplanApiService: GeneralplanApiService) { }
+
     getNewsFromApi() {
         return new Promise<News[]>((resolve, reject) => {
             fetch(GET_NEWS.toString())
@@ -23,6 +31,20 @@ export class ApiService {
     getVorstandFromApi() {
         return new Promise<Vorstandsmitglied[]>((resolve, reject) => {
             fetch(GET_VORSTAND.toString())
+                .then(res => res.json())
+                .then(res => {
+                    res.entries.forEach((entry: any) => {
+                        entry.image.path = HOST + entry.image.path
+                    });
+
+                    resolve(res.entries);
+                });
+        })
+    }
+
+    getMannschaftenFromApi() {
+        return new Promise<Mannschaft[]>((resolve, reject) => {
+            fetch(GET_MANNSCHAFTEN.toString())
                 .then(res => res.json())
                 .then(res => {
                     res.entries.forEach((entry: any) => {
@@ -52,5 +74,9 @@ export class ApiService {
                     resolve(res);
                 });
         })
+    }
+
+    getGeneralPlanData() {
+        return this.generalplanApiService.getGeneralplanData(this.getPrefix());
     }
 }

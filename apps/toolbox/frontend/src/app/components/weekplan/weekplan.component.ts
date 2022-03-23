@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { checkHomeAwayFilter, filterAbgesagt, filterPlaces, Filters, getFilterPlaces, setDefaultTeamsUiFilterState, TeamData } from '@fcschwarzach/shared-generalplan-api';
 import { ApiService } from '../../../app/api/api.service';
-import { TeamData } from '../../../app/model/generalplan.model';
 import { TimeDetails, WeeklyEvent } from '../../../app/model/weekly-event.model';
-import { checkHomeAwayFilter, filterAbgesagt, filterPlaces, getFilterPlaces, setDefaultTeamsUiFilterState } from '../ui-components/match-filters/filter-helpers';
-import { Filters } from '../ui-components/match-filters/match-filters.component';
 
 
 export interface DayEntry {

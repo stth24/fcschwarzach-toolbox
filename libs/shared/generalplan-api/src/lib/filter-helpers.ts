@@ -1,5 +1,21 @@
-import { IcalEvent, TeamData } from "../../../model/generalplan.model";
-import { Filters, PlaceFilter } from "./match-filters.component";
+import { IcalEvent, TeamData } from "@fcschwarzach/shared-generalplan-api";
+
+export interface PlaceFilter {
+    label: string,
+    stringToMatch: string,
+    show: boolean
+}
+
+export interface Filters {
+    startDate: Date,
+    endDate: Date,
+    showHome: boolean,
+    showAway: boolean,
+    places: {
+        [key: string]: PlaceFilter
+    },
+    teamsUiState: Map<TeamData, { show: boolean }>
+}
 
 export function getFilterPlaces(): { [key: string]: PlaceFilter } {
     return {

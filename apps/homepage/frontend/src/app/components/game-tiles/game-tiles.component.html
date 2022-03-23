@@ -1,0 +1,14 @@
+<ng-container *ngFor="let team of teams">
+    <div class="tile" 
+        [class.km-game]="team.name === 'KM'" 
+        [class.location-home]="game.location.value.includes('Schwarzach')"
+        *ngFor="let game of team.events">
+        <span class="game-title">{{game.summary.value}}</span>
+        <span>{{game.description.value}}</span>
+        <hr class="line">
+        <span class="game-date">{{game.dtstart.value | date:'dd.MM.yyyy'}}</span>
+        <span class="game-date">{{game.dtstart.value | date:'HH:mm'}} Uhr</span>
+        <hr class="line">
+        <span>{{game.location.value}}</span>
+    </div>
+</ng-container>

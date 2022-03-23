@@ -1,23 +1,6 @@
 import { KeyValue } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IcalEvent, TeamData } from '../../../model/generalplan.model';
-
-export interface PlaceFilter {
-    label: string,
-    stringToMatch: string,
-    show: boolean
-}
-
-export interface Filters {
-    startDate: Date,
-    endDate: Date,
-    showHome: boolean,
-    showAway: boolean,
-    places: {
-        [key: string]: PlaceFilter
-    },
-    teamsUiState: Map<TeamData, { show: boolean }>
-}
+import { Filters, IcalEvent, TeamData } from '@fcschwarzach/shared-generalplan-api';
 
 @Component({
     selector: 'app-match-filters',

@@ -17,6 +17,9 @@
     "paths": {
       "@fcschwarzach/shared-base-styles": [
         "libs/shared/base-styles/src/index.ts"
+      ],
+      "@fcschwarzach/shared-generalplan-api": [
+        "libs/shared/generalplan-api/src/index.ts"
       ]
     }
   },
