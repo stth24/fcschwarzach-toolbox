@@ -20,7 +20,7 @@
 <button *ngIf="!showAddTeam" (click)="toggleShowAddTeam()">Neues Team hinzufügen</button>
 
 
-<app-confirm-cancel-modal 
+<shared-ui-helpers-confirm-cancel-modal 
     *ngIf="showModal" 
     [message]="modalMessage" 
-    (close)="closeModal($event)"></app-confirm-cancel-modal>
+    (close)="closeModal($event)"></shared-ui-helpers-confirm-cancel-modal>

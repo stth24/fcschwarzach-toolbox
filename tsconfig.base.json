@@ -20,7 +20,8 @@
       ],
       "@fcschwarzach/shared-generalplan-api": [
         "libs/shared/generalplan-api/src/index.ts"
-      ]
+      ],
+      "@fcschwarzach/shared-ui-helpers": ["libs/shared/ui-helpers/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

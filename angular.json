@@ -7,6 +7,7 @@
     "homepage-frontend-e2e": "apps/homepage/frontend-e2e",
     "shared-base-styles": "libs/shared/base-styles",
     "shared-generalplan-api": "libs/shared/generalplan-api",
+    "shared-ui-helpers": "libs/shared/ui-helpers",
     "toolbox-frontend": "apps/toolbox/frontend",
     "toolbox-frontend-e2e": "apps/toolbox/frontend-e2e"
   }

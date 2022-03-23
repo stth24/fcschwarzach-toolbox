@@ -7,15 +7,6 @@
     </a>
 </ng-template>
 
-<ng-template #clickZoomTemplate let-src="src" let-height="height">
-    <div class="click-zoom">
-        <label>
-            <input type="checkbox">
-            <img [src]="src" [style]="'max-height: ' + height +'px'"/>
-        </label>
-    </div>
-</ng-template>
-
 <p>
     <ng-container *ngTemplateOutlet="formButtonTemplate"></ng-container>
 </p>
@@ -57,8 +48,10 @@
     Bei Klick auf den Button <ng-container *ngTemplateOutlet="formButtonTemplate"></ng-container> werden Sie auf das Google Forms-Dokument (siehe Abbildung) des FC Schwarzach weitergeleitet.
 </p>
 
-<ng-container *ngTemplateOutlet="clickZoomTemplate;context:{src: 'assets/anmeldeformular.png', height: '400'}"></ng-container>
-
+<shared-ui-helpers-zoom-image 
+    [src]="'assets/anmeldeformular.png'" 
+    [height]="'400'">
+</shared-ui-helpers-zoom-image>
 
 <p>
     Hier finden Sie alle Eingabefelder zu den oben beschriebenen Informationen. 
@@ -67,14 +60,19 @@
     Außerdem finden Sie am Ende des Formulars die Upload-Dialoge zum Hochladen der erforderlichen Dokumente (Passfoto, Geburtsurkunde, etc.):
 </p>
 
-<ng-container *ngTemplateOutlet="clickZoomTemplate;context:{src: 'assets/anmeldeformular_upload.png', height: '400'}"></ng-container>
-
+<shared-ui-helpers-zoom-image 
+    [src]="'assets/anmeldeformular_upload.png'" 
+    [height]="'400'">
+</shared-ui-helpers-zoom-image>
 
 <p>
     Wenn Sie alle Felder korrekt ausgefüllt haben, klicken Sie auf "Senden", um alle Informationen und Dokumente an uns weiterzuleiten.
 </p>
 
-<ng-container *ngTemplateOutlet="clickZoomTemplate;context:{src: 'assets/anmeldeformular_senden.png', height: '300'}"></ng-container>
+<shared-ui-helpers-zoom-image 
+    [src]="'assets/anmeldeformular_senden.png'" 
+    [height]="'300'">
+</shared-ui-helpers-zoom-image>
 
 <h2>Weiteres Vorgehen:</h2>
 

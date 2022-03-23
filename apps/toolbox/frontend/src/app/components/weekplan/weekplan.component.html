@@ -1,9 +1,9 @@
 
-<app-loader *ngIf="loadingProgress.loadingTasks.length > 0 && loadingProgress.completeTasks.length === 0"></app-loader>
+<shared-ui-helpers-loader *ngIf="loadingProgress.loadingTasks.length > 0 && loadingProgress.completeTasks.length === 0"></shared-ui-helpers-loader>
 
-<app-error-box *ngIf="fetchError.status"
+<shared-ui-helpers-error-box *ngIf="fetchError.status"
     [title]="fetchError.message.title"
-    [message]="fetchError.message.text"></app-error-box>
+    [message]="fetchError.message.text"></shared-ui-helpers-error-box>
 
 <ng-container *ngIf="loadingProgress.completeTasks.length > 0 && !fetchError.status">
     <div class="header">

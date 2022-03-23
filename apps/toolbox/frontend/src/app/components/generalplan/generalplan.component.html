@@ -1,9 +1,9 @@
-<app-loader *ngIf="teams.length < 1 && !fetchError.status"></app-loader>
+<shared-ui-helpers-loader *ngIf="teams.length < 1 && !fetchError.status"></shared-ui-helpers-loader>
 
-<app-error-box *ngIf="fetchError.status"
+<shared-ui-helpers-error-box *ngIf="fetchError.status"
     [title]="fetchError.message.title"
     [message]="fetchError.message.text">
-</app-error-box>
+</shared-ui-helpers-error-box>
 
 <ng-container  *ngIf="teams.length > 0">
     <div class="button-group">
