@@ -1,0 +1,16 @@
+<div class="tile news-item" *ngIf="newsItem">
+    <span class="news-title">{{newsItem.title}}</span>
+    <img (click)="toggleModal()" class="news-pic" [src]="newsItem?.image?.path" />
+    <p class="news-text" [innerText]="newsItem.text"></p>
+</div>
+
+
+<shared-ui-helpers-modal *ngIf="showModal && newsItem">
+    <div class="news-modal-content">
+        <div class="modal-header">
+            <h1>{{newsItem.title}}</h1>
+            <button class="close-modal-button delete-button" (click)="toggleModal()">X</button>
+        </div>
+        <p [innerText]="newsItem.text"></p>
+    </div>
+</shared-ui-helpers-modal>
