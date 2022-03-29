@@ -22,7 +22,12 @@ export class ContentComponent implements OnInit {
 
     ngOnInit(): void {
         this.apiService.getNewsFromApi()
-            .then(news => this.news = news);
+            .then(news => {
+                news.sort((a, b) => a.modified > b.modified ? -1 : 1)
+                console.log('NEWS', news);
+
+                this.news = news;
+            });
 
         this.apiService.getVorstandFromApi()
             .then(vorstand => this.vorstand = vorstand);

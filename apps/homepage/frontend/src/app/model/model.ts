@@ -5,7 +5,8 @@ export interface Image {
 export interface News {
     title: string,
     text: string,
-    image: Image
+    image: Image,
+    modified: Date
 }
 
 export interface ClubHistory {

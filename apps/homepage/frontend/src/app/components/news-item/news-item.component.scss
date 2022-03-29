@@ -19,7 +19,10 @@ $text-shadow: black;
 }
 
 .news-title {
-  font-size: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
   font-weight: bold;
   color: white;
 
@@ -29,6 +32,10 @@ $text-shadow: black;
 
   text-shadow: -1px 0 $text-shadow, 0 1px $text-shadow, 1px 0 $text-shadow,
     0 -1px $text-shadow;
+
+  .news-title-text {
+    font-size: 2.5rem;
+  }
 }
 
 .news-pic {
@@ -40,17 +47,38 @@ $text-shadow: black;
 // MODAL
 .news-modal-content {
   padding: 20px;
-
-  max-width: 80vw;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: auto;
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
+
+  .news-modified {
+    font-weight: bold;
+  }
+}
+
+.modal-main {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-modal-pic {
+  max-height: 50%;
+  object-fit: cover;
 }
 
 @media only screen and (max-width: 600px) {
   .news-title {
-    font-size: 2rem;
+    left: 20px;
+
+    .news-title-text {
+      font-size: 2rem;
+    }
   }
 }

@@ -1,5 +1,8 @@
 <div (click)="toggleModal()" class="news-item" *ngIf="newsItem">
-    <span class="news-title">{{newsItem.title}}</span>
+    <div class="news-title">
+        <span class="news-title-text">{{newsItem.title}}</span>
+        <span class="news-title-modified">{{newsItem.modified | date: 'dd.MM.yyy HH:mm'}}</span>
+    </div>
     <img class="news-pic" [src]="newsItem?.image?.path" />
 </div>
 
@@ -7,9 +10,15 @@
 <shared-ui-helpers-modal *ngIf="showModal && newsItem">
     <div class="news-modal-content">
         <div class="modal-header">
-            <h1>{{newsItem.title}}</h1>
+            <div class="left-side">
+                <h1>{{newsItem.title}}</h1>
+                <span class="news-modified">{{newsItem.modified | date: 'dd.MM.yyyy HH:mm'}}</span>
+            </div>
             <button class="close-modal-button delete-button" (click)="toggleModal()">X</button>
         </div>
-        <p [innerText]="newsItem.text"></p>
+        <div class="modal-main">
+            <img class="news-modal-pic" [src]="newsItem?.image?.path" />
+            <p [innerText]="newsItem.text"></p>
+        </div>
     </div>
 </shared-ui-helpers-modal>

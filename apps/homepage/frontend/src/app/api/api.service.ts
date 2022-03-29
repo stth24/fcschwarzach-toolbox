@@ -21,6 +21,7 @@ export class ApiService {
                 .then(res => {
                     res.entries.forEach((entry: any) => {
                         entry.image.path = HOST + entry.image.path
+                        entry.modified = new Date(entry._modified * 1000)
                     });
 
                     resolve(res.entries);
