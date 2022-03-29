@@ -1,7 +1,19 @@
 <img src="assets/logo.png" width="50px" />
-<span class="header-item"><a href="#news">News</a></span>
-<span class="header-item"><a href="#nachwuchs">Nachwuchs</a></span>
-<span class="header-item"><a href="#verein">Verein</a></span>
-<span class="header-item"><a href="/toolbox">Toolbox</a></span>
-<span class="header-item"><a href="#teams">Teams</a></span>
-<span class="header-item"><a href="#kontakt">Kontakt</a></span>
+<ng-container *ngTemplateOutlet="items"></ng-container>
+
+<div class="mobile-menu">
+    <span class="header-item" (click)="toggleMobileMenu()">Menu</span>
+</div>
+
+<div class="mobile-menu-container" *ngIf="showMobileMenu">
+    <ng-container *ngTemplateOutlet="items"></ng-container>
+</div>
+
+<ng-template #items>
+    <span class="header-item"><a href="#news">News</a></span>
+    <span class="header-item"><a href="#nachwuchs">Nachwuchs</a></span>
+    <span class="header-item"><a href="#verein">Verein</a></span>
+    <span class="header-item"><a href="#teams">Teams</a></span>
+    <span class="header-item"><a href="#kontakt">Kontakt</a></span>
+    <span class="header-item"><a href="/toolbox">Toolbox</a></span>
+</ng-template>

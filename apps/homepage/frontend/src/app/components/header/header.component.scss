@@ -7,7 +7,9 @@
   background-color: darkred;
   box-shadow: 0 0 5px #000;
 
-  padding: 10px;
+  padding: 10px 0;
+
+  position: relative;
 }
 
 .header-item {
@@ -23,5 +25,42 @@
   .header-item a {
     color: white;
     text-decoration: none;
+  }
+}
+
+.mobile-menu {
+  display: none;
+}
+
+.mobile-menu-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  border-top: 2px solid white;
+
+  padding: 20px 0;
+
+  background-color: darkred;
+
+  position: absolute;
+  z-index: 100;
+  width: 100vw;
+  top: 100%;
+}
+
+@media only screen and (max-width: 900px) {
+  :host {
+    gap: 20px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  :host > .header-item {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: block;
   }
 }
