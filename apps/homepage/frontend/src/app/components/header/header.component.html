@@ -1,11 +1,12 @@
-<img src="assets/logo.png" width="50px" />
+<img src="assets/logo.png" class="header-logo" />
 <ng-container *ngTemplateOutlet="items"></ng-container>
 
 <div class="mobile-menu">
     <span class="header-item" (click)="toggleMobileMenu()">Menu</span>
 </div>
 
-<div class="mobile-menu-container" *ngIf="showMobileMenu">
+<div class="mobile-menu-container" *ngIf="showMobileMenu" 
+    (click)="toggleMobileMenu()">
     <ng-container *ngTemplateOutlet="items"></ng-container>
 </div>
 

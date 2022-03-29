@@ -13,6 +13,10 @@
   z-index: 20;
 }
 
+.header-logo {
+  width: 50px;
+}
+
 .header-item {
   color: white;
   font-size: 1.5rem;
@@ -57,8 +61,16 @@
 }
 
 @media only screen and (max-width: 700px) {
+  :host {
+    padding: 5px 0;
+  }
+
   :host > .header-item {
     display: none;
+  }
+
+  .header-logo {
+    width: 40px;
   }
 
   .mobile-menu {
