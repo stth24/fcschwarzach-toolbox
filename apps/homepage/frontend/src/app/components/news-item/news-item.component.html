@@ -1,7 +1,6 @@
-<div class="tile news-item" *ngIf="newsItem">
+<div (click)="toggleModal()" class="news-item" *ngIf="newsItem">
     <span class="news-title">{{newsItem.title}}</span>
-    <img (click)="toggleModal()" class="news-pic" [src]="newsItem?.image?.path" />
-    <p class="news-text" [innerText]="newsItem.text"></p>
+    <img class="news-pic" [src]="newsItem?.image?.path" />
 </div>
 
 

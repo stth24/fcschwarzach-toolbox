@@ -132,15 +132,11 @@ app-content {
   grid-template-columns: repeat(auto-fill, minmax(min-content, 300px));
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1000px) {
   .main-part {
     grid-template-columns: auto;
     padding: 10px 20px;
     margin: 0;
-
-    .part-header {
-      font-size: 1.3rem;
-    }
 
     &:nth-child(2n) {
       .part-header {
@@ -152,5 +148,11 @@ app-content {
   .part-header {
     background-color: var(--background);
     padding: 10px 0;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .part-header {
+    font-size: 1.3rem;
   }
 }

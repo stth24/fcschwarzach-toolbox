@@ -1,26 +1,34 @@
+$text-shadow: black;
+
 :host {
   display: flex;
   width: 100%;
 }
+
 .news-item {
-  flex-direction: column;
-
   display: flex;
-
-  padding: 20px 30px;
+  flex-direction: column;
   width: 100%;
   overflow: hidden;
+
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .news-title {
-  font-size: 1.2rem;
+  font-size: 2.5rem;
   font-weight: bold;
-}
+  color: white;
 
-.news-text {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+  position: absolute;
+  left: 30px;
+  bottom: 20px;
+
+  text-shadow: -1px 0 $text-shadow, 0 1px $text-shadow, 1px 0 $text-shadow,
+    0 -1px $text-shadow;
 }
 
 .news-pic {
@@ -39,4 +47,10 @@
 .modal-header {
   display: flex;
   justify-content: space-between;
+}
+
+@media only screen and (max-width: 600px) {
+  .news-title {
+    font-size: 2rem;
+  }
 }

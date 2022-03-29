@@ -40,7 +40,7 @@ export class ContentComponent implements OnInit {
     scrollSlider(left: boolean) {
         this.currentNewsElement += left ? -1 : 1;
         if (this.currentNewsElement < 0) {
-            this.currentNewsElement = this.news.length;
+            this.currentNewsElement = this.news.length - 1;
         }
         if (this.currentNewsElement >= this.news.length) {
             this.currentNewsElement = 0;
