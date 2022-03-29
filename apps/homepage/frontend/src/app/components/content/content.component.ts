@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ApiService } from '../../api/api.service';
-import { Kontakt, Mannschaft, News, Vorstandsmitglied } from '../../model/model';
+import { Kontakt, Mannschaft, News, NWInfo, Vorstandsmitglied } from '../../model/model';
 
 @Component({
     selector: 'app-content',
@@ -15,6 +15,7 @@ export class ContentComponent implements OnInit {
     historyText = 'Lädt...';
     kontakt: Kontakt | undefined;
     mannschaften: Mannschaft[] = [];
+    nwinfo: NWInfo | undefined;
 
     currentNewsElement = 0;
 
@@ -40,6 +41,9 @@ export class ContentComponent implements OnInit {
 
         this.apiService.getMannschaftenFromApi()
             .then(teams => this.mannschaften = teams);
+
+        this.apiService.getNwInfoFromApi()
+            .then(info => this.nwinfo = info);
     }
 
     scrollSlider(left: boolean) {

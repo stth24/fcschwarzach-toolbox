@@ -41,7 +41,8 @@
               "with": "apps/homepage/frontend/src/environments/environment.prod.ts"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "none",
+          "baseHref": "./"
         },
         "development": {
           "buildOptimizer": false,

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { GeneralplanApiService } from '@fcschwarzach/shared-generalplan-api';
 import { environment } from '../../environments/environment';
-import { ClubHistory, Kontakt, Mannschaft, News, Vorstandsmitglied } from '../model/model';
-import { GET_HISTORY, GET_KONTAKT, GET_MANNSCHAFTEN, GET_NEWS, GET_VORSTAND, HOST } from './url';
+import { ClubHistory, Kontakt, Mannschaft, News, NWInfo, Vorstandsmitglied } from '../model/model';
+import { GET_HISTORY, GET_KONTAKT, GET_MANNSCHAFTEN, GET_NEWS, GET_NW_INFO, GET_VORSTAND, HOST } from './url';
 
 @Injectable({
     providedIn: 'root'
@@ -19,7 +19,7 @@ export class ApiService {
             fetch(GET_NEWS.toString())
                 .then(res => res.json())
                 .then(res => {
-                    res.entries.forEach((entry: any) => {
+                    res?.entries.forEach((entry: any) => {
                         entry.image.path = HOST + entry.image.path
                         entry.modified = new Date(entry._modified * 1000)
                     });
@@ -34,7 +34,7 @@ export class ApiService {
             fetch(GET_VORSTAND.toString())
                 .then(res => res.json())
                 .then(res => {
-                    res.entries.forEach((entry: any) => {
+                    res?.entries.forEach((entry: any) => {
                         entry.image.path = HOST + entry.image.path
                     });
 
@@ -48,7 +48,7 @@ export class ApiService {
             fetch(GET_MANNSCHAFTEN.toString())
                 .then(res => res.json())
                 .then(res => {
-                    res.entries.forEach((entry: any) => {
+                    res?.entries.forEach((entry: any) => {
                         entry.image.path = HOST + entry.image.path
                     });
 
@@ -72,6 +72,18 @@ export class ApiService {
             fetch(GET_KONTAKT.toString())
                 .then(res => res.json())
                 .then(res => {
+                    resolve(res);
+                });
+        })
+    }
+
+    getNwInfoFromApi() {
+        return new Promise<NWInfo>((resolve, reject) => {
+            fetch(GET_NW_INFO.toString())
+                .then(res => res.json())
+                .then(res => {
+                    res.image.path = HOST + res.image.path
+
                     resolve(res);
                 });
         })

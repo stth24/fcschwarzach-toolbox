@@ -33,3 +33,10 @@ export interface Mannschaft {
     name: string,
     image: Image
 }
+
+export interface NWInfo {
+    text: string,
+    name: string,
+    image: Image,
+    email: string
+}

@@ -1,7 +1,9 @@
-export const HOST = 'http://localhost/';
-export const TOKEN = "5226b17e18a8c01fbc27a286a0d659";
+import { environment } from "../../environments/environment";
 
-export const GET_URL = HOST + "cockpit-master/api";
+export const HOST = !environment.production ? 'http://fcschwarzach.com/' : (window.location.origin + '/');
+export const TOKEN = "ee267dda1fbfde50ed854fb6af19ca";
+
+export const GET_URL = HOST + "cockpit/api";
 export const GET_COLLECTION = GET_URL + '/collections/get';
 export const GET_SINGLETON = GET_URL + '/singletons/get';
 export const params = new URLSearchParams({ token: TOKEN });
@@ -14,6 +16,7 @@ export const GET_MANNSCHAFTEN = new URL(GET_COLLECTION + '/mannschaften');
 // singletons
 export const GET_HISTORY = new URL(GET_SINGLETON + '/history');
 export const GET_KONTAKT = new URL(GET_SINGLETON + '/kontakt');
+export const GET_NW_INFO = new URL(GET_SINGLETON + '/nwinfo');
 
 
 GET_NEWS.search = params.toString();
@@ -21,3 +24,4 @@ GET_HISTORY.search = params.toString();
 GET_VORSTAND.search = params.toString();
 GET_KONTAKT.search = params.toString();
 GET_MANNSCHAFTEN.search = params.toString();
+GET_NW_INFO.search = params.toString();
