@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HOST } from '../../api/url';
+import { COCKPIT_URL } from '../../api/url';
 
 @Component({
     selector: 'app-footer',
@@ -8,5 +8,5 @@ import { HOST } from '../../api/url';
 })
 export class FooterComponent {
 
-    HOST = HOST;
+    COCKPIT_URL = COCKPIT_URL;
 }

@@ -2,8 +2,9 @@ import { environment } from "../../environments/environment";
 
 export const HOST = !environment.production ? 'http://fcschwarzach.com/' : (window.location.origin + '/');
 export const TOKEN = "ee267dda1fbfde50ed854fb6af19ca";
+export const COCKPIT_URL = HOST + 'cockpit';
 
-export const GET_URL = HOST + "cockpit/api";
+export const GET_URL = COCKPIT_URL + "/api";
 export const GET_COLLECTION = GET_URL + '/collections/get';
 export const GET_SINGLETON = GET_URL + '/singletons/get';
 export const params = new URLSearchParams({ token: TOKEN });
