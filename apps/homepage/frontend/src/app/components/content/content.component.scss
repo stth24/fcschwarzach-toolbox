@@ -135,7 +135,7 @@ app-content {
 @media only screen and (max-width: 1000px) {
   .main-part {
     grid-template-columns: auto;
-    padding: 10px 20px;
+    padding: 20px;
     margin: 0;
 
     &:nth-child(2n) {
@@ -147,7 +147,7 @@ app-content {
 
   .part-header {
     background-color: var(--background);
-    padding: 10px 0;
+    padding-bottom: 10px;
   }
 }
 
