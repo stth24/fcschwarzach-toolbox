@@ -12,6 +12,12 @@ export class ApiService {
         return environment.production ? '' : 'http://localhost';
     }
 
+    private changeEntryImagePath(entry: any) {
+        if (entry?.image?.path) {
+            entry.image.path = HOST + entry.image.path
+        }
+    }
+
     constructor(private generalplanApiService: GeneralplanApiService) { }
 
     getNewsFromApi() {
@@ -20,7 +26,7 @@ export class ApiService {
                 .then(res => res.json())
                 .then(res => {
                     res?.entries.forEach((entry: any) => {
-                        entry.image.path = HOST + entry.image.path
+                        this.changeEntryImagePath(entry);
                         entry.modified = new Date(entry._modified * 1000)
                     });
 
@@ -35,7 +41,7 @@ export class ApiService {
                 .then(res => res.json())
                 .then(res => {
                     res?.entries.forEach((entry: any) => {
-                        entry.image.path = HOST + entry.image.path
+                        this.changeEntryImagePath(entry);
                     });
 
                     resolve(res.entries);
@@ -49,7 +55,7 @@ export class ApiService {
                 .then(res => res.json())
                 .then(res => {
                     res?.entries.forEach((entry: any) => {
-                        entry.image.path = HOST + entry.image.path
+                        this.changeEntryImagePath(entry);
                     });
 
                     resolve(res.entries);
@@ -82,7 +88,7 @@ export class ApiService {
             fetch(GET_NW_INFO.toString())
                 .then(res => res.json())
                 .then(res => {
-                    res.image.path = HOST + res.image.path
+                    this.changeEntryImagePath(res);
 
                     resolve(res);
                 });

@@ -56,7 +56,7 @@
                 <div class="tile person-item" *ngFor="let person of vorstand">
                     <span class="tile-title">{{person.name}}</span>
                     <span>{{person.funktion}}</span>
-                    <img class="tile-img" [src]="person.image.path" />
+                    <img class="tile-img" [src]="person?.image?.path" />
                     <span>{{person.email}}</span>
                     <span>{{person.phone}}</span>
                 </div>
@@ -78,7 +78,7 @@
             <div class="mannschaften-content">
                 <div class="tile" *ngFor="let team of mannschaften">
                     <span class="tile-title">{{team.name}}</span>
-                    <img class="tile-img" [src]="team.image.path" />
+                    <img class="tile-img" [src]="team?.image?.path" />
                 </div>
             </div>
         </div>
