@@ -150,6 +150,10 @@ app-content {
     background-color: var(--background);
     padding: 10px 0;
   }
+
+  .news-part {
+    padding: 0;
+  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -159,5 +163,11 @@ app-content {
 
   .part-header {
     font-size: 1.3rem;
+  }
+
+  .news-part {
+    .part-header {
+      display: none;
+    }
   }
 }
