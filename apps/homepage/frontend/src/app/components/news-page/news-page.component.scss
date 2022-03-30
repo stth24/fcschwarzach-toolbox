@@ -19,7 +19,7 @@
 
 .header,
 .news-text {
-  padding: 0 30px;
+  padding: 0 10%;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -29,7 +29,8 @@
 
   .header,
   .news-text {
-    padding: 0 20px;
+    padding: 0 40px;
+    width: auto;
   }
 
   .news-pic {
@@ -40,5 +41,10 @@
 @media only screen and (max-width: 600px) {
   .news-pic {
     height: 300px;
+  }
+
+  .header,
+  .news-text {
+    padding: 0 20px;
   }
 }
