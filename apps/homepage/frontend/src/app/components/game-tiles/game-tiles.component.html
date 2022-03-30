@@ -1,6 +1,7 @@
 <ng-container *ngFor="let team of teams">
-    <div class="tile" 
+    <div class="tile nw-game" 
         [class.km-game]="team.name === 'KM'" 
+        [class.nw-game]="team.name !== 'KM' && team.name !== '1b'"
         [class.location-home]="game.location.value.includes('Schwarzach')"
         *ngFor="let game of team.events">
         <span class="game-title">{{game.summary.value}}</span>

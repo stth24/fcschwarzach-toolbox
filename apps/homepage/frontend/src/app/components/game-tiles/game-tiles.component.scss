@@ -4,15 +4,20 @@
   gap: 20px;
 }
 
-.km-game {
-  //we need !important to override .tile from parent
-  background-color: var(--regular-green) !important;
-  color: black !important;
+//we need :nth-child(1n) to override .tile:nth-child(2n) from parent
+.km-game:nth-child(1n) {
+  background-color: var(--regular-green);
+  color: black;
 }
 
 .game-title {
   font-weight: bold;
   font-size: 1.2rem;
+}
+
+.nw-game:nth-child(2n) {
+  background-color: var(--medium-blue);
+  color: black;
 }
 
 .line {
