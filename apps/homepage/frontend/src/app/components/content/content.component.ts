@@ -25,13 +25,15 @@ export class ContentComponent implements OnInit {
         this.apiService.getNewsFromApi()
             .then(news => {
                 news.sort((a, b) => a.modified > b.modified ? -1 : 1)
-                console.log('NEWS', news);
 
                 this.news = news;
             });
 
         this.apiService.getVorstandFromApi()
-            .then(vorstand => this.vorstand = vorstand);
+            .then(vorstand => {
+                vorstand.sort((a, b) => Number.parseInt(a.prio) < Number.parseInt(b.prio) ? -1 : 1);
+                this.vorstand = vorstand
+            });
 
         this.apiService.getHistoryFromApi()
             .then(history => this.historyText = history.text);

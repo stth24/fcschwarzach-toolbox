@@ -18,7 +18,8 @@ export interface Vorstandsmitglied {
     funktion: string,
     email: string,
     phone: string,
-    image: Image
+    image: Image,
+    prio: string
 }
 
 export interface Kontakt {
