@@ -63,10 +63,20 @@
 
 /* NEWS */
 
+.news-part {
+  padding: 0;
+  display: flex;
+
+  .part-header {
+    display: none;
+  }
+}
+
 .news-content {
   display: flex;
   overflow: auto;
   position: relative;
+  flex: 1;
 
   //   Button left
   .nav-left-button,
@@ -145,11 +155,8 @@
   }
 
   .news-part {
+    // override .main-part padding: 20px
     padding: 0;
-
-    .part-header {
-      display: none;
-    }
   }
 }
 

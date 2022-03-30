@@ -1,6 +1,5 @@
 :host {
   color: white;
-  padding: 0 10%;
   flex: 1;
 }
 
@@ -13,7 +12,7 @@
 }
 
 .news-pic {
-  height: 600px;
+  height: 650px;
   object-fit: cover;
 }
 
@@ -23,10 +22,6 @@
 }
 
 @media only screen and (max-width: 1000px) {
-  :host {
-    padding: 0;
-  }
-
   .header,
   .news-text {
     padding: 0 40px;
