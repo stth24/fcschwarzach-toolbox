@@ -73,12 +73,20 @@ $text-shadow: black;
   object-fit: cover;
 }
 
+@media only screen and (max-width: 900px) {
+  .news-title {
+    .news-title-text {
+      font-size: 2rem;
+    }
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .news-title {
     padding: 0 20px;
 
     .news-title-text {
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
   }
 }

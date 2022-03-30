@@ -18,6 +18,7 @@
 .line {
   width: 100%;
   border: 1px solid var(--dark-blue);
+  margin: 2px 0;
 }
 
 .game-date {
@@ -26,4 +27,10 @@
 
 .location-home {
   border: 10px solid darkred;
+}
+
+@media only screen and (max-width: 600px) {
+  .game-title {
+    font-size: 1rem;
+  }
 }

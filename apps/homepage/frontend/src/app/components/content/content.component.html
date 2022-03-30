@@ -30,9 +30,8 @@
             <p [innerText]="nwinfo?.text"></p>
             <div class="funktionen-content">
                 <div class="tile person-item">
-                    <p>
-                        <b>{{nwinfo?.name}}</b>
-                    </p>
+                    <span class="tile-title">{{nwinfo?.name}}</span>
+                    <span>Nachwuchsleiter</span>
                     <img class="tile-img" [src]="nwinfo?.image?.path" />
                     <p>
                         E-Mail: {{nwinfo?.email}}
