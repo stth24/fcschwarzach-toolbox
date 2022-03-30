@@ -2,7 +2,7 @@
 <ng-container *ngTemplateOutlet="items"></ng-container>
 
 <div class="mobile-menu">
-    <span class="header-item" (click)="toggleMobileMenu()">FC Schwarzach | Menü</span>
+    <span class="header-item" (click)="toggleMobileMenu()">FC Schwarzach | Menü {{showMobileMenu ? '&#9660;' : '&#9654;'}}</span>
 </div>
 
 <div class="mobile-menu-container" *ngIf="showMobileMenu" 
