@@ -69,8 +69,8 @@ $text-shadow: black;
 }
 
 .news-modal-pic {
-  max-height: 50%;
-  object-fit: cover;
+  height: 50%;
+  object-fit: contain;
 }
 
 @media only screen and (max-width: 900px) {
@@ -88,5 +88,9 @@ $text-shadow: black;
     .news-title-text {
       font-size: 1.5rem;
     }
+  }
+
+  .news-modal-pic {
+    height: auto;
   }
 }
