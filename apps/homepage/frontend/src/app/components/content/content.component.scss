@@ -1,14 +1,8 @@
-// cannot use :host because of viewEncapsulation.none
-app-content {
-  background-color: var(--background);
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-}
+// INFO: cannot use :host because of viewEncapsulation.none
+// use app-content {}
 
 .main-part {
   padding: 30px 50px;
-  margin: 0 5%;
 
   display: grid;
   grid-template-columns: 200px auto;
@@ -137,7 +131,6 @@ app-content {
     grid-template-columns: auto;
     padding: 20px;
     padding-top: 0;
-    margin: 0;
 
     &:nth-child(2n) {
       .part-header {
@@ -153,6 +146,10 @@ app-content {
 
   .news-part {
     padding: 0;
+
+    .part-header {
+      display: none;
+    }
   }
 }
 
@@ -163,11 +160,5 @@ app-content {
 
   .part-header {
     font-size: 1.3rem;
-  }
-
-  .news-part {
-    .part-header {
-      display: none;
-    }
   }
 }

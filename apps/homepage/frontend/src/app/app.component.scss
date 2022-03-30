@@ -4,3 +4,18 @@
   flex: 1;
   overflow: auto;
 }
+
+.main {
+  background-color: var(--background);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0 5%;
+}
+
+@media only screen and (max-width: 1000px) {
+  .main {
+    padding: 0;
+  }
+}

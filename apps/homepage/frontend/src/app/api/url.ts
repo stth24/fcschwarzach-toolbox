@@ -14,6 +14,15 @@ export const GET_NEWS = new URL(GET_COLLECTION + '/news');
 export const GET_VORSTAND = new URL(GET_COLLECTION + '/vorstand');
 export const GET_MANNSCHAFTEN = new URL(GET_COLLECTION + '/mannschaften');
 
+export function getSingleNewsEntryUrl(id: string) {
+    const url = new URL(GET_COLLECTION + '/news');
+    const queryParams = new URLSearchParams({ token: TOKEN, 'filter[_id]': id });
+
+    url.search = queryParams.toString();
+
+    return url;
+}
+
 // singletons
 export const GET_HISTORY = new URL(GET_SINGLETON + '/history');
 export const GET_KONTAKT = new URL(GET_SINGLETON + '/kontakt');

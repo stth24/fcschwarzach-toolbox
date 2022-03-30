@@ -1,8 +1,29 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ComponentsModule } from './components/components.module';
+import { ContentComponent } from './components/content/content.component';
+import { NewsPageComponent } from './components/news-page/news-page.component';
 
+export const NEWS_ID_ROUTE_PARAM = 'newsid';
+
+
+const routes: Routes = [
+    {
+        path: '',
+        component: ContentComponent
+    },
+    {
+        path: 'news/:' + NEWS_ID_ROUTE_PARAM,
+        component: NewsPageComponent,
+
+    },
+    {
+        path: '**',
+        redirectTo: '',
+    }
+];
 
 @NgModule({
     declarations: [
@@ -10,7 +31,8 @@ import { ComponentsModule } from './components/components.module';
     ],
     imports: [
         BrowserModule,
-        ComponentsModule
+        ComponentsModule,
+        RouterModule.forRoot(routes)
     ],
     providers: [],
     bootstrap: [

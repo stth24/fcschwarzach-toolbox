@@ -1,0 +1,10 @@
+<shared-ui-helpers-loader *ngIf="!newsItem"></shared-ui-helpers-loader>
+
+<div class="news-entry" *ngIf="newsItem">
+    <img class="news-pic" [src]="newsItem.image?.path" />
+    <div class="header">
+        <h1>{{newsItem.title}}</h1>
+        <span class="news-modified">{{newsItem.modified | date: 'dd.MM.yyyy HH:mm'}} Uhr</span>
+    </div>
+    <p class="news-text" [innerText]="newsItem.text"></p>
+</div>

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { News } from '../../model/model';
 
 @Component({
@@ -9,9 +10,9 @@ import { News } from '../../model/model';
 export class NewsItemComponent {
     @Input() newsItem: News | undefined;
 
-    showModal = false;
+    constructor(private router: Router, private route: ActivatedRoute) { }
 
-    toggleModal() {
-        this.showModal = !this.showModal;
+    navigateToNewsItem(newsItem: News) {
+        this.router.navigate(['news', newsItem.id], { relativeTo: this.route });
     }
 }

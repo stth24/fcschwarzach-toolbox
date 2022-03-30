@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { GeneralplanApiService } from '@fcschwarzach/shared-generalplan-api';
 import { environment } from '../../environments/environment';
 import { ClubHistory, Kontakt, Mannschaft, News, NWInfo, Vorstandsmitglied } from '../model/model';
-import { GET_HISTORY, GET_KONTAKT, GET_MANNSCHAFTEN, GET_NEWS, GET_NW_INFO, GET_VORSTAND, HOST } from './url';
+import { getSingleNewsEntryUrl, GET_HISTORY, GET_KONTAKT, GET_MANNSCHAFTEN, GET_NEWS, GET_NW_INFO, GET_VORSTAND, HOST } from './url';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ApiService {
     private getPrefix(): string {
-        return environment.production ? '' : 'http://localhost';
+        return environment.production ? '' : 'http://fcschwarzach.com'; //'http://localhost';
     }
 
     private changeEntryImagePath(entry: any) {
@@ -20,17 +20,36 @@ export class ApiService {
 
     constructor(private generalplanApiService: GeneralplanApiService) { }
 
+    private transformEntryToNewsItem(entry: any) {
+        this.changeEntryImagePath(entry);
+        entry.id = entry._id;
+        entry.modified = new Date(entry._modified * 1000)
+    }
+
     getNewsFromApi() {
         return new Promise<News[]>((resolve, reject) => {
             fetch(GET_NEWS.toString())
                 .then(res => res.json())
                 .then(res => {
                     res?.entries.forEach((entry: any) => {
-                        this.changeEntryImagePath(entry);
-                        entry.modified = new Date(entry._modified * 1000)
+                        this.transformEntryToNewsItem(entry);
                     });
 
                     resolve(res.entries);
+                });
+        })
+    }
+
+    getSingleNewsEntryFromApi(newsId: string) {
+        return new Promise<News>((resolve, reject) => {
+            fetch(getSingleNewsEntryUrl(newsId).toString())
+                .then(res => res.json())
+                .then(res => {
+                    res?.entries.forEach((entry: any) => {
+                        this.transformEntryToNewsItem(entry);
+                    });
+
+                    resolve(res?.entries[0]);
                 });
         })
     }

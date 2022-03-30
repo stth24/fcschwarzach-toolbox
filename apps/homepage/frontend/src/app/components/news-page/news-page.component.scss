@@ -1,0 +1,44 @@
+:host {
+  color: white;
+  padding: 0 10%;
+  flex: 1;
+}
+
+.news-entry {
+  background-color: var(--dark-gray);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+}
+
+.news-pic {
+  height: 600px;
+  object-fit: cover;
+}
+
+.header,
+.news-text {
+  padding: 0 30px;
+}
+
+@media only screen and (max-width: 1000px) {
+  :host {
+    padding: 0;
+  }
+
+  .header,
+  .news-text {
+    padding: 0 20px;
+  }
+
+  .news-pic {
+    height: 450px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .news-pic {
+    height: 300px;
+  }
+}

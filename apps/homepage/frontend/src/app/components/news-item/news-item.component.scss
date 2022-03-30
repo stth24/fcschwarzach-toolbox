@@ -44,35 +44,6 @@ $text-shadow: black;
   object-fit: cover;
 }
 
-// MODAL
-.news-modal-content {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  overflow: auto;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-
-  .news-modified {
-    font-weight: bold;
-  }
-}
-
-.modal-main {
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-}
-
-.news-modal-pic {
-  height: 50%;
-  object-fit: contain;
-}
-
 @media only screen and (max-width: 900px) {
   .news-title {
     .news-title-text {
@@ -88,9 +59,5 @@ $text-shadow: black;
     .news-title-text {
       font-size: 1.5rem;
     }
-  }
-
-  .news-modal-pic {
-    height: auto;
   }
 }

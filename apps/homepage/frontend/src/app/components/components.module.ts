@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { NewsItemComponent } from './news-item/news-item.component';
 import { NextKmGamesComponent } from './next-km-games/next-km-games.component';
 import { NextNwGamesComponent } from './next-nw-games/next-nw-games.component';
+import { NewsPageComponent } from './news-page/news-page.component';
 
 
 
@@ -19,7 +20,8 @@ import { NextNwGamesComponent } from './next-nw-games/next-nw-games.component';
         NextKmGamesComponent,
         GameTilesComponent,
         NextNwGamesComponent,
-        NewsItemComponent
+        NewsItemComponent,
+        NewsPageComponent
     ],
     imports: [
         CommonModule,

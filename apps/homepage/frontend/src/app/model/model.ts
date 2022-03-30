@@ -3,6 +3,7 @@ export interface Image {
 }
 
 export interface News {
+    id: string,
     title: string,
     text: string,
     image: Image,

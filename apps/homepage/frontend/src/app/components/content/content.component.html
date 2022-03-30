@@ -2,11 +2,14 @@
 <div class="main-part news-part" id="news">
     <h1 class="part-header">News</h1>
     <div class="part-content news-content" id="news-content">
-        <div class="nav-left-button" (click)="scrollSlider(true)"> < </div>
-        <ng-container *ngFor="let item of news, let i = index">
-            <app-news-item [newsItem]="item" *ngIf="i === currentNewsElement"></app-news-item>
+        <shared-ui-helpers-loader *ngIf="!news || news.length < 1"></shared-ui-helpers-loader>
+        <ng-container *ngIf="news && news.length > 0">
+            <div class="nav-left-button" (click)="scrollSlider(true)"> < </div>
+            <ng-container *ngFor="let item of news, let i = index">
+                <app-news-item [newsItem]="item" *ngIf="i === currentNewsElement"></app-news-item>
+            </ng-container>
+            <div class="nav-right-button" (click)="scrollSlider(false)"> > </div>
         </ng-container>
-        <div class="nav-right-button" (click)="scrollSlider(false)"> > </div>
     </div>
 </div>
 
