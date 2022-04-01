@@ -17,12 +17,11 @@ export class AppComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.element.classList.toggle('dark-mode', this.darkMode);
+        this.element.classList.add('dark-mode');
     }
 
     toggleDarkMode() {
         this.darkMode = !this.darkMode;
-        console.log('DARK MODE', this.darkMode);
         this.element.classList.toggle('dark-mode', this.darkMode);
     }
 }
