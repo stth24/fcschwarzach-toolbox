@@ -1,5 +1,6 @@
 :root {
   --background: #fafafa;
+  --on-background: black;
   --dark-blue: #466388;
   --medium-blue: #7dace8;
   --dark-gray: #444648;
@@ -7,6 +8,12 @@
   --regular-green: #8bc34a;
   --error-red: #d21b1b;
 
+    // Alternative colors
+    --dark-background: #131313;
+    --on-dark-background: white;
+
   //   font-weight
   --semi-bold: 550; //between bold and regular
+
+
 }

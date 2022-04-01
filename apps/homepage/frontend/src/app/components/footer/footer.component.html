@@ -1,4 +1,12 @@
-<span class="footer-part">Impressum</span>
+<div class="footer-part dark-mode-part">
+    <label class="switch" for="dark-mode">
+        <input type="checkbox" id="dark-mode" name="dark-mode" [checked]="darkMode" (change)="toggleDarkMode()"/>
+        <span class="slider round"></span>
+    </label>
+    <span>Dark Mode</span>
+</div>
+
+<span class="footer-part clickable">Impressum</span>
 <!-- Statuten als Download -->
-<span class="footer-part">Statuten</span>
-<div class="footer-part link-to-admin"><a [href]="COCKPIT_URL" target="blank">Admin</a></div>
+<span class="footer-part clickable">Statuten</span>
+<div class="footer-part clickable link-to-admin"><a [href]="COCKPIT_URL" target="blank">Admin</a></div>

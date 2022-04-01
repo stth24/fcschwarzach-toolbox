@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { COCKPIT_URL } from '../../api/url';
 
 @Component({
@@ -8,5 +8,12 @@ import { COCKPIT_URL } from '../../api/url';
 })
 export class FooterComponent {
 
+    @Input() darkMode = true;
+    @Output() toggleMode = new EventEmitter<void>();
+
     COCKPIT_URL = COCKPIT_URL;
+
+    toggleDarkMode() {
+        this.toggleMode.emit();
+    }
 }

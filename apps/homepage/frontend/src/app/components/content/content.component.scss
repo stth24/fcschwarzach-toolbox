@@ -6,6 +6,8 @@
 
   display: grid;
   grid-template-columns: 200px auto;
+
+  color: var(--on-background);
 }
 
 .main-part:nth-child(2n) {
