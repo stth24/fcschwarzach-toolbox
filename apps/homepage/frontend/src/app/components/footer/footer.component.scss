@@ -3,11 +3,14 @@
   justify-content: center;
   align-items: center;
   gap: 40px;
+  flex-wrap: wrap;
 
   background-color: darkred;
   box-shadow: 0 0 5px #000;
 
   padding: 10px;
+
+  z-index: 20;
 }
 
 .footer-part {
@@ -29,15 +32,31 @@
 
 .link-to-admin {
   color: var(--regular-green);
+  font-weight: bold;
+}
+
+.logo-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 // SLIDER
 /* The switch - the box around the slider */
+// $sliderWidth: 40px;
+:host {
+    --sliderWidth: 40px;
+    --sliderHeight: calc(var(--sliderWidth) * (5/8));
+    --sliderPointSize: calc(var(--sliderHeight) * 0.6);
+    --sliderPointBorderDistance: calc((var(--sliderHeight) - var(--sliderPointSize))/2);
+    --sliderTranslateX: calc(var(--sliderWidth) - var(--sliderPointSize) - (var(--sliderPointBorderDistance) * 2));
+}
+
 .switch {
     position: relative;
     display: inline-block;
-    width: 40px;
-    height: 23px;
+    width: var(--sliderWidth);
+    height: var(--sliderHeight);
 }
 
 /* Hide default HTML checkbox */
@@ -63,10 +82,10 @@
 .slider:before {
     position: absolute;
     content: "";
-    height: 15px;
-    width: 15px;
-    left: 4px;
-    bottom: 4px;
+    height: var(--sliderPointSize);
+    width: var(--sliderPointSize);
+    left: var(--sliderPointBorderDistance);
+    bottom: var(--sliderPointBorderDistance);
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
@@ -80,11 +99,11 @@ input:focus + .slider {
     box-shadow: 0 0 1px var(--dark-blue);
 }
 
-$translateX: 17px;
+
 input:checked + .slider:before {
-    -webkit-transform: translateX($translateX);
-    -ms-transform: translateX($translateX);
-    transform: translateX($translateX);
+    -webkit-transform: translateX(var(--sliderTranslateX));
+    -ms-transform: translateX(var(--sliderTranslateX));
+    transform: translateX(var(--sliderTranslateX));
 }
 
 /* Rounded sliders */
@@ -99,10 +118,10 @@ input:checked + .slider:before {
 
 @media only screen and (max-width: 600px) {
     :host {
-        gap: 20px;
+        gap: 10px 20px;
+        --sliderWidth: 35px;
+        --sliderHeight: calc(var(--sliderWidth) * (1/2));
     }
-
-
 }
 
 
