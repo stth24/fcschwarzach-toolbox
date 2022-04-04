@@ -4,6 +4,11 @@
   gap: 20px;
 }
 
+.game-tile {
+  gap: 5px;
+  padding: 10px 20px;
+}
+
 //we need :nth-child(1n) to override .tile:nth-child(2n) from parent
 .km-game:nth-child(1n) {
   background-color: var(--regular-green);
@@ -12,7 +17,7 @@
 
 .game-title {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .nw-game:nth-child(2n) {
@@ -32,10 +37,8 @@
 
 .location-home {
   border: 10px solid darkred;
-}
 
-@media only screen and (max-width: 600px) {
-  .game-title {
-    font-size: 1rem;
+  .game-location {
+      font-weight: bold;
   }
 }

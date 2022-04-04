@@ -1,5 +1,5 @@
 <ng-container *ngFor="let team of teams">
-    <div class="tile nw-game" 
+    <div class="tile game-tile" 
         [class.km-game]="team.name === 'KM'" 
         [class.nw-game]="team.name !== 'KM' && team.name !== '1b'"
         [class.location-home]="game.location.value.includes('Schwarzach')"
@@ -10,6 +10,6 @@
         <span class="game-date">{{game.dtstart.value | date:'EEEE dd.MM.yyyy'}}</span>
         <span class="game-date">{{game.dtstart.value | date:'HH:mm'}} Uhr</span>
         <hr class="line">
-        <span>{{game.location.value}}</span>
+        <span class="game-location">{{game.location.value}}</span>
     </div>
 </ng-container>
