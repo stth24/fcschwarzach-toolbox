@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { GeneralplanApiService } from '@fcschwarzach/shared-generalplan-api';
 import { environment } from '../../environments/environment';
-import { ClubHistory, Kontakt, Mannschaft, News, NWInfo, Vorstandsmitglied } from '../model/model';
-import { getSingleNewsEntryUrl, GET_HISTORY, GET_KONTAKT, GET_MANNSCHAFTEN, GET_NEWS, GET_NW_INFO, GET_VORSTAND, HOST } from './url';
+import { ClubHistory, Kontakt, Mannschaft, News, NWInfo, Sponsor, Vorstandsmitglied } from '../model/model';
+import { getSingleNewsEntryUrl, GET_HISTORY, GET_KONTAKT, GET_MANNSCHAFTEN, GET_NEWS, GET_NW_INFO, GET_SPONSOREN, GET_VORSTAND, HOST } from './url';
 
 @Injectable({
     providedIn: 'root'
@@ -71,6 +71,20 @@ export class ApiService {
     getMannschaftenFromApi() {
         return new Promise<Mannschaft[]>((resolve, reject) => {
             fetch(GET_MANNSCHAFTEN.toString())
+                .then(res => res.json())
+                .then(res => {
+                    res?.entries.forEach((entry: any) => {
+                        this.changeEntryImagePath(entry);
+                    });
+
+                    resolve(res.entries);
+                });
+        })
+    }
+
+    getSponsorenFromApi() {
+        return new Promise<Sponsor[]>((resolve, reject) => {
+            fetch(GET_SPONSOREN.toString())
                 .then(res => res.json())
                 .then(res => {
                     res?.entries.forEach((entry: any) => {

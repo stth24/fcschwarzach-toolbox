@@ -1,0 +1,11 @@
+<shared-ui-helpers-loader *ngIf="!sponsors || sponsors.length < 1"></shared-ui-helpers-loader>
+
+<div class="sponsor-container">
+    <ng-container *ngIf="sponsors && sponsors.length > 0">
+        <div class="sponsor-tile" *ngFor="let sponsor of sponsors" [title]="sponsor.name">
+            <a class="sponsor-img" [href]="sponsor.url || '#'">
+                <img [src]="sponsor?.image?.path" />
+            </a>
+        </div>
+    </ng-container>
+</div>

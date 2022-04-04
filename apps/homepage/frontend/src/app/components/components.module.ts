@@ -9,6 +9,7 @@ import { NewsItemComponent } from './news-item/news-item.component';
 import { NextKmGamesComponent } from './next-km-games/next-km-games.component';
 import { NextNwGamesComponent } from './next-nw-games/next-nw-games.component';
 import { NewsPageComponent } from './news-page/news-page.component';
+import { SponsorsComponent } from './sponsors/sponsors.component';
 
 
 
@@ -21,7 +22,8 @@ import { NewsPageComponent } from './news-page/news-page.component';
         GameTilesComponent,
         NextNwGamesComponent,
         NewsItemComponent,
-        NewsPageComponent
+        NewsPageComponent,
+        SponsorsComponent
     ],
     imports: [
         CommonModule,

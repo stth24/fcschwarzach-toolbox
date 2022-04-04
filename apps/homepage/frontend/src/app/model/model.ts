@@ -36,6 +36,12 @@ export interface Mannschaft {
     image: Image
 }
 
+export interface Sponsor {
+    name: string,
+    url: string,
+    image: Image
+}
+
 export interface NWInfo {
     text: string,
     name: string,

@@ -13,6 +13,7 @@ export const params = new URLSearchParams({ token: TOKEN });
 export const GET_NEWS = new URL(GET_COLLECTION + '/news');
 export const GET_VORSTAND = new URL(GET_COLLECTION + '/vorstand');
 export const GET_MANNSCHAFTEN = new URL(GET_COLLECTION + '/mannschaften');
+export const GET_SPONSOREN = new URL(GET_COLLECTION + '/sponsors');
 
 export function getSingleNewsEntryUrl(id: string) {
     const url = new URL(GET_COLLECTION + '/news');
@@ -29,9 +30,12 @@ export const GET_KONTAKT = new URL(GET_SINGLETON + '/kontakt');
 export const GET_NW_INFO = new URL(GET_SINGLETON + '/nwinfo');
 
 
-GET_NEWS.search = params.toString();
-GET_HISTORY.search = params.toString();
-GET_VORSTAND.search = params.toString();
-GET_KONTAKT.search = params.toString();
-GET_MANNSCHAFTEN.search = params.toString();
-GET_NW_INFO.search = params.toString();
+[
+    GET_NEWS,
+    GET_HISTORY,
+    GET_VORSTAND,
+    GET_KONTAKT,
+    GET_MANNSCHAFTEN,
+    GET_NW_INFO,
+    GET_SPONSOREN
+].forEach(url => url.search = params.toString());
