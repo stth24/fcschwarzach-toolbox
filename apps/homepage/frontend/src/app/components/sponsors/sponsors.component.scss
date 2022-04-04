@@ -16,7 +16,8 @@
     display: flex;
     height: 100%;
     gap: 20px;
-    animation: slide 60s linear infinite;
+    animation: slide linear infinite;
+    animation-duration: 60s;
 }
 
 .sponsor-tile {
@@ -54,11 +55,8 @@
     0% {
       transform: translateX(0);
     }
-    50% {
-      transform: translateX(-100%);
-    }
     100% {
-        transform: translateX(0);
+      transform: translateX(-50%);
     }
 }
 
