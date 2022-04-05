@@ -13,11 +13,12 @@
 }
 
 .sponsor-container {
-    display: flex;
-    height: 100%;
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min-content, 300px));
     gap: 20px;
-    animation: slide linear infinite;
-    animation-duration: 60s;
+    justify-content: center;
 }
 
 .sponsor-tile {
@@ -35,33 +36,15 @@
     img {
         height: 100%;
         object-fit: contain;
-        -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-        filter: grayscale(100%);
-    
-        transition: all 0.5s;
-    
     }
+
     &:hover {
       cursor: pointer;
-  
-      img {
-          -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
-          filter: grayscale(0%);
-      }
-    }
-}
-
-@keyframes slide {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
     }
 }
 
 @media only screen and (max-width: 600px) {
-    .sponsor-container {
-        animation-duration: 120s;
+    .sponsor-tile {
+        height: 80px;
     }
 }

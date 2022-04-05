@@ -4,7 +4,7 @@
     <ng-container *ngIf="sponsors && sponsors.length > 0">
         <div class="sponsor-tile" *ngFor="let sponsor of sponsors" [title]="sponsor.name">
             <a class="sponsor-img" [href]="sponsor.url || '#'">
-                <img [src]="sponsor?.image?.path" />
+                <img [src]="sponsor?.image?.path" [alt]="sponsor.name" />
             </a>
         </div>
     </ng-container>
