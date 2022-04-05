@@ -9,6 +9,8 @@ import { News } from '../../model/model';
 })
 export class NewsItemComponent {
     @Input() newsItem: News | undefined;
+    @Input() index = 1;
+    @Input() totalNewsItems = 1;
 
     constructor(private router: Router, private route: ActivatedRoute) { }
 
