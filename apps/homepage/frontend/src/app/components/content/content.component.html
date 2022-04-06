@@ -78,7 +78,7 @@
         <div class="part-region-content">
             <h2 class="part-region-content-header">Mannschaften</h2>
             <div class="mannschaften-content">
-                <div class="tile" (click)="navigateToTeamPage(team)" *ngFor="let team of mannschaften">
+                <div class="tile team-tile" (click)="navigateToTeamPage(team)" *ngFor="let team of mannschaften">
                     <span class="tile-title">{{team.name}}</span>
                     <img class="tile-img" [src]="team?.image?.path" />
                 </div>
