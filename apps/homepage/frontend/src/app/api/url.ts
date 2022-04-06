@@ -14,9 +14,21 @@ export const GET_NEWS = new URL(GET_COLLECTION + '/news');
 export const GET_VORSTAND = new URL(GET_COLLECTION + '/vorstand');
 export const GET_MANNSCHAFTEN = new URL(GET_COLLECTION + '/mannschaften');
 export const GET_SPONSOREN = new URL(GET_COLLECTION + '/sponsors');
+export const GET_SPIELER = new URL(GET_COLLECTION + '/spieler');
 
 export function getSingleNewsEntryUrl(id: string) {
     const url = new URL(GET_COLLECTION + '/news');
+
+    return getSingleEntryUrl(id, url);
+}
+
+export function getSingleTeamEntryUrl(id: string) {
+    const url = new URL(GET_COLLECTION + '/mannschaften');
+
+    return getSingleEntryUrl(id, url);
+}
+
+export function getSingleEntryUrl(id: string, url: URL) {
     const queryParams = new URLSearchParams({ token: TOKEN, 'filter[_id]': id });
 
     url.search = queryParams.toString();
@@ -37,5 +49,6 @@ export const GET_NW_INFO = new URL(GET_SINGLETON + '/nwinfo');
     GET_KONTAKT,
     GET_MANNSCHAFTEN,
     GET_NW_INFO,
-    GET_SPONSOREN
+    GET_SPONSOREN,
+    GET_SPIELER
 ].forEach(url => url.search = params.toString());

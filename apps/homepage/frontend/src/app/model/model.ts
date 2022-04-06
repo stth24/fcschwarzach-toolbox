@@ -32,6 +32,18 @@ export interface Kontakt {
 }
 
 export interface Mannschaft {
+    id: string,
+    name: string,
+    image: Image,
+    spieler: {
+        _id: string,
+        link: string,
+        display: string
+    }[]
+}
+
+export interface Spieler {
+    id: string,
     name: string,
     image: Image
 }

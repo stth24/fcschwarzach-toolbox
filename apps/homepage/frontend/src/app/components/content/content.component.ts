@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../api/api.service';
 import { Kontakt, Mannschaft, News, NWInfo, Vorstandsmitglied } from '../../model/model';
 
@@ -19,7 +20,9 @@ export class ContentComponent implements OnInit {
 
     currentNewsElement = 0;
 
-    constructor(private apiService: ApiService) { }
+    constructor(private apiService: ApiService,
+        private router: Router,
+        private route: ActivatedRoute) { }
 
     ngOnInit(): void {
         this.apiService.getNewsFromApi()
@@ -56,5 +59,9 @@ export class ContentComponent implements OnInit {
         if (this.currentNewsElement >= this.news.length) {
             this.currentNewsElement = 0;
         }
+    }
+
+    navigateToTeamPage(team: Mannschaft) {
+        this.router.navigate(['team', team.id], { relativeTo: this.route });
     }
 }
