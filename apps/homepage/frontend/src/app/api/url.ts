@@ -1,6 +1,6 @@
 import { environment } from "../../environments/environment";
 
-export const HOST = !environment.production ? 'http://fcschwarzach.com/' : (window.location.origin + '/');
+export const HOST = !environment.production ? 'https://fcschwarzach.com/' : (window.location.origin + '/');
 export const TOKEN = "ee267dda1fbfde50ed854fb6af19ca";
 export const COCKPIT_URL = HOST + 'cockpit';
 

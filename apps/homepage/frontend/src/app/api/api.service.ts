@@ -9,7 +9,7 @@ import { getSingleNewsEntryUrl, getSingleTeamEntryUrl, GET_HISTORY, GET_KONTAKT,
 })
 export class ApiService {
     private getPrefix(): string {
-        return environment.production ? '' : 'http://fcschwarzach.com'; //'http://localhost';
+        return environment.production ? '' : 'https://fcschwarzach.com'; //'http://localhost';
     }
 
     private changeEntryImagePath(entry: any) {

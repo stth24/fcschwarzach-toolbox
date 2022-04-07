@@ -61,7 +61,8 @@
           "browserTarget": "homepage-frontend:build:production"
         },
         "development": {
-          "browserTarget": "homepage-frontend:build:development"
+          "browserTarget": "homepage-frontend:build:development",
+          "ssl": true
         }
       },
       "defaultConfiguration": "development"
