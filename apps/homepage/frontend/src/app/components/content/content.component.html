@@ -90,8 +90,8 @@
 <!-- KONTAKT -->
 <div class="main-part" id="kontakt" *ngIf="kontakt">
     <h1 class="part-header">Kontakt</h1>
-    <div class="part-content">
-        <div class="part-region-content kontakt-content">
+    <div class="part-content kontakt-content">
+        <div class="part-region-content">
             <p class="main-part-text">
                 {{kontakt?.addresse}}
             </p>
@@ -104,6 +104,17 @@
             <p class="main-part-text">
                 {{kontakt?.phone}}
             </p>
+        </div>
+        <div class="part-region-content maps-embed" *ngIf="kontaktMapsSrc">
+            <iframe
+                class="maps-embed-iframe"
+                height="450"
+                style="border:0"
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"
+                [src]="kontaktMapsSrc">
+          </iframe>
         </div>
     </div>
 </div>

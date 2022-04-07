@@ -143,6 +143,27 @@
  cursor: pointer;
 }
 
+/* KONTAKT */
+.kontakt-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+
+    & p:first-child {
+        margin-top: 0;
+    }
+
+    .maps-embed {
+        display: flex;
+        flex: 1;
+
+        .maps-embed-iframe {
+            flex: 1;
+            min-width: 500px;
+        }
+    }
+} 
+
 @media only screen and (max-width: 1000px) {
   .main-part {
     grid-template-columns: auto;
@@ -162,17 +183,24 @@
   }
 
   .news-part {
-    // override .main-part padding: 20px
     padding: 0;
   }
 }
 
 @media only screen and (max-width: 600px) {
-  .tile {
-    gap: 5px;
-  }
+    .tile {
+        gap: 5px;
+    }
 
-  .part-header {
-    font-size: 1.3rem;
-  }
+    .part-header {
+        font-size: 1.3rem;
+    }
+
+    .kontakt-content {
+        .maps-embed {
+            .maps-embed-iframe {
+                min-width: 300px;
+            }
+        }
+    }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../api/api.service';
 import { Kontakt, Mannschaft, News, NWInfo, Vorstandsmitglied } from '../../model/model';
@@ -20,9 +21,13 @@ export class ContentComponent implements OnInit {
 
     currentNewsElement = 0;
 
+    readonly MAPS_API_KEY = 'AIzaSyDie3e0nW9y2o8IOUUV4XpVg6F3srGfE0w';
+    kontaktMapsSrc: SafeResourceUrl | undefined;
+
     constructor(private apiService: ApiService,
         private router: Router,
-        private route: ActivatedRoute) { }
+        private route: ActivatedRoute,
+        private sanitizer: DomSanitizer) { }
 
     ngOnInit(): void {
         this.apiService.getNewsFromApi()
@@ -42,7 +47,11 @@ export class ContentComponent implements OnInit {
             .then(history => this.historyText = history.text);
 
         this.apiService.getKontaktFromApi()
-            .then(kontakt => this.kontakt = kontakt);
+            .then(kontakt => {
+                this.kontakt = kontakt;
+                const url = `https://www.google.com/maps/embed/v1/place?key=${this.MAPS_API_KEY}&q=${kontakt.addresse.trim().replace(' ', '+')},+${kontakt.plz}+${kontakt.ort}`
+                this.kontaktMapsSrc = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+            });
 
         this.apiService.getMannschaftenFromApi()
             .then(teams => this.mannschaften = teams);
