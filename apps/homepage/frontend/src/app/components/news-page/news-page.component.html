@@ -6,5 +6,5 @@
         <h1>{{newsItem.title}}</h1>
         <span class="news-modified">{{newsItem.modified | date: 'dd.MM.yyyy HH:mm'}} Uhr</span>
     </div>
-    <p class="news-text" [innerText]="newsItem.text"></p>
+    <div class="news-text" [innerHtml]="newsItem.text"></div>
 </div>

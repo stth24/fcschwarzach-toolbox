@@ -29,7 +29,7 @@
     <div class="part-content">
         <div class="part-region-content">
             <h2 class="part-region-content-header">Nachwuchsleitung</h2>
-            <p [innerText]="nwinfo?.text"></p>
+            <div [innerHtml]="nwinfo?.text"></div>
             <div class="funktionen-content">
                 <div class="tile person-item">
                     <span class="tile-title">{{nwinfo?.name}}</span>
@@ -66,7 +66,7 @@
         </div>
         <div class="part-region-content">
             <h2 class="part-region-content-header">Vereinsgeschichte</h2>
-            <p class="main-part-text" id="history-text" [innerText]="historyText"></p>
+            <div class="main-part-text" id="history-text" [innerHtml]="historyText"></div>
         </div>
     </div>
 </div>
