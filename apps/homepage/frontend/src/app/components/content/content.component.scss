@@ -126,7 +126,7 @@
 }
 
 .mannschaften-content {
-  grid-template-columns: repeat(auto-fill, 500px);
+  grid-template-columns: repeat(auto-fill, minmax(min-content, 500px));
 }
 
 .tile-img {
@@ -135,8 +135,7 @@
 
 /* NACHWUCHS & VEREIN */
 .funktionen-content {
-  grid-template-columns: repeat(auto-fill, 300px);
-//   word-wrap: break-word;
+  grid-template-columns: repeat(auto-fill, minmax(min-content, 300px));
 }
 
 // VEREIN
