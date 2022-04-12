@@ -28,18 +28,20 @@
     <h1 class="part-header">Nachwuchs</h1>
     <div class="part-content">
         <div class="part-region-content">
-            <h2 class="part-region-content-header">Nachwuchsleitung</h2>
-            <div [innerHtml]="nwinfo?.text"></div>
-            <div class="funktionen-content">
-                <div class="tile person-item">
-                    <span class="tile-title">{{nwinfo?.name}}</span>
-                    <span>Nachwuchsleiter</span>
-                    <img class="tile-img" [src]="nwinfo?.image?.path" />
-                    <p>
-                        E-Mail: {{nwinfo?.email}}
-                    </p>
+            <ng-container *ngIf="nwinfo">
+                <h2 class="part-region-content-header">Nachwuchsleitung</h2>
+                <div [innerHtml]="nwinfo.text | safeHtml"></div>
+                <div class="funktionen-content">
+                    <div class="tile person-item">
+                        <span class="tile-title">{{nwinfo.name}}</span>
+                        <span>Nachwuchsleiter</span>
+                        <img class="tile-img" [src]="nwinfo.image?.path" />
+                        <p>
+                            E-Mail: {{nwinfo.email}}
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </ng-container>
         </div>
         <div class="part-region-content">
             <h2 class="part-region-content-header">Kommende Spiele</h2>
@@ -66,7 +68,7 @@
         </div>
         <div class="part-region-content">
             <h2 class="part-region-content-header">Vereinsgeschichte</h2>
-            <div class="main-part-text" id="history-text" [innerHtml]="historyText"></div>
+            <div class="main-part-text" id="history-text" [innerHtml]="historyText | safeHtml"></div>
         </div>
     </div>
 </div>

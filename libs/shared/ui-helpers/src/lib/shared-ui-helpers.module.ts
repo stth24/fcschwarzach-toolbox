@@ -4,6 +4,7 @@ import { ConfirmCancelModalComponent } from './confirm-cancel-modal/confirm-canc
 import { ErrorBoxComponent } from './error-box/error-box.component';
 import { LoaderComponent } from './loader/loader.component';
 import { ModalComponent } from './modal/modal.component';
+import { SafeHtmlPipe } from './safe-html-pipe/safe-html.pipe';
 import { ZoomImageComponent } from './zoom-image/zoom-image.component';
 
 @NgModule({
@@ -13,14 +14,16 @@ import { ZoomImageComponent } from './zoom-image/zoom-image.component';
         ModalComponent,
         ErrorBoxComponent,
         ConfirmCancelModalComponent,
-        ZoomImageComponent
+        ZoomImageComponent,
+        SafeHtmlPipe
     ],
     exports: [
         LoaderComponent,
         ModalComponent,
         ErrorBoxComponent,
         ConfirmCancelModalComponent,
-        ZoomImageComponent
+        ZoomImageComponent,
+        SafeHtmlPipe
     ],
 })
 export class SharedUiHelpersModule { }
