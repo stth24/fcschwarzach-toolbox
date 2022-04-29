@@ -28,6 +28,13 @@ export function getSingleTeamEntryUrl(id: string) {
     return getSingleEntryUrl(id, url);
 }
 
+export function getSingleTrainerEntryUrl(id: string) {
+    const url = new URL(GET_COLLECTION + '/trainer');
+
+    return getSingleEntryUrl(id, url);
+}
+
+
 export function getSingleEntryUrl(id: string, url: URL) {
     const queryParams = new URLSearchParams({ token: TOKEN, 'filter[_id]': id });
 

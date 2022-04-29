@@ -4,14 +4,31 @@
     <img class="team-img" [src]="teamItem.image.path" />
     <div class="team-content">
         <h1>{{teamItem.name}}</h1>
-        <div class="player-grid" *ngIf="spieler.length > 0">
-            <div class="player-card" *ngFor="let player of spieler">
-                <img class="player-img" [src]="player.image.path" />
-                <div class="player-name">
-                    <div class="player-name-text">{{player.name}}</div>
+        <ng-container *ngIf="trainer">
+            <h1>Trainer</h1>
+            <div class="trainer-tile">
+                <span class="trainer-name">{{trainer.name}}</span>
+                <img class="trainer-img" [src]="trainer.image?.path" />
+                <span>
+                    E-Mail: {{trainer.email}}
+                </span>
+                <span>
+                    Tel.: {{trainer.phone}}
+                </span>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="spieler.length > 0">
+            <h1>Spieler</h1>
+            <div class="player-grid" >
+                <div class="player-card" *ngFor="let player of spieler">
+                    <img class="player-img" [src]="player.image.path" />
+                    <div class="player-name">
+                        <div class="player-name-text">{{player.name}}</div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </ng-container>
     </div>
 </ng-container>
 

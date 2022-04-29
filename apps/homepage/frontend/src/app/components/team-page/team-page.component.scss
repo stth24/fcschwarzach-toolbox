@@ -16,6 +16,28 @@
     gap: 20px;
 }
 
+.trainer-tile {
+    background-color: lightgray;
+    color: black;
+
+    padding: 10px 20px;
+    max-width: 260px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+    .trainer-name {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .trainer-img {
+        width: 100%;
+        object-fit: contain;
+    }
+}
+
 .player-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min-content, 300px));
