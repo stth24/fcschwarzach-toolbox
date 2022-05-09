@@ -6,9 +6,12 @@
     <span>Dark Mode</span>
 </div>
 
-<span class="footer-part clickable">Impressum</span>
-<!-- Statuten als Download -->
-<span class="footer-part clickable">Statuten</span>
+<span class="footer-part clickable">
+    <a [href]="documentsInfo?.impressum" target="blank">Impressum</a>
+</span>
+<span class="footer-part clickable">
+    <a [href]="documentsInfo?.statuten" target="blank">Statuten</a>
+</span>
 
 <div class="logo-links">
     <a href="https://www.instagram.com/fc_schwarzach/" target="blank">

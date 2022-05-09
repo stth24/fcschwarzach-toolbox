@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { GeneralplanApiService } from '@fcschwarzach/shared-generalplan-api';
 import { environment } from '../../environments/environment';
-import { ClubHistory, Kontakt, Mannschaft, News, NWInfo, Spieler, Sponsor, Trainer, Vorstandsmitglied } from '../model/model';
-import { getSingleNewsEntryUrl, getSingleTeamEntryUrl, getSingleTrainerEntryUrl, GET_HISTORY, GET_KONTAKT, GET_MANNSCHAFTEN, GET_NEWS, GET_NW_INFO, GET_SPIELER, GET_SPONSOREN, GET_VORSTAND, HOST } from './url';
+import { Asset, ClubHistory, DocumentInfo, Kontakt, Mannschaft, News, NWInfo, Spieler, Sponsor, Trainer, Vorstandsmitglied } from '../model/model';
+import { getSingleNewsEntryUrl, getSingleTeamEntryUrl, getSingleTrainerEntryUrl, GET_DOCOUMENTS_INFO, GET_HISTORY, GET_KONTAKT, GET_MANNSCHAFTEN, GET_NEWS, GET_NW_INFO, GET_SPIELER, GET_SPONSOREN, GET_VORSTAND, HOST } from './url';
 
 @Injectable({
     providedIn: 'root'
@@ -12,10 +12,14 @@ export class ApiService {
         return environment.production ? '' : 'https://fcschwarzach.com'; //'http://localhost';
     }
 
-    private changeEntryImagePath(entry: any) {
+    private changeEntryImagePath(entry: { image: Asset }) {
         if (entry?.image?.path) {
-            entry.image.path = HOST + entry.image.path
+            entry.image.path = this.changeAssetPath(entry.image.path);
         }
+    }
+
+    private changeAssetPath(assetPath: string) {
+        return HOST + assetPath;
     }
 
     constructor(private generalplanApiService: GeneralplanApiService) { }
@@ -168,6 +172,19 @@ export class ApiService {
                 .then(res => res.json())
                 .then(res => {
                     this.changeEntryImagePath(res);
+
+                    resolve(res);
+                });
+        })
+    }
+
+    getDocumentsFromApi() {
+        return new Promise<DocumentInfo>((resolve, reject) => {
+            fetch(GET_DOCOUMENTS_INFO.toString())
+                .then(res => res.json())
+                .then((res: DocumentInfo) => {
+                    if (res?.impressum) res.impressum = this.changeAssetPath(res.impressum);
+                    if (res?.statuten) res.statuten = this.changeAssetPath(res.statuten);
 
                     resolve(res);
                 });

@@ -47,6 +47,7 @@ export function getSingleEntryUrl(id: string, url: URL) {
 export const GET_HISTORY = new URL(GET_SINGLETON + '/history');
 export const GET_KONTAKT = new URL(GET_SINGLETON + '/kontakt');
 export const GET_NW_INFO = new URL(GET_SINGLETON + '/nwinfo');
+export const GET_DOCOUMENTS_INFO = new URL(GET_SINGLETON + '/documents');
 
 
 [
@@ -57,5 +58,6 @@ export const GET_NW_INFO = new URL(GET_SINGLETON + '/nwinfo');
     GET_MANNSCHAFTEN,
     GET_NW_INFO,
     GET_SPONSOREN,
-    GET_SPIELER
+    GET_SPIELER,
+    GET_DOCOUMENTS_INFO
 ].forEach(url => url.search = params.toString());

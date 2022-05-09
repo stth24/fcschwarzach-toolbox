@@ -1,4 +1,4 @@
-export interface Image {
+export interface Asset {
     path: string
 }
 
@@ -12,7 +12,7 @@ export interface News {
     id: string,
     title: string,
     text: string,
-    image: Image,
+    image: Asset,
     modified: Date
 }
 
@@ -25,7 +25,7 @@ export interface Vorstandsmitglied {
     funktion: string,
     email: string,
     phone: string,
-    image: Image,
+    image: Asset,
     prio: string
 }
 
@@ -40,7 +40,7 @@ export interface Kontakt {
 export interface Mannschaft {
     id: string,
     name: string,
-    image: Image,
+    image: Asset,
     spieler: CollectionLink[],
     trainer?: CollectionLink
 }
@@ -48,13 +48,13 @@ export interface Mannschaft {
 export interface Spieler {
     id: string,
     name: string,
-    image: Image
+    image: Asset
 }
 
 export interface Trainer {
     id: string,
     name: string,
-    image: Image,
+    image: Asset,
     phone: string,
     email: string
 }
@@ -62,12 +62,17 @@ export interface Trainer {
 export interface Sponsor {
     name: string,
     url: string,
-    image: Image
+    image: Asset
 }
 
 export interface NWInfo {
     text: string,
     name: string,
-    image: Image,
+    image: Asset,
     email: string
+}
+
+export interface DocumentInfo {
+    statuten: string,
+    impressum: string
 }
