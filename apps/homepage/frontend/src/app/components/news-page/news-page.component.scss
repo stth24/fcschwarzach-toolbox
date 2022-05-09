@@ -12,13 +12,13 @@
 }
 
 .news-pic {
-  max-height: 650px;
   object-fit: cover;
 }
 
 .header,
 .news-text {
   padding: 0 10%;
+  word-wrap: break-word;
 }
 
 @media only screen and (max-width: 1000px) {
