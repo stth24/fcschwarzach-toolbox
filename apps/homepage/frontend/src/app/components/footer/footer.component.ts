@@ -25,11 +25,7 @@ export class FooterComponent implements OnInit {
             .then(docs => this.documentsInfo = docs)
 
         this.apiService.getSocialMediaLinks()
-            .then(links => {
-                console.log('LINKS', links);
-
-                this.socialMediaLinks = links
-            });
+            .then(links => this.socialMediaLinks = links);
     }
 
     toggleDarkMode() {
