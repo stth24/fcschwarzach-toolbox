@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ApiService } from '../../api/api.service';
 import { COCKPIT_URL } from '../../api/url';
-import { DocumentInfo } from '../../model/model';
+import { DocumentInfo, SocialMediaLinks } from '../../model/model';
 
 @Component({
     selector: 'app-footer',
@@ -16,12 +16,20 @@ export class FooterComponent implements OnInit {
     COCKPIT_URL = COCKPIT_URL;
 
     documentsInfo: DocumentInfo | undefined;
+    socialMediaLinks: SocialMediaLinks | undefined;
 
     constructor(private apiService: ApiService) { }
 
     ngOnInit() {
         this.apiService.getDocumentsFromApi()
             .then(docs => this.documentsInfo = docs)
+
+        this.apiService.getSocialMediaLinks()
+            .then(links => {
+                console.log('LINKS', links);
+
+                this.socialMediaLinks = links
+            });
     }
 
     toggleDarkMode() {

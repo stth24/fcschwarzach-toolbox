@@ -13,14 +13,14 @@
     <a [href]="documentsInfo?.statuten" target="blank">Statuten</a>
 </span>
 
-<div class="logo-links">
-    <a href="https://www.instagram.com/fc_schwarzach/" target="blank">
+<div class="logo-links" *ngIf="socialMediaLinks">
+    <a [href]="socialMediaLinks.instagram" target="blank">
         <img class="footer-part clickable" src="assets/insta_logo_white.png" width="20px" />
     </a>
-    <a href="https://www.facebook.com/fcschwarzach1955"  target="blank">
+    <a [href]="socialMediaLinks.facebook" target="blank">
         <img class="footer-part clickable" src="assets/fb_logo_white.png" width="20px" />
     </a>
-    <a href="https://github.com/stth24/fcschwarzach-toolbox" target="blank">
+    <a [href]="socialMediaLinks.github" target="blank">
         <img class="footer-part clickable" src="assets/github_logo_white.png" width="20px" />
     </a>
 </div>

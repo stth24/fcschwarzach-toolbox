@@ -76,3 +76,9 @@ export interface DocumentInfo {
     statuten: string,
     impressum: string
 }
+
+export interface SocialMediaLinks {
+    instagram: string,
+    facebook: string,
+    github: string
+}
