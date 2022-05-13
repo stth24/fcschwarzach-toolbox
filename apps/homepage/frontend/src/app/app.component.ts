@@ -1,23 +1,19 @@
-import { AfterViewInit, Component, ElementRef } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent {
     title = 'homepage-frontend';
 
-    darkMode = true;
+    darkMode = false;
 
     element: HTMLElement;
 
     constructor(elementRef: ElementRef) {
         this.element = elementRef.nativeElement;
-    }
-
-    ngAfterViewInit() {
-        this.element.classList.add('dark-mode');
     }
 
     toggleDarkMode() {
