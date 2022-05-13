@@ -1,4 +1,5 @@
 import { Component, ElementRef } from '@angular/core';
+import { ApiService } from './api/api.service';
 
 @Component({
     selector: 'app-root',
@@ -10,10 +11,17 @@ export class AppComponent {
 
     darkMode = false;
 
+    apiTokenLoaded = false;
+
     element: HTMLElement;
 
-    constructor(elementRef: ElementRef) {
+    constructor(elementRef: ElementRef, private apiService: ApiService) {
         this.element = elementRef.nativeElement;
+    }
+
+    ngOnInit() {
+        this.apiService.getApiToken()
+            .then(() => this.apiTokenLoaded = true);
     }
 
     toggleDarkMode() {

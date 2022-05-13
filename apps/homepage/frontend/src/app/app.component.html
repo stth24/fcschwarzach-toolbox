@@ -1,8 +1,11 @@
-<app-header></app-header>
+<ng-container *ngIf="apiTokenLoaded">
+    <app-header></app-header>
 
-<div class="main">
-    <!-- <app-content></app-content> -->
-    <router-outlet></router-outlet>
-</div>
+    <div class="main">
+        <router-outlet></router-outlet>
+    </div>
 
-<app-footer [darkMode]="darkMode" (toggleMode)="toggleDarkMode()"></app-footer>
+    <app-footer [darkMode]="darkMode" (toggleMode)="toggleDarkMode()"></app-footer>
+</ng-container>
+
+<shared-ui-helpers-loader *ngIf="!apiTokenLoaded"></shared-ui-helpers-loader>

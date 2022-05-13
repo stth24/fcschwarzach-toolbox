@@ -21,7 +21,6 @@ export class ContentComponent implements OnInit {
 
     currentNewsElement = 0;
 
-    readonly MAPS_API_KEY = 'AIzaSyDie3e0nW9y2o8IOUUV4XpVg6F3srGfE0w';
     kontaktMapsSrc: SafeResourceUrl | undefined;
 
     constructor(private apiService: ApiService,
@@ -49,8 +48,12 @@ export class ContentComponent implements OnInit {
         this.apiService.getKontaktFromApi()
             .then(kontakt => {
                 this.kontakt = kontakt;
-                const url = `https://www.google.com/maps/embed/v1/place?key=${this.MAPS_API_KEY}&q=${kontakt.addresse.trim().replace(' ', '+')},+${kontakt.plz}+${kontakt.ort}`
-                this.kontaktMapsSrc = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+
+                this.apiService.getGoogleDevToken()
+                    .then(token => {
+                        const url = `https://www.google.com/maps/embed/v1/place?key=${token}&q=${kontakt.addresse.trim().replace(' ', '+')},+${kontakt.plz}+${kontakt.ort}`
+                        this.kontaktMapsSrc = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+                    })
             });
 
         this.apiService.getMannschaftenFromApi()

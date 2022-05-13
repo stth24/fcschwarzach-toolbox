@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { GeneralplanApiService } from '@fcschwarzach/shared-generalplan-api';
 import { environment } from '../../environments/environment';
 import { Asset, ClubHistory, DocumentInfo, Kontakt, Mannschaft, News, NWInfo, Spieler, Sponsor, Trainer, Vorstandsmitglied } from '../model/model';
-import { getSingleNewsEntryUrl, getSingleTeamEntryUrl, getSingleTrainerEntryUrl, GET_DOCOUMENTS_INFO, GET_HISTORY, GET_KONTAKT, GET_MANNSCHAFTEN, GET_NEWS, GET_NW_INFO, GET_SPIELER, GET_SPONSOREN, GET_VORSTAND, HOST } from './url';
+import { addApiTokenToURLs, getSingleNewsEntryUrl, getSingleTeamEntryUrl, getSingleTrainerEntryUrl, GET_API_TOKEN, GET_DOCOUMENTS_INFO, GET_GOOGLE_DEV_TOKEN, GET_HISTORY, GET_KONTAKT, GET_MANNSCHAFTEN, GET_NEWS, GET_NW_INFO, GET_SPIELER, GET_SPONSOREN, GET_VORSTAND, HOST } from './url';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ApiService {
+    apiToken = '';
+
     private getPrefix(): string {
         return environment.production ? '' : 'https://fcschwarzach.com'; //'http://localhost';
     }
@@ -30,6 +32,28 @@ export class ApiService {
         entry.modified = new Date(entry._modified * 1000)
     }
 
+    getApiToken() {
+        return new Promise<void>((resolve) => {
+            fetch(GET_API_TOKEN)
+                .then(res => res.text())
+                .then(token => {
+                    this.apiToken = token;
+                    addApiTokenToURLs(this.apiToken);
+                    resolve();
+                });
+        })
+    }
+
+    getGoogleDevToken() {
+        return new Promise<string>((resolve) => {
+            fetch(GET_GOOGLE_DEV_TOKEN)
+                .then(res => res.text())
+                .then(token => {
+                    resolve(token);
+                });
+        })
+    }
+
     getNewsFromApi() {
         return new Promise<News[]>((resolve, reject) => {
             fetch(GET_NEWS.toString())
@@ -46,7 +70,7 @@ export class ApiService {
 
     getSingleNewsEntryFromApi(newsId: string) {
         return new Promise<News>((resolve, reject) => {
-            fetch(getSingleNewsEntryUrl(newsId).toString())
+            fetch(getSingleNewsEntryUrl(newsId, this.apiToken).toString())
                 .then(res => res.json())
                 .then(res => {
                     res?.entries.forEach((entry: any) => {
@@ -89,7 +113,7 @@ export class ApiService {
 
     getSingleMannschaftEntryFromApi(teamId: string) {
         return new Promise<Mannschaft>((resolve, reject) => {
-            fetch(getSingleTeamEntryUrl(teamId).toString())
+            fetch(getSingleTeamEntryUrl(teamId, this.apiToken).toString())
                 .then(res => res.json())
                 .then(res => {
                     res?.entries.forEach((entry: any) => {
@@ -119,7 +143,7 @@ export class ApiService {
 
     getSingleTrainerFromApi(trainerId: string) {
         return new Promise<Trainer>((resolve, reject) => {
-            fetch(getSingleTrainerEntryUrl(trainerId).toString())
+            fetch(getSingleTrainerEntryUrl(trainerId, this.apiToken).toString())
                 .then(res => res.json())
                 .then(res => {
                     res?.entries.forEach((entry: any) => {

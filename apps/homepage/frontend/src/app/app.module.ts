@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
+import { SharedUiHelpersModule } from '@fcschwarzach/shared-ui-helpers';
 import { AppComponent } from './app.component';
 import { ComponentsModule } from './components/components.module';
 import { ContentComponent } from './components/content/content.component';
@@ -38,7 +39,8 @@ const routes: Routes = [
     imports: [
         BrowserModule,
         ComponentsModule,
-        RouterModule.forRoot(routes)
+        RouterModule.forRoot(routes),
+        SharedUiHelpersModule
     ],
     providers: [],
     bootstrap: [

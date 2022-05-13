@@ -1,13 +1,13 @@
 import { environment } from "../../environments/environment";
 
 export const HOST = !environment.production ? 'https://fcschwarzach.com/' : (window.location.origin + '/');
-export const TOKEN = "ee267dda1fbfde50ed854fb6af19ca";
+export const GET_API_TOKEN = HOST + 'api/admin/api-token.php';
+export const GET_GOOGLE_DEV_TOKEN = HOST + 'api/admin/google-dev-token.php';
 export const COCKPIT_URL = HOST + 'cockpit';
 
 export const GET_URL = COCKPIT_URL + "/api";
 export const GET_COLLECTION = GET_URL + '/collections/get';
 export const GET_SINGLETON = GET_URL + '/singletons/get';
-export const params = new URLSearchParams({ token: TOKEN });
 
 // collections
 export const GET_NEWS = new URL(GET_COLLECTION + '/news');
@@ -16,27 +16,27 @@ export const GET_MANNSCHAFTEN = new URL(GET_COLLECTION + '/mannschaften');
 export const GET_SPONSOREN = new URL(GET_COLLECTION + '/sponsors');
 export const GET_SPIELER = new URL(GET_COLLECTION + '/spieler');
 
-export function getSingleNewsEntryUrl(id: string) {
+export function getSingleNewsEntryUrl(id: string, token: string) {
     const url = new URL(GET_COLLECTION + '/news');
 
-    return getSingleEntryUrl(id, url);
+    return getSingleEntryUrl(id, url, token);
 }
 
-export function getSingleTeamEntryUrl(id: string) {
+export function getSingleTeamEntryUrl(id: string, token: string) {
     const url = new URL(GET_COLLECTION + '/mannschaften');
 
-    return getSingleEntryUrl(id, url);
+    return getSingleEntryUrl(id, url, token);
 }
 
-export function getSingleTrainerEntryUrl(id: string) {
+export function getSingleTrainerEntryUrl(id: string, token: string) {
     const url = new URL(GET_COLLECTION + '/trainer');
 
-    return getSingleEntryUrl(id, url);
+    return getSingleEntryUrl(id, url, token);
 }
 
 
-export function getSingleEntryUrl(id: string, url: URL) {
-    const queryParams = new URLSearchParams({ token: TOKEN, 'filter[_id]': id });
+export function getSingleEntryUrl(id: string, url: URL, token: string) {
+    const queryParams = new URLSearchParams({ token, 'filter[_id]': id });
 
     url.search = queryParams.toString();
 
@@ -50,14 +50,18 @@ export const GET_NW_INFO = new URL(GET_SINGLETON + '/nwinfo');
 export const GET_DOCOUMENTS_INFO = new URL(GET_SINGLETON + '/documents');
 
 
-[
-    GET_NEWS,
-    GET_HISTORY,
-    GET_VORSTAND,
-    GET_KONTAKT,
-    GET_MANNSCHAFTEN,
-    GET_NW_INFO,
-    GET_SPONSOREN,
-    GET_SPIELER,
-    GET_DOCOUMENTS_INFO
-].forEach(url => url.search = params.toString());
+export function addApiTokenToURLs(token: string) {
+    const params = new URLSearchParams({ token });
+
+    [
+        GET_NEWS,
+        GET_HISTORY,
+        GET_VORSTAND,
+        GET_KONTAKT,
+        GET_MANNSCHAFTEN,
+        GET_NW_INFO,
+        GET_SPONSOREN,
+        GET_SPIELER,
+        GET_DOCOUMENTS_INFO
+    ].forEach(url => url.search = params.toString());
+}
