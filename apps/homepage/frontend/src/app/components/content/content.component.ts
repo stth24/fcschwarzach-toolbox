@@ -31,9 +31,9 @@ export class ContentComponent implements OnInit {
     ngOnInit(): void {
         this.apiService.getNewsFromApi()
             .then(news => {
-                news.sort((a, b) => a.modified > b.modified ? -1 : 1)
-
-                this.news = news;
+                this.news = news
+                    .filter(n => n.active)
+                    .sort((a, b) => a.modified > b.modified ? -1 : 1)
             });
 
         this.apiService.getVorstandFromApi()

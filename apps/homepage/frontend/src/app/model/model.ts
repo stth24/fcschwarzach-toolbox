@@ -13,7 +13,8 @@ export interface News {
     title: string,
     text: string,
     image: Asset,
-    modified: Date
+    modified: Date,
+    active: boolean
 }
 
 export interface ClubHistory {
