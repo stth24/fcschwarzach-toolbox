@@ -73,12 +73,14 @@ export class ApiService {
             fetch(getSingleNewsEntryUrl(newsId, this.apiToken).toString())
                 .then(res => res.json())
                 .then(res => {
+                    if (res.entries.length === 0) reject();
+
                     res?.entries.forEach((entry: any) => {
                         this.transformEntryToNewsItem(entry);
                     });
 
                     resolve(res?.entries[0]);
-                });
+                })
         })
     }
 
@@ -116,6 +118,8 @@ export class ApiService {
             fetch(getSingleTeamEntryUrl(teamId, this.apiToken).toString())
                 .then(res => res.json())
                 .then(res => {
+                    if (res.entries.length === 0) reject();
+
                     res?.entries.forEach((entry: any) => {
                         entry.id = entry._id;
                         this.changeEntryImagePath(entry);

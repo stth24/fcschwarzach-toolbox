@@ -1,34 +1,44 @@
-<shared-ui-helpers-loader *ngIf="!teamItem"></shared-ui-helpers-loader>
+<ng-container *ngIf="!notFound else notFoundBlock">
+    <shared-ui-helpers-loader *ngIf="!teamItem"></shared-ui-helpers-loader>
 
-<ng-container *ngIf="teamItem">
-    <img class="team-img" [src]="teamItem.image.path" />
-    <div class="team-content">
-        <h1>{{teamItem.name}}</h1>
-        <ng-container *ngIf="trainer">
-            <h1>Trainer</h1>
-            <div class="trainer-tile">
-                <span class="trainer-name">{{trainer.name}}</span>
-                <img class="trainer-img" [src]="trainer.image?.path" />
-                <span>
-                    E-Mail: {{trainer.email}}
-                </span>
-                <span>
-                    Tel.: {{trainer.phone}}
-                </span>
-            </div>
-        </ng-container>
+    <ng-container *ngIf="teamItem">
+        <img class="team-img" [src]="teamItem.image.path" />
+        <div class="team-content">
+            <h1>{{teamItem.name}}</h1>
+            <ng-container *ngIf="trainer">
+                <h1>Trainer</h1>
+                <div class="trainer-tile">
+                    <span class="trainer-name">{{trainer.name}}</span>
+                    <img class="trainer-img" [src]="trainer.image?.path" />
+                    <span>
+                        E-Mail: {{trainer.email}}
+                    </span>
+                    <span>
+                        Tel.: {{trainer.phone}}
+                    </span>
+                </div>
+            </ng-container>
 
-        <ng-container *ngIf="spieler.length > 0">
-            <h1>Spieler</h1>
-            <div class="player-grid" >
-                <div class="player-card" *ngFor="let player of spieler">
-                    <img class="player-img" [src]="player.image.path" />
-                    <div class="player-name">
-                        <div class="player-name-text">{{player.name}}</div>
+            <ng-container *ngIf="spieler.length > 0">
+                <h1>Spieler</h1>
+                <div class="player-grid" >
+                    <div class="player-card" *ngFor="let player of spieler">
+                        <img class="player-img" [src]="player.image.path" />
+                        <div class="player-name">
+                            <div class="player-name-text">{{player.name}}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </ng-container>
-    </div>
+            </ng-container>
+        </div>
+    </ng-container>
 </ng-container>
+
+
+<ng-template #notFoundBlock>
+    <div class="not-found">
+        <h1>Sorry, es scheint keinen Team-Eintrag unter dieser URL zu geben!</h1>
+        <h2><a href="#news" class="clickable-link">Zurück zur Startseite</a></h2>
+    </div>
+</ng-template>
 

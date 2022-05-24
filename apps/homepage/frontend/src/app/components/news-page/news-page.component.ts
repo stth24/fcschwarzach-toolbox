@@ -15,6 +15,7 @@ export class NewsPageComponent implements OnInit, OnDestroy {
     private unsubscribe = new Subject<void>();
 
     newsItem: News | undefined;
+    notFound = false;
 
     constructor(private route: ActivatedRoute, private apiService: ApiService) { }
 
@@ -26,6 +27,7 @@ export class NewsPageComponent implements OnInit, OnDestroy {
                 if (typeof newsId === 'string') {
                     this.apiService.getSingleNewsEntryFromApi(newsId)
                         .then(entry => this.newsItem = entry)
+                        .catch(() => this.notFound = true);
                 }
             })
     }

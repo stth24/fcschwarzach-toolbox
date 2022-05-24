@@ -19,6 +19,8 @@ export class TeamPageComponent implements OnInit {
     spieler: Spieler[] = [];
     trainer: Trainer | undefined;
 
+    notFound = false;
+
     constructor(private route: ActivatedRoute, private apiService: ApiService) { }
 
     ngOnInit(): void {
@@ -50,6 +52,7 @@ export class TeamPageComponent implements OnInit {
                                     .then(trainer => this.trainer = trainer);
                             }
                         })
+                        .catch(() => this.notFound = true)
                 }
             })
     }

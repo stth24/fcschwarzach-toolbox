@@ -21,6 +21,18 @@
   word-wrap: break-word;
 }
 
+.not-found {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    padding: 20px;
+
+    .clickable-link:hover {
+        text-decoration: underline;
+    }
+}
+
 @media only screen and (max-width: 1000px) {
   .header,
   .news-text {
