@@ -39,7 +39,7 @@ const routes: Routes = [
     imports: [
         BrowserModule,
         ComponentsModule,
-        RouterModule.forRoot(routes),
+        RouterModule.forRoot(routes, { useHash: true }),
         SharedUiHelpersModule
     ],
     providers: [],
