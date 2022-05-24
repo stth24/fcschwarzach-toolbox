@@ -1,0 +1,44 @@
+:host {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min-content, 300px));
+  gap: 20px;
+}
+
+.game-tile {
+  gap: 5px;
+  padding: 10px 20px;
+}
+
+//we need :nth-child(1n) to override .tile:nth-child(2n) from parent
+.km-game:nth-child(1n) {
+  background-color: var(--regular-green);
+  color: black;
+}
+
+.game-title {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.nw-game:nth-child(2n) {
+  background-color: var(--medium-blue);
+  color: black;
+}
+
+.line {
+  width: 100%;
+  border: 1px solid var(--dark-blue);
+  margin: 2px 0;
+}
+
+.game-date {
+  font-weight: bold;
+}
+
+.location-home {
+  border: 10px solid darkred;
+
+  .game-location {
+      font-weight: bold;
+  }
+}

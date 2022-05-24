@@ -1,0 +1,130 @@
+<!-- NEWS -->
+<div class="main-part news-part" id="news">
+    <div class="part-content news-content" id="news-content">
+        <shared-ui-helpers-loader *ngIf="!news || news.length < 1"></shared-ui-helpers-loader>
+        <ng-container *ngIf="news && news.length > 0">
+            <div class="nav-left-button" (click)="scrollSlider(true)"> < </div>
+            <ng-container *ngFor="let item of news, let i = index">
+                <app-news-item [newsItem]="item" [index]="i" [totalNewsItems]="news.length" *ngIf="i === currentNewsElement"></app-news-item>
+            </ng-container>
+            <div class="nav-right-button" (click)="scrollSlider(false)"> > </div>
+        </ng-container>
+    </div>
+</div>
+
+<!-- KM -->
+<div class="main-part" id="km">
+    <h1 class="part-header">KM</h1>
+    <div class="part-content verein-content">
+        <div class="part-region-content">
+            <h2 class="part-region-content-header">Kommende Spiele</h2>
+            <h3 class="part-region-content-header"><a href="/toolbox/?nav=generalplan" class="clickable-link">&#9654; Ganzen Spielplan anzeigen</a></h3>
+            <app-next-km-games></app-next-km-games>
+        </div>
+    </div>
+</div>
+
+<!-- NACHWUCHS -->
+<div class="main-part" id="nachwuchs">
+    <h1 class="part-header">Nachwuchs</h1>
+    <div class="part-content">
+        <div class="part-region-content">
+            <ng-container *ngIf="nwinfo">
+                <h2 class="part-region-content-header">Nachwuchsleitung</h2>
+                <div [innerHtml]="nwinfo.text | safeHtml"></div>
+                <div class="funktionen-content">
+                    <div class="tile person-item">
+                        <span class="tile-title">{{nwinfo.name}}</span>
+                        <span>Nachwuchsleiter</span>
+                        <img class="tile-img" [src]="nwinfo.image?.path" />
+                        <p>
+                            E-Mail: {{nwinfo.email}}
+                        </p>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div class="part-region-content">
+            <h2 class="part-region-content-header">Kommende Spiele</h2>
+            <h3 class="part-region-content-header"><a href="/toolbox/?nav=generalplan" class="clickable-link">&#9654; Ganzen Spielplan anzeigen</a></h3>
+            <app-next-nw-games></app-next-nw-games>
+        </div>
+    </div>
+</div>
+
+<!-- VEREIN -->
+<div class="main-part" id="verein">
+    <h1 class="part-header">Verein</h1>
+    <div class="part-content">
+        <div class="part-region-content verein-content">
+            <h2 class="part-region-content-header">Funktionäre:</h2>
+            <div class="funktionen-content">
+                <div class="tile person-item" *ngFor="let person of vorstand">
+                    <span class="tile-title">{{person.name}}</span>
+                    <span>{{person.funktion}}</span>
+                    <img class="tile-img" [src]="person?.image?.path" />
+                    <span>{{person.email}}</span>
+                    <span>{{person.phone}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="part-region-content">
+            <h2 class="part-region-content-header">Vereinsgeschichte</h2>
+            <div class="main-part-text" id="history-text" [innerHtml]="historyText | safeHtml"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TEAMS -->
+<div class="main-part" id="teams">
+    <h1 class="part-header">Teams</h1>
+    <div class="part-content">
+        <div class="part-region-content">
+            <h2 class="part-region-content-header">Mannschaften</h2>
+            <div class="mannschaften-content">
+                <div class="tile team-tile" (click)="navigateToTeamPage(team)" *ngFor="let team of mannschaften">
+                    <span class="tile-title">{{team.name}}</span>
+                    <img class="tile-img" [src]="team?.image?.path" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- KONTAKT -->
+<div class="main-part" id="kontakt" *ngIf="kontakt">
+    <h1 class="part-header">Kontakt</h1>
+    <div class="part-content kontakt-content">
+        <div class="part-region-content">
+            <p class="main-part-text">
+                {{kontakt?.addresse}}
+            </p>
+            <p class="main-part-text">
+                {{kontakt?.plz}} {{kontakt?.ort}}
+            </p>
+            <p class="main-part-text">
+                {{kontakt?.email}}
+            </p>
+            <p class="main-part-text">
+                {{kontakt?.phone}}
+            </p>
+        </div>
+        <div class="part-region-content maps-embed" *ngIf="kontaktMapsSrc">
+            <iframe
+                class="maps-embed-iframe"
+                height="450"
+                style="border:0"
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"
+                [src]="kontaktMapsSrc">
+          </iframe>
+        </div>
+    </div>
+</div>
+
+<!-- SPONSOREN -->
+<div class="main-part" id="sponsoren">
+    <h1 class="part-header">Sponsoren</h1>
+        <app-sponsors></app-sponsors>
+</div>

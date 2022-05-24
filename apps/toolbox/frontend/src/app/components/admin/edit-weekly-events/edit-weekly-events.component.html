@@ -1,4 +1,4 @@
-<app-loader *ngIf="events === undefined"></app-loader>
+<shared-ui-helpers-loader *ngIf="events === undefined"></shared-ui-helpers-loader>
 
 <ng-container *ngIf="events !== undefined">
     <h1>Wöchentliche Events bearbeiten:</h1>
@@ -46,13 +46,13 @@
 </ng-container>
 
 <!-- Delete Event -->
-<app-confirm-cancel-modal *ngIf="showDeleteEventModal"
+<shared-ui-helpers-confirm-cancel-modal *ngIf="showDeleteEventModal"
     [message]="'Event-Typ ' + selectedEvent?.name + ' wirklich löschen?'"
     (close)="onCloseDeleteEventModal($event)" >
-</app-confirm-cancel-modal>
+</shared-ui-helpers-confirm-cancel-modal>
 
 <!-- Add Event -->
-<app-modal *ngIf="showAddEventModal">
+<shared-ui-helpers-modal *ngIf="showAddEventModal">
     <div class="add-event-modal">
         <h2>Event-Typ hinzufügen</h2>
 
@@ -63,16 +63,16 @@
             <button (click)="showAddEventModal = false">Abbrechen</button>
         </div>
     </div>
-</app-modal>
+</shared-ui-helpers-modal>
 
 <!-- Delete Time Detail -->
-<app-confirm-cancel-modal *ngIf="timeDetailToDelete"
+<shared-ui-helpers-confirm-cancel-modal *ngIf="timeDetailToDelete"
     [message]="'Event wirklich löschen?'"
     (close)="onCloseDeleteTimeDetailModal($event)" >
-</app-confirm-cancel-modal>
+</shared-ui-helpers-confirm-cancel-modal>
 
 <!-- Add Time Detail -->
-<app-modal *ngIf="newTimeDetail">
+<shared-ui-helpers-modal *ngIf="newTimeDetail">
     <div class="add-detail-modal">
         <h2>Event hinzufügen</h2>
 
@@ -88,7 +88,7 @@
             <button (click)="newTimeDetail = undefined">Abbrechen</button>
         </div>
     </div>
-</app-modal>
+</shared-ui-helpers-modal>
 
 <!-- Template for TimeDetails -->
 <ng-template #detailsTemplate let-timeDetail="timeDetail">

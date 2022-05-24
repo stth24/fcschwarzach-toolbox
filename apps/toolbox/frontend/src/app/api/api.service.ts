@@ -1,10 +1,9 @@
-import { environment } from "../../environments/environment";
-import * as ical from 'cal-parser';
-import { TeamData } from "../model/generalplan.model";
-import { Team } from "../model/team.model";
-import { LoginTokenHandler } from "../components/helpers/login-helper";
 import { Injectable } from "@angular/core";
+import { GeneralplanApiService } from "@fcschwarzach/shared-generalplan-api";
+import { environment } from "../../environments/environment";
+import { LoginTokenHandler } from "../components/helpers/login-helper";
 import { StateService } from "../components/services/state/state.service";
+import { Team } from "../model/team.model";
 import { TimeDetails, WeeklyEvent } from "../model/weekly-event.model";
 
 @Injectable({
@@ -12,12 +11,14 @@ import { TimeDetails, WeeklyEvent } from "../model/weekly-event.model";
 })
 export class ApiService {
 
-    constructor(private stateService: StateService) { }
+    constructor(private stateService: StateService, private geneneralPlanService: GeneralplanApiService) { }
+
+    private getPrefix(): string {
+        return environment.production ? '' : 'http://localhost';
+    }
 
     private getUrl() {
-        const prefix = environment.production ? '' : 'http://localhost';
-
-        return prefix + '/api';
+        return this.getPrefix() + '/api';
     }
 
     private handleErrorResponse(reject: (reason?: any) => void, status: number) {
@@ -185,36 +186,7 @@ export class ApiService {
     }
 
     getGeneralplanData() {
-        return new Promise<TeamData[]>((resolve, reject) => {
-            fetch(this.getUrl() + '/generalplan')
-                .then(res => {
-                    if (res.status === 200) {
-                        res.json().then(data => {
-                            const teams: TeamData[] = [];
-
-                            if (Array.isArray(data)) {
-                                data.forEach((d: any) => {
-                                    teams.push({
-                                        name: d.name,
-                                        url: d.url,
-                                        events: ical.parseString(d.data).events
-                                    })
-                                })
-                                resolve(teams);
-                            }
-                            else {
-                                reject('Cannot parse data!');
-                            }
-                        })
-                    }
-                    else {
-                        reject('An unexpected Error occurred');
-                    }
-                })
-                .catch(err => {
-                    reject(err);
-                })
-        })
+        return this.geneneralPlanService.getGeneralplanData(this.getPrefix());
     }
 
     getTeams() {

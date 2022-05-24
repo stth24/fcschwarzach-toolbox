@@ -1,0 +1,34 @@
+button {
+  border: 2px solid var(--dark-blue);
+  background-color: white;
+  padding: 5px 10px;
+
+  width: max-content;
+  height: max-content;
+
+  &:hover {
+    color: white;
+    background-color: var(--dark-blue);
+    cursor: pointer;
+  }
+
+  &:disabled {
+    border-color: var(--dark-gray);
+    background-color: lightgray;
+    color: var(--dark-gray);
+  }
+
+  &:disabled:hover {
+    cursor: default;
+  }
+}
+
+.delete-button {
+  border-color: darkred;
+  color: darkred;
+
+  &:hover {
+    color: white;
+    background-color: darkred;
+  }
+}

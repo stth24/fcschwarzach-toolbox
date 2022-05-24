@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'libs/shared/base-styles/src/shared-styles.scss';
+
+
+.dark-mode {
+    --background: var(--dark-background);
+    --on-background: var(--on-dark-background);
+}
