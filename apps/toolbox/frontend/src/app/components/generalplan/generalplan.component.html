@@ -34,7 +34,7 @@
             <tbody>
                 <tr *ngFor="let gameday of matchTable; let i = index" [class.isWeekend]="gameday.date.getDay() === 6 || gameday.date.getDay() === 0">
                     <td [id]="'row-' + i" class="firstColumn">
-                        <p><b>{{gameday.date | date: 'EEEE'}}</b></p>
+                        <p><b>{{gameday.date | weekday }}</b></p>
                         <p><b>{{gameday.date | date: 'dd.MM.yyyy'}}</b></p>
                     </td>
                     <ng-container *ngFor="let team of gameday.teams">

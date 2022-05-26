@@ -30,7 +30,7 @@
             *ngFor="let currentDayEntry of currentWeek"
             [class.isWeekend]="currentDayEntry.date.getDay() === 6 || currentDayEntry.date.getDay() === 0">
             <div class="day-header">
-                <div>{{currentDayEntry.date | date: 'EEEE'}}</div>
+                <div>{{currentDayEntry.date | weekday}}</div>
                 <div>{{currentDayEntry.date | date: 'dd.MM.yyyy'}}</div>
             </div>
             <ng-container *ngFor="let event of currentDayEntry.events">

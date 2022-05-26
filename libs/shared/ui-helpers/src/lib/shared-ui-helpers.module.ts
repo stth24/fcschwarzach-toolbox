@@ -5,6 +5,7 @@ import { ErrorBoxComponent } from './error-box/error-box.component';
 import { LoaderComponent } from './loader/loader.component';
 import { ModalComponent } from './modal/modal.component';
 import { SafeHtmlPipe } from './safe-html-pipe/safe-html.pipe';
+import { WeekdayPipe } from './weekday-pipe/weekday.pipe';
 import { ZoomImageComponent } from './zoom-image/zoom-image.component';
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ZoomImageComponent } from './zoom-image/zoom-image.component';
         ErrorBoxComponent,
         ConfirmCancelModalComponent,
         ZoomImageComponent,
-        SafeHtmlPipe
+        SafeHtmlPipe,
+        WeekdayPipe
     ],
     exports: [
         LoaderComponent,
@@ -23,7 +25,8 @@ import { ZoomImageComponent } from './zoom-image/zoom-image.component';
         ErrorBoxComponent,
         ConfirmCancelModalComponent,
         ZoomImageComponent,
-        SafeHtmlPipe
+        SafeHtmlPipe,
+        WeekdayPipe
     ],
 })
 export class SharedUiHelpersModule { }

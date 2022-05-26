@@ -7,7 +7,7 @@
         <span class="game-title">{{game.summary.value}}</span>
         <span>{{game.description.value}}</span>
         <hr class="line">
-        <span class="game-date">{{game.dtstart.value | date:'EEEE dd.MM.yyyy'}}</span>
+        <span class="game-date">{{game.dtstart.value | weekday}} {{game.dtstart.value | date:'dd.MM.yyyy'}}</span>
         <span class="game-date">{{game.dtstart.value | date:'HH:mm'}} Uhr</span>
         <hr class="line">
         <span class="game-location">{{game.location.value}}</span>
