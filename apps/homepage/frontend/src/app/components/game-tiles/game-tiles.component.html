@@ -2,7 +2,7 @@
     <div class="tile game-tile" 
         [class.km-game]="team.name === 'KM'" 
         [class.nw-game]="team.name !== 'KM' && team.name !== '1b'"
-        [class.location-home]="game.location.value.includes('Schwarzach')"
+        [class.location-home]="game.location.value.includes('Schwarzach') || game.location.value.includes('Wolfurt')"
         *ngFor="let game of team.events">
         <span class="game-title">{{game.summary.value}}</span>
         <span>{{game.description.value}}</span>
@@ -10,6 +10,10 @@
         <span class="game-date">{{game.dtstart.value | weekday}} {{game.dtstart.value | date:'dd.MM.yyyy'}}</span>
         <span class="game-date">{{game.dtstart.value | date:'HH:mm'}} Uhr</span>
         <hr class="line">
-        <span class="game-location">{{game.location.value}}</span>
+        <div class="game-location">
+            <img *ngIf="game.location.value.includes('Schwarzach')" src="assets/logo.png" class="home-logo" />
+            <img *ngIf="game.location.value.includes('Wolfurt')" src="assets/fcwolfurt_logo.png" class="home-logo" />
+            <span class="game-location-text">{{game.location.value}}</span>
+        </div>
     </div>
 </ng-container>

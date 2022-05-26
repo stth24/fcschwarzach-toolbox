@@ -87,15 +87,28 @@ thead .firstColumn {
 .withGame {
   min-width: 200px;
 
-  .match-event {
-    padding: 10px;
-    flex-direction: column;
-    background-color: var(--medium-blue);
-  }
-}
+    .match-event {
+        padding: 10px;
+        flex-direction: column;
+        background-color: var(--medium-blue);
+    }
 
-.isWeekend .match-event {
-  background-color: var(--regular-green);
+    .location-home-game {
+        background-color: var(--regular-green);
+        
+        .location-text {
+            display: flex;
+            gap: 10px;
+            
+            font-weight: bold;
+            color: darkred;
+        }
+    }
+    
+    .home-logo {
+        height: 40px;
+        object-fit: contain;
+    }
 }
 
 .withoutGameTd {
@@ -104,10 +117,6 @@ thead .firstColumn {
   width: 100%;
 }
 
-.location-home {
-  font-weight: bold;
-  color: darkred;
-}
 
 hr {
   border: 1px solid var(--dark-blue);

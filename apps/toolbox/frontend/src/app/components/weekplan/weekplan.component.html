@@ -35,7 +35,7 @@
             </div>
             <ng-container *ngFor="let event of currentDayEntry.events">
                 <div class="event-entry" 
-                    [class.event-home]="event.timeDetail.location.includes('Schwarzach') && event.type === eventType.oneTime"
+                    [class.event-home]="(event.timeDetail.location.includes('Schwarzach') || event.timeDetail.location.includes('Wolfurt')) && event.type === eventType.oneTime"
                     [class.single-event]="event.type === eventType.oneTime"
                     [style]="'background-color: ' +  (event.type !== eventType.oneTime ? uiState.get(event.timeDetail.weeklyEventid) : '')">
                         <span class="event-name">{{event.name}}</span>
@@ -50,7 +50,11 @@
                             </ng-container>
     
                             <span class="event-details-topic">Ort:</span>
-                            <span [class.location-home]="event.timeDetail.location.includes('Schwarzach')">{{event.timeDetail.location}}</span>
+                            <div [class.location-home]="event.timeDetail.location.includes('Schwarzach') || event.timeDetail.location.includes('Wolfurt')">
+                                <span>{{event.timeDetail.location}}</span>
+                                <img *ngIf="event.timeDetail.location.includes('Schwarzach') && event.type === eventType.oneTime" src="assets/logo.png" class="home-logo" />
+                                <img *ngIf="event.timeDetail.location.includes('Wolfurt') && event.type === eventType.oneTime" src="assets/fcwolfurt_logo.png" class="home-logo" />
+                            </div>
                         </div>
                     </div>
             </ng-container>
