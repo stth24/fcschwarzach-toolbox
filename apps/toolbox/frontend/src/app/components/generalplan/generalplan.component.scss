@@ -94,7 +94,8 @@ thead .firstColumn {
     }
 
     .location-home-game {
-        background-color: var(--regular-green);
+        background-color: var(--background);
+        border: 5px solid darkred;
         
         .location-text {
             display: flex;
