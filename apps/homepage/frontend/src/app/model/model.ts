@@ -27,7 +27,6 @@ export interface Vorstandsmitglied {
     email: string,
     phone: string,
     image: Asset,
-    prio: string
 }
 
 export interface Kontakt {

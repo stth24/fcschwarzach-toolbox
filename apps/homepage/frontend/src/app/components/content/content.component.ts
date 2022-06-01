@@ -37,10 +37,7 @@ export class ContentComponent implements OnInit {
             });
 
         this.apiService.getVorstandFromApi()
-            .then(vorstand => {
-                vorstand.sort((a, b) => Number.parseInt(a.prio) < Number.parseInt(b.prio) ? -1 : 1);
-                this.vorstand = vorstand
-            });
+            .then(vorstand => this.vorstand = vorstand);
 
         this.apiService.getHistoryFromApi()
             .then(history => this.historyText = history.text);
