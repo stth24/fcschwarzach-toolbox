@@ -3,11 +3,11 @@
     <div class="part-content news-content" id="news-content">
         <shared-ui-helpers-loader *ngIf="!news || news.length < 1"></shared-ui-helpers-loader>
         <ng-container *ngIf="news && news.length > 0">
-            <div class="nav-left-button" (click)="scrollSlider(true)"> < </div>
+            <div class="nav-left-button" (click)="scrollSlider(true)"><img src="assets/left_arrow.svg" alt="<"/> </div>
             <ng-container *ngFor="let item of news, let i = index">
                 <app-news-item [newsItem]="item" [index]="i" [totalNewsItems]="news.length" *ngIf="i === currentNewsElement"></app-news-item>
             </ng-container>
-            <div class="nav-right-button" (click)="scrollSlider(false)"> > </div>
+            <div class="nav-right-button" (click)="scrollSlider(false)"> <img src="assets/left_arrow.svg" alt="<"/> </div>
         </ng-container>
     </div>
 </div>

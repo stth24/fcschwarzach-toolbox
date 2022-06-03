@@ -87,27 +87,38 @@
   //   Button left
   .nav-left-button,
   .nav-right-button {
-    font-size: 1.5rem;
-    line-height: 1.5rem;
-    font-weight: bold;
-    padding: 10px;
     display: flex;
     justify-content: center;
     align-content: center;
+    align-items: center;
 
     background: var(--dark-blue);
-    color: white;
 
     position: absolute;
     z-index: 1;
     top: 50%;
     transform: translateY(-50%);
     border-radius: 30px;
-    height: 30px;
-    width: 30px;
+    height: 50px;
+    width: 50px;
     overflow: hidden;
 
     box-shadow: 0 0 5px #000;
+
+    
+    img {
+        height: 30px;
+        width: 30px;
+        
+        // for alt text
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+        font-weight: bold;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
 
     &:hover {
       cursor: pointer;
@@ -120,6 +131,10 @@
 
   .nav-right-button {
     right: 10px;
+
+    img {
+        rotate: 180deg;
+    }
   }
 }
 
