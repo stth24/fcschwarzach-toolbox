@@ -1,42 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { filterAbgesagt, TeamData } from '@fcschwarzach/shared-generalplan-api';
-import { ApiService } from '../../api/api.service';
 
 @Component({
     selector: 'app-next-km-games',
     templateUrl: './next-km-games.component.html',
     styleUrls: ['./next-km-games.component.scss']
 })
-export class NextKmGamesComponent implements OnInit {
+export class NextKmGamesComponent implements OnChanges {
+    @Input()
+    teamData?: TeamData[];
+
     teams: TeamData[] = [];
 
-    constructor(private apiService: ApiService) { }
+    ngOnChanges() {
+        const today = new Date();
+        today.setHours(0);
+        today.setMinutes(0);
 
-    ngOnInit(): void {
-        this.apiService.getGeneralPlanData()
-            .then(teamData => {
-                const today = new Date();
-                today.setHours(0);
-                today.setMinutes(0);
+        if (!this.teamData) return;
 
-                const km = teamData.find(team => team.name === 'KM')
-                if (km) {
-                    this.teams.push(km);
-                }
+        const km = this.teamData.find(team => team.name === 'KM')
+        if (km) {
+            this.teams.push(km);
+        }
 
-                const einsB = teamData.find(team => team.name === '1b')
-                if (einsB) {
-                    this.teams.push(einsB);
-                }
+        const einsB = this.teamData.find(team => team.name === '1b')
+        if (einsB) {
+            this.teams.push(einsB);
+        }
 
-                this.teams.forEach(team => {
-                    team.events =
-                        team.events
-                            .filter(event => filterAbgesagt(event))
-                            .filter(event => event.dtstart.value >= today)
-                            .slice(0, 3);
-                })
-            })
+        this.teams.forEach(team => {
+            team.events =
+                team.events
+                    .filter(event => filterAbgesagt(event))
+                    .filter(event => event.dtstart.value >= today)
+                    .slice(0, 3);
+        })
     }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TeamData } from '@fcschwarzach/shared-generalplan-api';
 import { ApiService } from '../../api/api.service';
 import { Kontakt, Mannschaft, News, NWInfo, Vorstandsmitglied } from '../../model/model';
 
@@ -18,6 +19,7 @@ export class ContentComponent implements OnInit {
     kontakt: Kontakt | undefined;
     mannschaften: Mannschaft[] = [];
     nwinfo: NWInfo | undefined;
+    teamData: TeamData[] | undefined;
 
     currentNewsElement = 0;
 
@@ -58,6 +60,9 @@ export class ContentComponent implements OnInit {
 
         this.apiService.getNwInfoFromApi()
             .then(info => this.nwinfo = info);
+
+        this.apiService.getGeneralPlanData()
+            .then(teamData => this.teamData = teamData);
     }
 
     scrollSlider(left: boolean) {
