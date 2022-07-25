@@ -9,6 +9,8 @@ import { ApiService } from './api/api.service';
 export class AppComponent {
     title = 'homepage-frontend';
 
+    readonly DARK_MODE_KEY = 'dark_mode';
+
     darkMode = false;
 
     apiTokenLoaded = false;
@@ -22,10 +24,21 @@ export class AppComponent {
     ngOnInit() {
         this.apiService.getApiToken()
             .then(() => this.apiTokenLoaded = true);
+
+        const darkModeFromLS = localStorage.getItem(this.DARK_MODE_KEY);
+
+        if (!darkModeFromLS) {
+            localStorage.setItem(this.DARK_MODE_KEY, JSON.stringify(this.darkMode));
+        }
+        else {
+            this.darkMode = JSON.parse(darkModeFromLS);
+            this.element.classList.toggle('dark-mode', this.darkMode);
+        };
     }
 
     toggleDarkMode() {
         this.darkMode = !this.darkMode;
         this.element.classList.toggle('dark-mode', this.darkMode);
+        localStorage.setItem(this.DARK_MODE_KEY, JSON.stringify(this.darkMode));
     }
 }
