@@ -10,32 +10,34 @@ export class NextKmGamesComponent implements OnChanges {
     @Input()
     teamData?: TeamData[];
 
-    teams: TeamData[] = [];
+    eins: TeamData | undefined;
+    einsB: TeamData | undefined;
 
     ngOnChanges() {
-        const today = new Date();
-        today.setHours(0);
-        today.setMinutes(0);
-
         if (!this.teamData) return;
 
         const km = this.teamData.find(team => team.name === 'KM')
         if (km) {
-            this.teams.push(km);
+            this.filterTeam(km);
+            this.eins = km;
         }
 
         const einsB = this.teamData.find(team => team.name === '1b')
         if (einsB) {
-            this.teams.push(einsB);
+            this.filterTeam(einsB);
+            this.einsB = einsB;
         }
+    }
 
-        this.teams.forEach(team => {
-            team.events =
-                team.events
-                    .filter(event => filterAbgesagt(event))
-                    .filter(event => event.dtstart.value >= today)
-                    .slice(0, 3);
-        })
+    filterTeam(team: TeamData) {
+        const today = new Date();
+        today.setHours(0);
+        today.setMinutes(0);
+
+        team.events = team.events
+            .filter(event => filterAbgesagt(event))
+            .filter(event => event.dtstart.value >= today)
+            .slice(0, 3)
     }
 
 }

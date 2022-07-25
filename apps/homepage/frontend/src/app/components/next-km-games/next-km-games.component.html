@@ -1,6 +1,18 @@
-<shared-ui-helpers-loader *ngIf="!teamData"></shared-ui-helpers-loader>
+<shared-ui-helpers-loader *ngIf="!eins && !einsB else teamsLoaded"></shared-ui-helpers-loader>
 
+<ng-template #teamsLoaded>
+    <div class="team-section">
+        <h2 class="team-section-header">KM</h2>
+        <app-game-tiles *ngIf="eins else noGames" [teams]="[eins]"></app-game-tiles>
+    </div>
+    
+    <div class="team-section">
+        <h2 class="team-section-header">1b</h2>
+        <app-game-tiles *ngIf="einsB else noGames" [teams]="[einsB]"></app-game-tiles>
+    
+    </div>
+</ng-template>
 
-<h2 *ngIf="teamData && teams.length < 1">Derzeit finden keine KM-Spiele statt!</h2>
-
-<app-game-tiles [teams]="teams"></app-game-tiles>
+<ng-template #noGames>
+    <h3>Derzeit finden keine Spiele statt!</h3>
+</ng-template>
