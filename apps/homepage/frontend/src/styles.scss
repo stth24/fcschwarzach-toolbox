@@ -3,7 +3,12 @@
 @import 'libs/shared/base-styles/src/shared-styles.scss';
 
 
+html {
+    --part-background-medium: #d3d3d3;
+}
+
 .dark-mode {
     --background: var(--dark-background);
     --on-background: var(--on-dark-background);
+    --part-background-medium: #2f2f2f;
 }
