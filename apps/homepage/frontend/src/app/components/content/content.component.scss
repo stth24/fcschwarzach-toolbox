@@ -13,7 +13,7 @@
 }
 
 .main-part:nth-child(2n) {
-  background-color: var(--dark-gray);
+  background-color: var(--dark-red);
   color: white;
 
   .part-header,
@@ -36,7 +36,7 @@
   gap: 10px;
   padding: 10px 20px;
   padding-bottom: 20px;
-  background-color: var(--dark-gray);
+  background-color: var(--dark-red);
 
   color: white;
 
@@ -201,7 +201,7 @@
 
     &:nth-child(2n) {
       .part-header {
-        background-color: var(--dark-gray);
+        background-color: var(--dark-red);
       }
     }
   }
