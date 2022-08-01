@@ -32,7 +32,8 @@
                 </ng-container>
             </thead>
             <tbody>
-                <tr *ngFor="let gameday of matchTable; let i = index">
+                <tr *ngFor="let gameday of matchTable; let i = index"
+                    [class.date-in-past]="gameday.date < today">
                     <td [id]="'row-' + i" class="firstColumn">
                         <p><b>{{gameday.date | weekday }}</b></p>
                         <p><b>{{gameday.date | date: 'dd.MM.yyyy'}}</b></p>

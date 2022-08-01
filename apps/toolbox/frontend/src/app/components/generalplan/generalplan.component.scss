@@ -75,13 +75,16 @@ th {
   z-index: 1;
   border-left: none;
   border-right: $border-size solid $border-color;
-  background-color: var(--background);
 
   width: 100px;
 }
 
 thead .firstColumn {
   z-index: 3;
+}
+
+.date-in-past {
+    background-color: #eaeaea;
 }
 
 .withGame {

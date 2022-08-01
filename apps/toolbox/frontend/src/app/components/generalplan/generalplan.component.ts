@@ -39,6 +39,8 @@ export class GeneralplanComponent implements OnInit {
         }
     }
 
+    today = new Date();
+
     constructor(private apiService: ApiService) {
         setFilterStartAndEndDate(this.filters);
     }
