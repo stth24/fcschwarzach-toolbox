@@ -9,24 +9,11 @@
 
   color: var(--on-background);
 
-  background-color: var(--part-background-medium);
+  background-color: var(--part-background-light);
 }
 
 .main-part:nth-child(2n) {
-  background-color: var(--dark-red);
-  color: white;
-
-  .part-header,
-  h1,
-  h2 {
-    color: white;
-  }
-
-  // light version for dark BG
-  .tile {
-    background-color: lightgray;
-    color: black;
-  }
+    background-color: var(--part-background-medium);
 }
 
 // dark version for light BG
@@ -201,13 +188,13 @@
 
     &:nth-child(2n) {
       .part-header {
-        background-color: var(--dark-red);
+        background-color: var(--part-background-medium);
       }
     }
   }
 
   .part-header {
-    background-color: var(--part-background-medium);
+    background-color: var(--part-background-light);
     padding: 10px 0;
   }
 

@@ -1,6 +1,6 @@
 :host {
-    background-color: var(--dark-red);
-    color: white;
+    background-color: var(--part-background-light);
+    color: var(--on-background);
     flex: 1;
 }
 
@@ -17,8 +17,8 @@
 }
 
 .trainer-tile {
-    background-color: lightgray;
-    color: black;
+    background-color: var(--dark-red);
+    color: var(--on-dark-background);
 
     padding: 10px 20px;
     max-width: 260px;
@@ -47,6 +47,7 @@
 .player-card {
     position: relative;
     display: flex;
+    color: white;
 }
 
 .player-img {

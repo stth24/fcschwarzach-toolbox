@@ -1,10 +1,10 @@
 :host {
-  color: white;
   flex: 1;
+  color: var(--on-background);
 }
 
 .news-entry {
-  background-color: var(--dark-red);
+  background-color: var(--part-background-light);
   display: flex;
   flex-direction: column;
   gap: 20px;
