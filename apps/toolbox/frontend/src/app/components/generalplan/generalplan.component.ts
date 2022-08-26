@@ -42,6 +42,13 @@ export class GeneralplanComponent implements OnInit {
     today = new Date();
 
     constructor(private apiService: ApiService) {
+        // set today to 00:00 minus 1ms so events today wont be marked as "in-past"
+        this.today.setHours(0);
+        this.today.setMinutes(0);
+        this.today.setSeconds(0);
+        this.today.setMilliseconds(0);
+        this.today.setTime(this.today.getTime() - 1);
+
         setFilterStartAndEndDate(this.filters);
     }
 

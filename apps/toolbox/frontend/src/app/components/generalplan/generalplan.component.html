@@ -33,10 +33,17 @@
             </thead>
             <tbody>
                 <tr *ngFor="let gameday of matchTable; let i = index"
+                    [id]="'row-' + i"
+                    class="dateRow"
                     [class.date-in-past]="gameday.date < today">
-                    <td [id]="'row-' + i" class="firstColumn">
-                        <p><b>{{gameday.date | weekday }}</b></p>
-                        <p><b>{{gameday.date | date: 'dd.MM.yyyy'}}</b></p>
+                    <td  class="firstColumn">
+                        <div class="firstColumnDateRegular">
+                            <p><b>{{gameday.date | weekday }}</b></p>
+                            <p><b>{{gameday.date | date: 'dd.MM.yyyy'}}</b></p>
+                        </div>
+                        <div class="firstColumnDateMobile">
+                            <p><b>{{gameday.date | weekday }} {{gameday.date | date: 'dd.MM.yyyy'}}</b></p>
+                        </div>
                     </td>
                     <ng-container *ngFor="let team of gameday.teams">
                         <td [class.withoutGameTd]="team.events.length < 1"
