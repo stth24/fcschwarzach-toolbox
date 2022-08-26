@@ -80,5 +80,6 @@ export interface DocumentInfo {
 export interface SocialMediaLinks {
     instagram: string,
     facebook: string,
-    github: string
+    github: string,
+    youtube: string
 }
