@@ -5,12 +5,10 @@
 
 html {
     --part-background-light: #ececec;
-    --part-background-medium: #d5d5d5;
 }
 
 .dark-mode {
     --background: var(--dark-background);
     --on-background: var(--on-dark-background);
     --part-background-light: #2f2f2f;
-    --part-background-medium: #1e1e1e;
 }

@@ -9,11 +9,7 @@
 
   color: var(--on-background);
 
-  background-color: var(--part-background-light);
-}
-
-.main-part:nth-child(2n) {
-    background-color: var(--part-background-medium);
+  background-color: var(--background);
 }
 
 // dark version for light BG
@@ -185,16 +181,10 @@
     grid-template-columns: auto;
     padding: 20px;
     padding-top: 0;
-
-    &:nth-child(2n) {
-      .part-header {
-        background-color: var(--part-background-medium);
-      }
-    }
   }
 
   .part-header {
-    background-color: var(--part-background-light);
+    background-color: var(--background);
     padding: 10px 0;
   }
 
