@@ -1,12 +1,10 @@
 import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ApiService } from '../../../app/api/api.service';
 import { LoginTokenHandler } from '../helpers/login-helper';
-import { navigateToParam } from '../helpers/navigation-helper';
 import { StateService } from '../services/state/state.service';
-import { GeneralplanNavigationEntry, navigationEntriesList, NavigationEntry } from './navigation-entries';
 
 @Component({
     selector: 'app-navigation',
@@ -17,23 +15,17 @@ export class NavigationComponent implements OnInit, OnChanges, AfterViewInit, On
 
     @Input() navOpen = true;
 
-    menuEntries = navigationEntriesList.filter(elem => !elem.admin);
-    adminMenuEntries = navigationEntriesList.filter(elem => elem.admin);
-
     showAdminLogin = false;
 
     loggedIn = false;
 
     unsubscribe = new Subject<void>();
 
-    selectedEntry: string | undefined;
-
     private nativeElement: HTMLElement;
 
     constructor(
         elementRef: ElementRef,
         private router: Router,
-        private activatedRoute: ActivatedRoute,
         private stateService: StateService,
         private apiService: ApiService) {
         this.nativeElement = elementRef.nativeElement;
@@ -42,10 +34,6 @@ export class NavigationComponent implements OnInit, OnChanges, AfterViewInit, On
     ngOnInit(): void {
         this.stateService.getStateStream().pipe(takeUntil(this.unsubscribe)).subscribe(state => {
             this.loggedIn = state.loggedIn;
-        })
-
-        this.activatedRoute.queryParams.pipe(takeUntil(this.unsubscribe)).subscribe(params => {
-            this.selectedEntry = params['nav'];
         })
     }
 
@@ -65,10 +53,6 @@ export class NavigationComponent implements OnInit, OnChanges, AfterViewInit, On
         this.unsubscribe.complete();
     }
 
-    navigate(entry: NavigationEntry) {
-        navigateToParam(entry, this.router, this.activatedRoute);
-    }
-
     adminLogin() {
         this.apiService.verifyToken()
             .catch(() => this.showAdminLogin = true);
@@ -81,7 +65,7 @@ export class NavigationComponent implements OnInit, OnChanges, AfterViewInit, On
             loggedIn: false
         })
 
-        this.navigate(GeneralplanNavigationEntry);
+        this.router.navigate(['/']);
     }
 
     closeLoginModal() {

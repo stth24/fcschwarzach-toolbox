@@ -1,12 +1,10 @@
-<ng-template #container></ng-template>
+<h1>Willkommen in der FC Schwarzach-Toolbox!</h1>
 
-<div *ngIf="showDefaultContent">
-    <h1>Willkommen in der FC Schwarzach-Toolbox!</h1>
+<p *ngIf="!loggedIn">Wir freuen uns, Ihnen folgendes Services anbieten zu können:</p>
+<p *ngIf="loggedIn">Liebes Mitglied, hoffentlich findest du unter den zur Verfügung stehenden Services, was du brauchst:</p>
 
-    <p *ngIf="!loggedIn">Wir freuen uns, Ihnen folgendes Services anbieten zu können:</p>
-    <p *ngIf="loggedIn">Liebes Mitglied, hoffentlich findest du unter den zur Verfügung stehenden Services, was du brauchst:</p>
-
-    <ul *ngFor="let item of navigationEntriesListForDefault">
-        <li class="nav-item" (click)="navigate(item)">{{item.label}} </li>
-    </ul>
-</div>
+<ul>
+    <li class="nav-item" routerLink="/generalplan">Generalplan</li>
+    <li class="nav-item" routerLink="/weekplan">Wochenplan</li>
+    <li class="nav-item" routerLink="/newplayerform">Spielplan</li>
+</ul>

@@ -11,6 +11,13 @@
   position: relative;
 }
 
+.content {
+    display: flex;
+    overflow: auto;
+    padding: 10px;
+    width: 100%;
+}
+
 .nav-out {
   min-width: 200px;
   max-width: 300px;

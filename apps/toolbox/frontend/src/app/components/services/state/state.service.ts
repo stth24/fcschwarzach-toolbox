@@ -10,9 +10,9 @@ export interface State {
 })
 export class StateService {
 
-    state: State;
+    private state: State;
 
-    stateStream: BehaviorSubject<State>;
+    private stateStream: BehaviorSubject<State>;
 
     constructor() {
         this.state = {
@@ -26,8 +26,9 @@ export class StateService {
         return this.stateStream;
     }
 
-    updateState(newState: State) {
+    updateState(newState: Partial<State>) {
         this.state = {
+            ...this.state,
             ...newState
         }
 

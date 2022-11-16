@@ -1,10 +1,7 @@
 <div class="entries-top">
-    <div class="nav-entry" 
-        *ngFor="let entry of menuEntries"
-        [class.selected-entry]="entry.id === selectedEntry"
-        (click)="navigate(entry)">
-        {{entry.id === selectedEntry ? '>' : ''}} {{entry.label}}
-    </div>
+    <div class="nav-entry" routerLink="/generalplan">Generalplan</div>
+    <div class="nav-entry" routerLink="/weekplan">Wochenplan</div>
+    <div class="nav-entry" routerLink="/newplayerform">Spielplan</div>
 
     
     <a href="http://fcschwarzach.com">
@@ -12,12 +9,8 @@
     </a>
 
     <div class="admin-entries" *ngIf="loggedIn">
-        <div class="nav-entry"  
-            *ngFor="let entry of adminMenuEntries"
-            [class.selected-entry]="entry.id === selectedEntry" 
-            (click)="navigate(entry)">
-            {{entry.id === selectedEntry ? '>' : ''}} {{entry.label}}
-        </div>
+        <div class="nav-entry" routerLink="/teamsdata">Team Daten</div>
+        <div class="nav-entry" routerLink="/weeklyevents">Wöchentliche Events</div>
     </div>
 </div>
 
