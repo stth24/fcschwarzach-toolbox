@@ -88,7 +88,7 @@ export function createPlan(teamEvents: TeamData[], startDate: Date, endDate: Dat
                 }
 
                 // set home games font color
-                const firstStringPart = cell.value.toString().split(':')[0];
+                const firstStringPart = cell.value?.toString().split(':')[0] ?? '';
                 if (firstStringPart.includes('Schwarzach') || firstStringPart.includes('Hofsteig')) {
                     cell.font = { color: { argb: "ff0000" } }
                 }
