@@ -6,20 +6,10 @@
         <div class="team-content">
             <h1>{{teamItem.name}}</h1>
             <ng-container *ngIf="trainer">
-                <h1>Trainer</h1>
-                <div class="trainer-tile">
-                    <span class="trainer-name">{{trainer.name}}</span>
-                    <img class="trainer-img" [src]="trainer.image?.path" />
-                    <span>
-                        E-Mail: {{trainer.email}}
-                    </span>
-                    <span>
-                        Tel.: {{trainer.phone}}
-                    </span>
-                </div>
+                <app-person-tile [person]="trainer"></app-person-tile>
             </ng-container>
 
-            <ng-container *ngIf="spieler.length > 0">
+            <!-- <ng-container *ngIf="spieler.length > 0">
                 <h1>Spieler</h1>
                 <div class="player-grid" >
                     <div class="player-card" *ngFor="let player of spieler">
@@ -29,7 +19,7 @@
                         </div>
                     </div>
                 </div>
-            </ng-container>
+            </ng-container> -->
         </div>
     </ng-container>
 </ng-container>

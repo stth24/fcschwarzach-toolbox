@@ -25,6 +25,8 @@ export class ContentComponent implements OnInit {
 
     kontaktMapsSrc: SafeResourceUrl | undefined;
 
+    nachwuchsleiter: Vorstandsmitglied | undefined;
+
     constructor(private apiService: ApiService,
         private router: Router,
         private route: ActivatedRoute,
@@ -59,7 +61,16 @@ export class ContentComponent implements OnInit {
             .then(teams => this.mannschaften = teams);
 
         this.apiService.getNwInfoFromApi()
-            .then(info => this.nwinfo = info);
+            .then(info => {
+                this.nachwuchsleiter = {
+                    name: info.name,
+                    funktion: 'Nachwuchsleiter',
+                    email: info.email,
+                    phone: '',
+                    image: info.image,
+                };
+                this.nwinfo = info;
+            });
 
         this.apiService.getGeneralPlanData()
             .then(teamData => this.teamData = teamData);
@@ -73,9 +84,5 @@ export class ContentComponent implements OnInit {
         if (this.currentNewsElement >= this.news.length) {
             this.currentNewsElement = 0;
         }
-    }
-
-    navigateToTeamPage(team: Mannschaft) {
-        this.router.navigate(['team', team.id], { relativeTo: this.route });
     }
 }

@@ -20,13 +20,7 @@
   padding: 10px 20px;
   padding-bottom: 20px;
   background-color: var(--dark-red);
-
   color: white;
-
-  .tile-title {
-    font-size: 1.3rem;
-    font-weight: bold;
-  }
 }
 
 .part-header {
@@ -159,19 +153,6 @@
 /* NACHWUCHS & VEREIN */
 .funktionen-content {
   grid-template-columns: repeat(auto-fill, minmax(min-content, 300px));
-}
-
-// VEREIN
-.person-item {
-    .tile-img {
-        max-height: 300px;
-        object-fit: contain;
-    }
-}
-
-/* TEAMS */
-.team-tile:hover {
- cursor: pointer;
 }
 
 /* KONTAKT */

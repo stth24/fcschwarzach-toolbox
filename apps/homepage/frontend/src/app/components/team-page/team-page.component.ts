@@ -4,7 +4,7 @@ import { takeUntil } from 'rxjs';
 import { Subject } from 'rxjs/internal/Subject';
 import { ApiService } from '../../api/api.service';
 import { TEAM_ID_ROUTE_PARAM } from '../../app.module';
-import { Mannschaft, Spieler, Trainer } from '../../model/model';
+import { Mannschaft, Spieler, Vorstandsmitglied } from '../../model/model';
 
 @Component({
     selector: 'app-team-page',
@@ -17,7 +17,7 @@ export class TeamPageComponent implements OnInit {
 
     teamItem: Mannschaft | undefined;
     spieler: Spieler[] = [];
-    trainer: Trainer | undefined;
+    trainer: Vorstandsmitglied | undefined;
 
     notFound = false;
 
@@ -49,7 +49,7 @@ export class TeamPageComponent implements OnInit {
                             if (this.teamItem.trainer) {
                                 // GET Trainer
                                 this.apiService.getSingleTrainerFromApi(this.teamItem.trainer._id)
-                                    .then(trainer => this.trainer = trainer);
+                                    .then(trainer => this.trainer = { ...trainer, funktion: 'Trainer' });
                             }
                         })
                         .catch(() => this.notFound = true)

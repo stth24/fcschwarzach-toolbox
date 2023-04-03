@@ -11,6 +11,8 @@ import { NextKmGamesComponent } from './next-km-games/next-km-games.component';
 import { NextNwGamesComponent } from './next-nw-games/next-nw-games.component';
 import { SponsorsComponent } from './sponsors/sponsors.component';
 import { TeamPageComponent } from './team-page/team-page.component';
+import { PersonTileComponent } from './person-tile/person-tile.component';
+import { TeamTileComponent } from './team-tile/team-tile.component';
 
 
 
@@ -25,7 +27,9 @@ import { TeamPageComponent } from './team-page/team-page.component';
         NewsItemComponent,
         NewsPageComponent,
         SponsorsComponent,
-        TeamPageComponent
+        TeamPageComponent,
+        PersonTileComponent,
+        TeamTileComponent
     ],
     imports: [
         CommonModule,

@@ -12,3 +12,12 @@ html {
     --on-background: var(--on-dark-background);
     --part-background-light: #2f2f2f;
 }
+
+.tile-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+* {
+    box-sizing: border-box;
+}

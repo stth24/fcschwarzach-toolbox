@@ -35,14 +35,7 @@
                 <h2 class="part-region-content-header">Nachwuchsleitung</h2>
                 <div [innerHtml]="nwinfo.text | safeHtml"></div>
                 <div class="funktionen-content">
-                    <div class="tile person-item">
-                        <span class="tile-title">{{nwinfo.name}}</span>
-                        <span>Nachwuchsleiter</span>
-                        <img class="tile-img" [src]="nwinfo.image?.path" />
-                        <p>
-                            E-Mail: {{nwinfo.email}}
-                        </p>
-                    </div>
+                    <app-person-tile [person]="nachwuchsleiter"></app-person-tile>
                 </div>
             </ng-container>
         </div>
@@ -63,13 +56,7 @@
         <div class="part-region-content verein-content">
             <h2 class="part-region-content-header">Funktionäre:</h2>
             <div class="funktionen-content">
-                <div class="tile person-item" *ngFor="let person of vorstand">
-                    <span class="tile-title">{{person.name}}</span>
-                    <span>{{person.funktion}}</span>
-                    <img class="tile-img" [src]="person?.image?.path" />
-                    <span>{{person.email}}</span>
-                    <span>{{person.phone}}</span>
-                </div>
+                <app-person-tile *ngFor="let person of vorstand" [person]="person"></app-person-tile>
             </div>
         </div>
         <div class="part-region-content">
@@ -88,10 +75,11 @@
         <div class="part-region-content">
             <h2 class="part-region-content-header">Mannschaften</h2>
             <div class="mannschaften-content">
-                <div class="tile team-tile" (click)="navigateToTeamPage(team)" *ngFor="let team of mannschaften">
+                <app-team-tile *ngFor="let team of mannschaften" [team]="team"></app-team-tile>
+                <!-- <div class="tile team-tile" (click)="navigateToTeamPage(team)" *ngFor="let team of mannschaften">
                     <span class="tile-title">{{team.name}}</span>
                     <img class="tile-img" [src]="team?.image?.path" />
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

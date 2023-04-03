@@ -1,0 +1,42 @@
+.person-tile {
+    display: flex;
+    flex-direction: column;
+    // height: 460px;
+    width: 300px;
+    background-color: var(--dark-red);
+    overflow: hidden;
+}
+
+.person-tile-text-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    color: white;
+
+    & span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 420px;
+        white-space: nowrap;
+    }
+}
+
+.funktion-text {
+    font-weight: bold;
+}
+
+.person-tile-img {
+    height: 300px;
+    width: 300px;
+    object-position: top left;
+    object-fit: cover;
+}
+
+@media only screen and (max-width: 600px) {
+    .person-tile-text-container {
+        gap: 5px;
+        padding: 10px;
+    }
+}
+

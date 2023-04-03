@@ -1,17 +1,17 @@
 <ng-container *ngFor="let team of teams">
-    <div class="tile game-tile" 
-        [class.location-home]="game.location.value.includes('Schwarzach') || game.location.value.includes('Wolfurt')"
-        *ngFor="let game of team.events">
-        <span class="game-title">{{game.summary.value}}</span>
-        <span>{{game.description.value}}</span>
-        <hr class="line">
-        <span class="game-date">{{game.dtstart.value | weekday}} {{game.dtstart.value | date:'dd.MM.yyyy'}}</span>
-        <span class="game-date">{{game.dtstart.value | date:'HH:mm'}} Uhr</span>
-        <hr class="line">
-        <div class="game-location">
-            <img *ngIf="game.location.value.includes('Schwarzach')" src="assets/logo.png" class="home-logo" />
-            <img *ngIf="game.location.value.includes('Wolfurt')" src="assets/fcwolfurt_logo.png" class="home-logo" />
-            <span class="game-location-text">{{game.location.value}}</span>
+    <ng-container *ngFor="let game of team.events">
+        <div class="game-tile" 
+            [class.location-home]="game.location.value.includes('Schwarzach') || game.location.value.includes('Wolfurt')">
+            <div class="game-date-description">
+                <span class="game-date">{{game.dtstart.value | weekday}} {{game.dtstart.value | date:'dd.MM.yyyy'}} {{game.dtstart.value | date:'HH:mm'}} Uhr</span>
+                <span>{{game.description.value}}</span>
+            </div>
+            <span class="game-title">{{game.summary.value}}</span>
+            <div class="game-location">
+                <img *ngIf="game.location.value.includes('Schwarzach')" src="assets/logo.png" class="home-logo" />
+                <img *ngIf="game.location.value.includes('Wolfurt')" src="assets/fcwolfurt_logo.png" class="home-logo" />
+                <span class="game-location-text">{{game.location.value}}</span>
+            </div>
         </div>
-    </div>
+    </ng-container>
 </ng-container>

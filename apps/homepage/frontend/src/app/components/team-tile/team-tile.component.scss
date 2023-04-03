@@ -1,0 +1,29 @@
+.team-tile {
+    display: flex;
+    flex-direction: column;
+    max-width: 460px;
+    background-color: var(--dark-red);
+
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.team-tile-img {
+    width: 100%;
+    height: 259px; // 16:9 format of 460px
+    object-position: center;
+    object-fit: cover;
+}
+
+.team-tile-name {
+    padding: 20px;
+    color: white;
+}
+
+@media only screen and (max-width: 600px) {
+    .team-tile-name {
+        padding: 10px 20px;
+    }
+}

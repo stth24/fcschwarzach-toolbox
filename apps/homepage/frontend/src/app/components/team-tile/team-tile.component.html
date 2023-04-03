@@ -1,0 +1,4 @@
+<div class="team-tile" (click)="navigateToTeamPage(team)" *ngIf="team">
+    <img class="team-tile-img" [src]="team.image.path" />
+    <span class="tile-title team-tile-name">{{team.name}}</span>
+</div>
