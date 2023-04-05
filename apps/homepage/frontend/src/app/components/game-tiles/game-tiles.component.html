@@ -4,7 +4,7 @@
             [class.location-home]="game.location.value.includes('Schwarzach') || game.location.value.includes('Wolfurt')">
             <div class="game-date-description">
                 <span class="game-date">{{game.dtstart.value | weekday}} {{game.dtstart.value | date:'dd.MM.yyyy'}} {{game.dtstart.value | date:'HH:mm'}} Uhr</span>
-                <span>{{game.description.value}}</span>
+                <span class="game-description">{{game.description.value}}</span>
             </div>
             <span class="game-title">{{game.summary.value}}</span>
             <div class="game-location">

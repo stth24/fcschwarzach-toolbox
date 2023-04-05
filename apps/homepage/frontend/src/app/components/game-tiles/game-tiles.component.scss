@@ -22,11 +22,17 @@
     gap: 5px;
 }
 
+.game-description {
+    text-align: right;
+}
+
 
 .game-title {
     align-self: center;
+    text-align: center;
     font-weight: bold;
     font-size: 1.3rem;
+    min-height: 40px;
 }
 
 .line {
