@@ -6,7 +6,7 @@
                 <span class="game-date">{{game.dtstart.value | weekday}} {{game.dtstart.value | date:'dd.MM.yyyy'}} {{game.dtstart.value | date:'HH:mm'}} Uhr</span>
                 <span class="game-description">{{game.description.value}}</span>
             </div>
-            <span class="game-title">{{game.summary.value}}</span>
+            <div class="game-title"><span>{{game.summary.value}}</span></div>
             <div class="game-location">
                 <img *ngIf="game.location.value.includes('Schwarzach')" src="assets/logo.png" class="home-logo" />
                 <img *ngIf="game.location.value.includes('Wolfurt')" src="assets/fcwolfurt_logo.png" class="home-logo" />

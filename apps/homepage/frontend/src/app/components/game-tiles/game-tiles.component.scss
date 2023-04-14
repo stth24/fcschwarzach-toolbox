@@ -28,8 +28,9 @@
 
 
 .game-title {
-    align-self: center;
-    text-align: center;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
     font-weight: bold;
     font-size: 1.3rem;
     min-height: 40px;
