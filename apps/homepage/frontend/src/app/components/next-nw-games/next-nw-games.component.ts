@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { filterAbgesagt, TeamData } from '@fcschwarzach/shared-generalplan-api';
+import { TeamData, filterAbgesagt } from '@fcschwarzach/shared-generalplan-api';
 
 @Component({
     selector: 'app-next-nw-games',
@@ -28,6 +28,9 @@ export class NextNwGamesComponent implements OnChanges {
                     .filter(event => event.dtstart.value >= today)
                     .slice(0, 1);
         })
+
+        // remove teams without events
+        this.teams = this.teams.filter(team => team.events.length > 0);
     }
 
 }

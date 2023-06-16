@@ -3,14 +3,13 @@
 <ng-template #teamsLoaded>
     <div class="team-section">
         <h2 class="team-section-header">KM</h2>
-        <app-game-tiles *ngIf="eins else noGames" [teams]="[eins]"></app-game-tiles>
+        <app-game-tiles *ngIf="(eins && eins.events.length > 0) else noGames" [teams]="[eins]"></app-game-tiles>
     </div>
     
-    <div class="team-section">
+    <!-- <div class="team-section">
         <h2 class="team-section-header">1b</h2>
-        <app-game-tiles *ngIf="einsB else noGames" [teams]="[einsB]"></app-game-tiles>
-    
-    </div>
+        <app-game-tiles *ngIf="(einsB && einsB.events.length > 0) else noGames" [teams]="[einsB]"></app-game-tiles>
+    </div> -->
 </ng-template>
 
 <ng-template #noGames>

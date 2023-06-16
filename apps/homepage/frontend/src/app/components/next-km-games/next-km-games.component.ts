@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { filterAbgesagt, TeamData } from '@fcschwarzach/shared-generalplan-api';
+import { TeamData, filterAbgesagt } from '@fcschwarzach/shared-generalplan-api';
 
 @Component({
     selector: 'app-next-km-games',
@@ -22,11 +22,11 @@ export class NextKmGamesComponent implements OnChanges {
             this.eins = km;
         }
 
-        const einsB = this.teamData.find(team => team.name === '1b')
-        if (einsB) {
-            this.filterTeam(einsB);
-            this.einsB = einsB;
-        }
+        // const einsB = this.teamData.find(team => team.name === '1b')
+        // if (einsB) {
+        //     this.filterTeam(einsB);
+        //     this.einsB = einsB;
+        // }
     }
 
     filterTeam(team: TeamData) {
