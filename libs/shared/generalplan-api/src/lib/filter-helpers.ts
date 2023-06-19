@@ -47,7 +47,7 @@ export function filterAbgesagt(event: IcalEvent): boolean {
 }
 
 export function filterPlaces(event: IcalEvent, filters: Filters): boolean {
-    const eventLocationLowerCase = event.location.value.toLowerCase();
+    const eventLocationLowerCase = event.location?.value.toLowerCase() ?? '';
 
     if (eventLocationLowerCase.includes(filters.places['schwarzach'].stringToMatch)) {
         return filters.places['schwarzach'].show;

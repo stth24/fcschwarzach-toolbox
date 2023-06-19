@@ -15,17 +15,20 @@ export class GeneralplanApiService {
 
     getGeneralplanData(prefix: string) {
         return new Promise<TeamData[]>((resolve, reject) => {
-            fetch(this.getUrl(prefix) + '/generalplan')
+            fetch(this.getUrl(prefix) + '/generalplan/')
                 .then(res => {
                     if (res.status === 200) {
                         res.json().then(data => {
                             const teams: TeamData[] = [];
+                            console.log('DATRA', data);
+
 
                             if (Array.isArray(data)) {
                                 data.forEach((d: any) => {
                                     teams.push({
                                         name: d.name,
                                         url: d.url,
+                                        km: d.km,
                                         events: ical.parseString(d.data).events
                                     })
                                 })

@@ -28,7 +28,7 @@ export class MatchFiltersComponent {
     }
 
     filterPlaces(event: IcalEvent): boolean {
-        const eventLocationLowerCase = event.location.value.toLowerCase();
+        const eventLocationLowerCase = event.location?.value.toLowerCase() ?? '';
 
         if (eventLocationLowerCase.includes(this.filters.places['schwarzach'].stringToMatch)) {
             return this.filters.places['schwarzach'].show;

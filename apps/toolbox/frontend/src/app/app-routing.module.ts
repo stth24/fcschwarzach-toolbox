@@ -1,7 +1,6 @@
 import { Injectable, NgModule } from '@angular/core';
 import { CanActivate, RouterModule, Routes } from '@angular/router';
 import { map } from 'rxjs';
-import { EditTeamsComponent } from './components/admin/edit-teams/edit-teams.component';
 import { EditWeeklyEventsComponent } from './components/admin/edit-weekly-events/edit-weekly-events.component';
 import { ContentComponent } from './components/content/content.component';
 import { GeneralplanComponent } from './components/generalplan/generalplan.component';
@@ -35,11 +34,6 @@ const routes: Routes = [
     {
         path: 'newplayerform',
         component: NewplayerFormComponent
-    },
-    {
-        path: 'teamsdata',
-        component: EditTeamsComponent,
-        canActivate: [AdminCanActive]
     },
     {
         path: 'weeklyevents',

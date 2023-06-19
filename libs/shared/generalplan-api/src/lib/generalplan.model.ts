@@ -13,6 +13,7 @@ export interface IcalEvent {
 export interface TeamData {
     name: string,
     url: string,
+    km: boolean,
     events: IcalEvent[]
 }
 

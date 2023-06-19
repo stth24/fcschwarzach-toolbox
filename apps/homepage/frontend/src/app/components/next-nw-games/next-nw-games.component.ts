@@ -19,7 +19,7 @@ export class NextNwGamesComponent implements OnChanges {
         today.setHours(0);
         today.setMinutes(0);
 
-        this.teams = this.teamData.filter(team => team.name !== 'KM' && team.name !== '1b');
+        this.teams = this.teamData.filter(team => !team.km);
 
         this.teams.forEach(team => {
             team.events =

@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SharedUiHelpersModule } from '@fcschwarzach/shared-ui-helpers';
 import { AppRoutingModule } from '../app-routing.module';
-import { EditTeamsComponent } from './admin/edit-teams/edit-teams.component';
 import { EditWeeklyEventsComponent } from './admin/edit-weekly-events/edit-weekly-events.component';
 import { ContentComponent } from './content/content.component';
 import { GeneralplanComponent } from './generalplan/generalplan.component';
@@ -18,7 +17,7 @@ import { WeekplanComponent } from './weekplan/weekplan.component';
 
 
 @NgModule({
-    declarations: [HeaderComponent, NavigationComponent, ContentComponent, NewplayerFormComponent, GeneralplanComponent, LoginFormComponent, EditTeamsComponent, WeekplanComponent, EditWeeklyEventsComponent, HourMinutePipe, MatchFiltersComponent],
+    declarations: [HeaderComponent, NavigationComponent, ContentComponent, NewplayerFormComponent, GeneralplanComponent, LoginFormComponent, WeekplanComponent, EditWeeklyEventsComponent, HourMinutePipe, MatchFiltersComponent],
     imports: [
         CommonModule,
         AppRoutingModule,
