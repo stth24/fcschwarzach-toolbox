@@ -76,12 +76,26 @@
             <h2 class="part-region-content-header">Mannschaften</h2>
             <div class="mannschaften-content">
                 <app-team-tile *ngFor="let team of mannschaften" [team]="team"></app-team-tile>
-                <!-- <div class="tile team-tile" (click)="navigateToTeamPage(team)" *ngFor="let team of mannschaften">
-                    <span class="tile-title">{{team.name}}</span>
-                    <img class="tile-img" [src]="team?.image?.path" />
-                </div> -->
             </div>
         </div>
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- NEWSLETTER -->
+<div class="main-part">
+    <h1 class="part-header">Newsletter</h1>
+    <div class="part-content">
+        <ng-container *ngIf="newsletterInfo">
+            <h2 class="part-region-content-header">Anmeldung</h2>
+            <p class="main-part-text">
+                {{newsletterInfo.text}}
+            </p>
+            <a [href]="newsletterInfo.link" target="_blank">
+                <button>Hier geht's zur Anmeldung</button>
+            </a>
+        </ng-container>    
     </div>
 </div>
 

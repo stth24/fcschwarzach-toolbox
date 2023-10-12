@@ -1,14 +1,16 @@
 button {
-  border: 2px solid var(--dark-blue);
-  background-color: white;
-  padding: 5px 10px;
+  background-color: darkred;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
 
   width: max-content;
   height: max-content;
 
   &:hover {
     color: white;
-    background-color: var(--dark-blue);
+    background-color: var(--light-red);
     cursor: pointer;
   }
 
@@ -29,6 +31,6 @@ button {
 
   &:hover {
     color: white;
-    background-color: darkred;
+    background-color: var(--light-red);
   }
 }

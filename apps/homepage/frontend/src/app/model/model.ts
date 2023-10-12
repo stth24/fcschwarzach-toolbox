@@ -83,3 +83,8 @@ export interface SocialMediaLinks {
     github: string,
     youtube: string
 }
+
+export interface NewsletterInfo {
+    link: string,
+    text: string
+}

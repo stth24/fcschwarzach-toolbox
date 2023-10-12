@@ -15,10 +15,7 @@ export class NextKmGamesComponent implements OnChanges {
     ngOnChanges() {
         if (!this.teamData) return;
 
-
-
         this.kmTeams = this.teamData.filter(team => team.km);
-        console.log('km', this.kmTeams);
         this.teamData.forEach(team => this.filterTeam(team));
     }
 

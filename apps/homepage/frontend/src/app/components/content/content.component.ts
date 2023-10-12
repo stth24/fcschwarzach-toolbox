@@ -3,7 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeamData } from '@fcschwarzach/shared-generalplan-api';
 import { ApiService } from '../../api/api.service';
-import { Kontakt, Mannschaft, News, NWInfo, Vorstandsmitglied } from '../../model/model';
+import { Kontakt, Mannschaft, NWInfo, News, NewsletterInfo, Vorstandsmitglied } from '../../model/model';
 
 @Component({
     selector: 'app-content',
@@ -20,6 +20,7 @@ export class ContentComponent implements OnInit {
     mannschaften: Mannschaft[] = [];
     nwinfo: NWInfo | undefined;
     teamData: TeamData[] | undefined;
+    newsletterInfo: NewsletterInfo | undefined;
 
     currentNewsElement = 0;
 
@@ -74,6 +75,13 @@ export class ContentComponent implements OnInit {
 
         this.apiService.getGeneralPlanData()
             .then(teamData => this.teamData = teamData);
+
+        this.apiService.getNewsletterInfo()
+            .then(newsletterInfo => {
+                this.newsletterInfo = newsletterInfo;
+                console.log('INFO', newsletterInfo);
+
+            });
     }
 
     scrollSlider(left: boolean) {

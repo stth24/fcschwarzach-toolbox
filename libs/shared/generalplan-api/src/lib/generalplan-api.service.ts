@@ -20,8 +20,6 @@ export class GeneralplanApiService {
                     if (res.status === 200) {
                         res.json().then(data => {
                             const teams: TeamData[] = [];
-                            console.log('DATRA', data);
-
 
                             if (Array.isArray(data)) {
                                 data.forEach((d: any) => {

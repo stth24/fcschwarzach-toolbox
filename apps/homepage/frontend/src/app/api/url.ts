@@ -49,6 +49,7 @@ export const GET_KONTAKT = new URL(GET_SINGLETON + '/kontakt');
 export const GET_NW_INFO = new URL(GET_SINGLETON + '/nwinfo');
 export const GET_DOCOUMENTS_INFO = new URL(GET_SINGLETON + '/documents');
 export const GET_SOCIAL_MEDIA_LINKS = new URL(GET_SINGLETON + '/socialmedialinks');
+export const GET_NEWSLETTER_INFO = new URL(GET_SINGLETON + '/newsletter');
 
 
 export function addApiTokenToURLs(token: string) {
@@ -64,6 +65,7 @@ export function addApiTokenToURLs(token: string) {
         GET_SPONSOREN,
         GET_SPIELER,
         GET_DOCOUMENTS_INFO,
-        GET_SOCIAL_MEDIA_LINKS
+        GET_SOCIAL_MEDIA_LINKS,
+        GET_NEWSLETTER_INFO
     ].forEach(url => url.search = params.toString());
 }
