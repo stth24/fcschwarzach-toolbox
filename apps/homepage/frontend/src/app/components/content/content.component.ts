@@ -31,7 +31,8 @@ export class ContentComponent implements OnInit {
     constructor(private apiService: ApiService,
         private router: Router,
         private route: ActivatedRoute,
-        private sanitizer: DomSanitizer) { }
+        private sanitizer: DomSanitizer) {
+    }
 
     ngOnInit(): void {
         this.apiService.getNewsFromApi()
@@ -79,8 +80,6 @@ export class ContentComponent implements OnInit {
         this.apiService.getNewsletterInfo()
             .then(newsletterInfo => {
                 this.newsletterInfo = newsletterInfo;
-                console.log('INFO', newsletterInfo);
-
             });
     }
 
