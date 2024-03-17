@@ -43,6 +43,7 @@
               "with": "apps/toolbox-frontend/src/environments/environment.prod.ts"
             }
           ],
+          "baseHref": "./",
           "outputHashing": "none"
         },
         "development": {

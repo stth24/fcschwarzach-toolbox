@@ -43,6 +43,7 @@
               "with": "apps/homepage-frontend/src/environments/environment.prod.ts"
             }
           ],
+          "baseHref": "./",
           "outputHashing": "none"
         },
         "development": {
