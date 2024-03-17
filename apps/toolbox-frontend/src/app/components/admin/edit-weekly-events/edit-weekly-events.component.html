@@ -1,0 +1,125 @@
+<shared-ui-helpers-loader *ngIf="events === undefined"></shared-ui-helpers-loader>
+
+<ng-container *ngIf="events !== undefined">
+    <h1>Wöchentliche Events bearbeiten:</h1>
+    <div class="events-selection">
+        <select [(ngModel)]="selectedEvent" (change)="onChangeSelectedEvent()">
+            <option *ngFor="let event of events" [ngValue]="event">{{event.name}}</option>
+        </select>
+
+        <button (click)="showAddEventModal = true">Event-Typ hinzufügen</button>
+    </div>
+    <ng-container *ngIf="selectedEvent">
+        <div class="details">
+            <input type="text" (change)="changeEventName($event)" [value]="selectedEvent.name" />
+
+            <div class="event-buttons">
+                <button [disabled]="newEventName === selectedEvent.name || newEventName.length < 1" 
+                    (click)="updateEvent()">
+                    Speichern
+                </button>
+                <button class="delete-button" (click)="onDeleteEvent()">Löschen</button>
+            </div>
+
+            <hr class="detail-line">
+
+            <ng-container  *ngIf="dirtyTimeDetails.length > 0">
+
+                <h2 class="details-header">Events:</h2>
+                <ng-container *ngFor="let timeDetail of dirtyTimeDetails">
+                    <!-- show template here -->
+                    <ng-container 
+                        *ngTemplateOutlet="detailsTemplate;context:{timeDetail}">
+                    </ng-container>
+                    
+                    <div class="details-buttons">
+                        <button [disabled]="checkTimeDetailsValid(timeDetail)" (click)="updateTimeDetail(timeDetail)">Speichern</button>
+                        <button class="delete-button" (click)="timeDetailToDelete = timeDetail">Löschen</button>
+                    </div>
+
+                    <hr class="detail-line">
+                </ng-container>
+            </ng-container>
+            <button class="new-detail-button" (click)="showAddTimeDetail()">Event hinzufügen</button>
+        </div>
+    </ng-container>
+</ng-container>
+
+<!-- Delete Event -->
+<shared-ui-helpers-confirm-cancel-modal *ngIf="showDeleteEventModal"
+    [message]="'Event-Typ ' + selectedEvent?.name + ' wirklich löschen?'"
+    (close)="onCloseDeleteEventModal($event)" >
+</shared-ui-helpers-confirm-cancel-modal>
+
+<!-- Add Event -->
+<shared-ui-helpers-modal *ngIf="showAddEventModal">
+    <div class="add-event-modal">
+        <h2>Event-Typ hinzufügen</h2>
+
+        <input type="text" placeholder="Name" [(ngModel)]="addEventName"/>
+
+        <div class="add-modal-buttons"> 
+            <button (click)="addEvent()" [disabled]="!addEventName || addEventName.length < 1">Hinzufügen</button>
+            <button (click)="showAddEventModal = false">Abbrechen</button>
+        </div>
+    </div>
+</shared-ui-helpers-modal>
+
+<!-- Delete Time Detail -->
+<shared-ui-helpers-confirm-cancel-modal *ngIf="timeDetailToDelete"
+    [message]="'Event wirklich löschen?'"
+    (close)="onCloseDeleteTimeDetailModal($event)" >
+</shared-ui-helpers-confirm-cancel-modal>
+
+<!-- Add Time Detail -->
+<shared-ui-helpers-modal *ngIf="newTimeDetail">
+    <div class="add-detail-modal">
+        <h2>Event hinzufügen</h2>
+
+        <div class="details">
+            <!-- show template here -->
+            <ng-container 
+                *ngTemplateOutlet="detailsTemplate;context:{timeDetail: newTimeDetail}">
+            </ng-container>
+        </div>
+
+        <div class="add-modal-buttons"> 
+            <button (click)="addTimeDetail()">Hinzufügen</button>
+            <button (click)="newTimeDetail = undefined">Abbrechen</button>
+        </div>
+    </div>
+</shared-ui-helpers-modal>
+
+<!-- Template for TimeDetails -->
+<ng-template #detailsTemplate let-timeDetail="timeDetail">
+    <div>Tag:</div>
+    <select [(ngModel)]="timeDetail.day">
+        <option [ngValue]="'1'">Montag</option>
+        <option [ngValue]="'2'">Dienstag</option>
+        <option [ngValue]="'3'">Mittwoch</option>
+        <option [ngValue]="'4'">Donnerstag</option>
+        <option [ngValue]="'5'">Freitag</option>
+        <option [ngValue]="'6'">Samstag</option>
+        <option [ngValue]="'0'">Sonntag</option>
+    </select>
+    
+    <div>Ort:</div>
+    <input type="text" [(ngModel)]="timeDetail.location" />
+    
+    <div>Startzeit (Stunde):</div>
+    <select [(ngModel)]="timeDetail.startTimeHour">
+        <option *ngFor="let emptyItem of [].constructor(24); let i = index" [ngValue]="i.toString() | hourMinute">{{i.toString() | hourMinute}}</option>
+    </select>
+    
+    <div>Startzeit (Minute):</div>
+    <select [(ngModel)]="timeDetail.startTimeMinute">
+        <option *ngFor="let emptyItem of [].constructor(12); let i = index" [ngValue]="(i * 5).toString() | hourMinute">{{(i * 5).toString() | hourMinute}}</option>
+    </select>
+    
+    <div>Länge (hh:mm):</div>
+    <select [(ngModel)]="timeDetail.durationInMin">
+        <option *ngFor="let emptyItem of [].constructor(20); let i = index" [ngValue]="((i + 1) * 15).toString() | hourMinute">
+            {{((i + 1) * 15) * 60 * 1000 | date: 'HH:mm':'+0000'}} <!-- convert to milliseconds to show as date in UTC (e.g. 90min as 01:30)  -->
+        </option>
+    </select>
+</ng-template>

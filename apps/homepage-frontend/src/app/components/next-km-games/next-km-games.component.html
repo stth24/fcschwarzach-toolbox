@@ -1,0 +1,12 @@
+<shared-ui-helpers-loader *ngIf="!teamData else teamsLoaded"></shared-ui-helpers-loader>
+
+<ng-template #teamsLoaded>
+    <div class="team-section" *ngFor="let team of kmTeams">
+        <h2 class="team-section-header">{{team.name}}</h2>
+        <app-game-tiles *ngIf="(team.events.length > 0) else noGames" [teams]="[team]"></app-game-tiles>
+    </div>
+</ng-template>
+
+<ng-template #noGames>
+    <h3>Derzeit finden keine Spiele statt!</h3>
+</ng-template>

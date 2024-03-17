@@ -1,0 +1,75 @@
+<shared-ui-helpers-loader *ngIf="teams.length < 1 && !fetchError.status"></shared-ui-helpers-loader>
+
+<shared-ui-helpers-error-box *ngIf="fetchError.status"
+    [title]="fetchError.message.title"
+    [message]="fetchError.message.text">
+</shared-ui-helpers-error-box>
+
+<ng-container  *ngIf="teams.length > 0">
+    <div class="button-group">
+        <button (click)="toggleFilters()">Filter <span class="filter-button-text">anzeigen/ausblenden</span></button>
+        <button *ngIf="matchTable.length > 0" (click)="navigateToCurrentDate()">
+            <span class="today-button-text">Zu</span> 
+            Heute 
+            <span class="today-button-text">springen</span>
+        </button>
+    </div>
+
+    <!-- Filters -->
+    <app-match-filters 
+        [showFilters]="showFilters" 
+        [filters]="filters" 
+        [teams]="teams" 
+        (updatedFilters)="createTableData()"></app-match-filters>
+
+    <!-- Table -->
+    <div class="table-wrapper" *ngIf="matchTable.length > 0">
+        <table>
+            <thead>
+                <th class="firstColumn">Datum:</th>
+                <ng-container *ngFor="let team of teams">
+                    <th *ngIf="filters.teamsUiState.get(team)?.show">{{team.name}}</th>
+                </ng-container>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let gameday of matchTable; let i = index">
+                    <tr class="tableRowMobile"
+                        [class.date-in-past]="gameday.date < today">
+                        <td>
+                            <b>{{gameday.date | weekday }} {{gameday.date | date: 'dd.MM.yyyy'}}</b>
+                        </td>
+                        <!-- create empty dummy td for each team column -->
+                        <td *ngFor="let team of gameday.teams"></td>
+                    </tr>
+                    <tr [id]="'row-' + i"
+                        class="dateRow"
+                        [class.date-in-past]="gameday.date < today">
+                        <td  class="firstColumn">
+                            <p><b>{{gameday.date | weekday }}</b></p>
+                            <p><b>{{gameday.date | date: 'dd.MM.yyyy'}}</b></p>
+                        </td>
+                        <ng-container *ngFor="let team of gameday.teams">
+                            <td [class.withoutGameTd]="team.events.length < 1"
+                            [class.withGame]="team.events.length > 0">
+                                <div class="match-event" 
+                                    [class.location-home-game]="team.events[0].location.value.includes('Schwarzach') || team.events[0].location.value.includes('Wolfurt')" 
+                                    *ngIf="team.events.length > 0">
+                                    <p><b>{{team.events[0].summary.value}}</b></p>
+                                    <p>{{team.events[0].description.value}}</p>
+                                    <hr>
+                                    <p>{{team.events[0].dtstart.value | date: 'HH:mm'}} Uhr</p>
+                                    <hr>
+                                    <p class="location-text" >
+                                        <img *ngIf="team.events[0].location.value.includes('Schwarzach')" src="assets/logo.png" class="home-logo" />
+                                        <img *ngIf="team.events[0].location.value.includes('Wolfurt')" src="assets/fcwolfurt_logo.png" class="home-logo" />
+                                        <span class="location-text">{{team.events[0].location.value}}</span>
+                                    </p>
+                                </div>
+                            </td>
+                        </ng-container>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</ng-container>

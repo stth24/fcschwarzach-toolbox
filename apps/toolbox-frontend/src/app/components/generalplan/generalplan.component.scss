@@ -1,0 +1,170 @@
+$border-size: 1px;
+$border-color: lightgray;
+
+:host {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.button-group {
+  button {
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+
+  button:first-child {
+    margin-left: 0;
+  }
+}
+
+// Matches table
+.table-wrapper {
+  display: flex;
+  overflow: auto;
+  flex: 1;
+
+  font-size: 0.8rem;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0px; // override default behaviour
+  width: 100%;
+  height: 100%;
+  table-layout: fixed;
+}
+
+th,
+td {
+  border-left: $border-size solid $border-color;
+  border-top: $border-size solid $border-color;
+  text-align: left;
+  vertical-align: top;
+  padding: 5px 10px;
+
+  width: 250px;
+
+  p {
+    margin: 0;
+  }
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  border-left: none;
+}
+
+tr:first-child td {
+  border-top: none;
+}
+
+th {
+  position: sticky; //always show th even on scroll down
+  top: 0;
+  z-index: 2;
+  border-top: none;
+  background-color: var(--background);
+  border-bottom: $border-size solid $border-color; //needs to be always visible and not disappear via scroll
+}
+
+.tableRowMobile {
+    display: none;
+}
+
+.firstColumn {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  border-left: none;
+  border-right: $border-size solid $border-color;
+  background-color: var(--background);
+
+  width: 100px;
+}
+
+thead .firstColumn {
+  z-index: 3;
+}
+
+.date-in-past, .date-in-past .firstColumn {
+    background-color: #eaeaea;
+}
+
+.withGame {
+  min-width: 200px;
+
+    .match-event {
+        padding: 10px;
+        flex-direction: column;
+        
+        background-color: var(--background);
+        color: var(--on-background);
+        border: 5px solid var(--dark-gray);
+    }
+
+    .location-home-game {
+        border-color:darkred;
+        
+        .location-text {
+            display: flex;
+            gap: 10px;
+            
+            font-weight: bold;
+            color: darkred;
+        }
+    }
+    
+    .home-logo {
+        height: 40px;
+        object-fit: contain;
+    }
+}
+
+.withoutGameTd {
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+
+hr {
+  border: 1px solid var(--dark-blue);
+}
+
+
+
+@media only screen and (max-width: 600px) {
+  th,
+  td {
+    width: 200px;
+  }
+
+  .dateRow {
+    position: relative;
+  }
+
+  thead .firstColumn {
+    visibility: hidden;
+  }
+
+  .firstColumn {
+    display: none;
+  }
+
+  .tableRowMobile {
+    display: table-row;
+    
+    td {
+        border-left: none;
+        position: sticky;
+        left: 0;
+    }
+}
+
+  .filter-button-text,
+  .today-button-text {
+    display: none;
+  }
+}

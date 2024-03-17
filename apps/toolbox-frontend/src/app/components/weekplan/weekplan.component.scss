@@ -1,0 +1,162 @@
+$border-color: lightgray;
+
+:host {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  align-content: center;
+}
+
+.header {
+  margin-bottom: 10px;
+
+  display: flex;
+  gap: 10px;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+  max-width: 100%;
+
+  .header-change-week-button {
+    font-weight: bold;
+  }
+
+  .header-date {
+    font-weight: bold;
+  }
+
+  .progress-box {
+    display: flex;
+    gap: 10px;
+  }
+}
+
+.header,
+.container {
+  width: max-content;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  overflow: auto;
+  box-sizing: border-box;
+  overflow: auto;
+  max-width: 100%;
+  font-size: 0.8rem;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid $border-color;
+
+  gap: 10px;
+  padding-bottom: 10px;
+
+  &:last-child {
+    border-right: none;
+  }
+
+  .day-header {
+    position: sticky; //always show header even on scroll down
+    top: 0;
+    z-index: 2;
+
+    font-weight: bold;
+    border-bottom: 1px solid $border-color;
+    padding: 5px 10px;
+
+    background-color: var(--background);
+  }
+}
+
+.event-entry {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 300px;
+
+  overflow: hidden;
+
+  background-color: var(--medium-blue);
+
+  margin: 0 10px;
+  padding: 10px;
+
+  .event-name {
+    font-weight: bold;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 2px solid var(--dark-blue);
+  }
+
+  .event-entry-details {
+    display: grid;
+    grid-template-columns: min-content auto;
+    row-gap: 5px;
+    column-gap: 10px;
+
+    overflow: hidden;
+  }
+
+  .event-details-topic {
+    font-weight: var(--semi-bold);
+  }
+}
+
+.single-event {
+    background-color: var(--background);
+    border: 4px solid var(--dark-gray);
+    color: var(--on-background);
+    
+    .location-home {
+        .home-logo {
+            height: 40px;
+            object-fit: contain;
+        }
+    }
+}
+
+.event-home {
+  border-color: darkred;
+}
+
+.location-home {
+    display: flex;
+    gap: 10px;
+
+    color: darkred;
+    font-weight: var(--semi-bold);
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    grid-template-columns: auto;
+    width: 100%;
+
+    .day {
+      border-bottom: 1px solid $border-color;
+      border-right: none;
+    }
+
+    .day:last-child {
+      border-bottom: none;
+    }
+
+    .event-details-topic,
+    .location-home {
+      font-weight: bold;
+    }
+
+    .without-entry {
+      padding: 10px;
+
+      &::after {
+        content: 'Kein Ereignis an diesem Tag!';
+      }
+    }
+  }
+}

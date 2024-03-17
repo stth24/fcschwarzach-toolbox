@@ -1,0 +1,5 @@
+<shared-ui-helpers-loader *ngIf="!teamData"></shared-ui-helpers-loader>
+
+<h2 *ngIf="teamData && teams.length < 1">Derzeit finden keine NW-Spiele statt!</h2>
+
+<app-game-tiles [teams]="teams"></app-game-tiles>

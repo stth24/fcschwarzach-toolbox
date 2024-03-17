@@ -1,0 +1,34 @@
+<ng-container *ngIf="!notFound else notFoundBlock">
+    <shared-ui-helpers-loader *ngIf="!teamItem"></shared-ui-helpers-loader>
+
+    <ng-container *ngIf="teamItem">
+        <img class="team-img" [src]="teamItem.image.path" />
+        <div class="team-content">
+            <h1>{{teamItem.name}}</h1>
+            <ng-container *ngIf="trainer">
+                <app-person-tile [person]="trainer"></app-person-tile>
+            </ng-container>
+
+            <ng-container *ngIf="spieler.length > 0">
+                <h1>Spieler</h1>
+                <div class="player-grid" >
+                    <div class="player-card" *ngFor="let player of spieler">
+                        <img class="player-img" [src]="player.image.path" />
+                        <div class="player-name">
+                            <div class="player-name-text">{{player.name}}</div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </ng-container>
+</ng-container>
+
+
+<ng-template #notFoundBlock>
+    <div class="not-found">
+        <h1>Sorry, es scheint keinen Team-Eintrag unter dieser URL zu geben!</h1>
+        <h2><a href="#news" class="clickable-link">Zurück zur Startseite</a></h2>
+    </div>
+</ng-template>
+

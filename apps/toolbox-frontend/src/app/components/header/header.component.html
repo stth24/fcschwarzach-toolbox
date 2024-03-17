@@ -1,0 +1,10 @@
+<img [class.navClosed]="!navOpen"
+    src="assets/burgermenu.png" 
+    class="toggle-nav-button" 
+    (click)="toggleMenu()" />
+
+<img src="assets/logo.png" />
+
+<h1>FC Schwarzach | Toolbox 
+    <ng-container *ngIf="loggedIn"> | Admin</ng-container> 
+</h1>

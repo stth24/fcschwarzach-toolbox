@@ -1,0 +1,66 @@
+
+<shared-ui-helpers-loader *ngIf="loadingProgress.loadingTasks.length > 0 && loadingProgress.completeTasks.length === 0"></shared-ui-helpers-loader>
+
+<shared-ui-helpers-error-box *ngIf="fetchError.status"
+    [title]="fetchError.message.title"
+    [message]="fetchError.message.text"></shared-ui-helpers-error-box>
+
+<ng-container *ngIf="loadingProgress.completeTasks.length > 0 && !fetchError.status">
+    <div class="header">
+        <button (click)="onResetToCurrentWeek()">Aktuelle Woche</button>
+        <button class="header-change-week-button" (click)="previousWeek()"> < </button>
+        <span class="header-date">{{firstDayOfSelectedWeek | date: 'dd.MM.yyyy'}} </span>
+        <button class="header-change-week-button" (click)="nextWeek()"> > </button>
+        <button (click)="toggleFilters()" *ngIf="teams">Filter</button>
+        <div class="progress-box" *ngIf="loadingProgress.loadingTasks.length > 0">
+            <progress  [value]="loadingProgress.loadingTasks.length / (loadingProgress.completeTasks.length + loadingProgress.loadingTasks.length)"></progress>
+            <span>Ladefortschritt: {{loadingProgress.loadingTasks.length / (loadingProgress.completeTasks.length + loadingProgress.loadingTasks.length) * 100}}%</span>
+        </div>
+    </div>
+
+    <app-match-filters *ngIf="teams"
+        [showFilters]="showFilters" 
+        [showDateFilters]="false"
+        [filters]="filters"
+        [teams]="teams"
+        (updatedFilters)="createTableData()"></app-match-filters>
+    
+    <div class="container">
+        <div class="day" 
+            *ngFor="let currentDayEntry of currentWeek"
+            [class.isWeekend]="currentDayEntry.date.getDay() === 6 || currentDayEntry.date.getDay() === 0">
+            <div class="day-header">
+                <div>{{currentDayEntry.date | weekday}}</div>
+                <div>{{currentDayEntry.date | date: 'dd.MM.yyyy'}}</div>
+            </div>
+            <ng-container *ngFor="let event of currentDayEntry.events">
+                <div class="event-entry" 
+                    [class.event-home]="(event.timeDetail.location.includes('Schwarzach') || event.timeDetail.location.includes('Wolfurt')) && event.type === eventType.oneTime"
+                    [class.single-event]="event.type === eventType.oneTime"
+                    [style]="'background-color: ' +  (event.type !== eventType.oneTime ? uiState.get(event.timeDetail.weeklyEventid) : '')">
+                        <span class="event-name">{{event.name}}</span>
+                        <div class="event-entry-details">
+                            <span class="event-details-topic">Start:</span>
+                            <span>{{event.timeDetail.startTimeHour + ':' + event.timeDetail.startTimeMinute}} Uhr</span>
+    
+                            <!-- we dont need to show duration if none is available -->
+                            <ng-container *ngIf="event.timeDetail.durationInMin">
+                                <span class="event-details-topic">Dauer:</span>
+                                <span>{{event.timeDetail.durationInMin}}min</span>
+                            </ng-container>
+    
+                            <span class="event-details-topic">Ort:</span>
+                            <div [class.location-home]="event.timeDetail.location.includes('Schwarzach') || event.timeDetail.location.includes('Wolfurt')">
+                                <span>{{event.timeDetail.location}}</span>
+                                <img *ngIf="event.timeDetail.location.includes('Schwarzach') && event.type === eventType.oneTime" src="assets/logo.png" class="home-logo" />
+                                <img *ngIf="event.timeDetail.location.includes('Wolfurt') && event.type === eventType.oneTime" src="assets/fcwolfurt_logo.png" class="home-logo" />
+                            </div>
+                        </div>
+                    </div>
+            </ng-container>
+            
+            <!-- No events at this day -->
+            <div class="without-entry" *ngIf="currentDayEntry.events.length < 1"></div>
+        </div>
+    </div>
+</ng-container>

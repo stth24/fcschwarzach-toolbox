@@ -1,0 +1,6 @@
+<app-header [navOpen]="navOpen" (toggleNav)="toggleMenu()"></app-header>
+
+<div class="main">
+    <app-navigation [navOpen]="navOpen"></app-navigation>
+    <div class="content"><router-outlet></router-outlet></div>
+</div>

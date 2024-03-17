@@ -1,0 +1,22 @@
+<a href="#news"><img src="assets/logo.png" class="header-logo" /></a>
+<ng-container *ngTemplateOutlet="items"></ng-container>
+
+<div class="mobile-menu">
+    <span class="header-item" (click)="toggleMobileMenu()">FC Schwarzach | Menü {{showMobileMenu ? '&#9660;' : '&#9654;'}}</span>
+</div>
+
+<div class="mobile-menu-container" *ngIf="showMobileMenu" 
+    (click)="toggleMobileMenu()">
+    <ng-container *ngTemplateOutlet="items"></ng-container>
+</div>
+
+<ng-template #items>
+    <a href="#news" class="header-item">News</a>
+    <a class="header-item" href="#km">KM</a>
+    <a class="header-item" href="#nachwuchs">Nachwuchs</a>
+    <a class="header-item" href="#verein">Verein</a>
+    <a class="header-item" href="#teams">Teams</a>
+    <a class="header-item" href="#kontakt">Kontakt</a>
+    <a class="header-item" href="#sponsoren">Sponsoren</a>
+    <a class="header-item" href="/toolbox">Toolbox</a>
+</ng-template>

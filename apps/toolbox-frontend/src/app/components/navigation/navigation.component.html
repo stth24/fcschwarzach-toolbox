@@ -1,0 +1,28 @@
+<div class="entries-top">
+    <div class="nav-entry" routerLink="/generalplan">Generalplan</div>
+    <div class="nav-entry" routerLink="/weekplan">Wochenplan</div>
+    <div class="nav-entry" routerLink="/newplayerform">Anmeldung</div>
+
+    
+    <a href="http://fcschwarzach.com">
+        <div class="nav-entry">Zurück zur Homepage</div>
+    </a>
+
+    <div class="admin-entries" *ngIf="loggedIn">
+        <div class="nav-entry" routerLink="/weeklyevents">Wöchentliche Events</div>
+    </div>
+</div>
+
+<div class="entries-bottom">
+    <div *ngIf="!loggedIn" class="nav-entry admin-login" (click)="adminLogin()">
+        Admin Login
+    </div>
+    
+    <div *ngIf="loggedIn" class="nav-entry admin-login" (click)="adminLogout()">
+        Logout
+    </div>
+</div>
+
+<shared-ui-helpers-modal *ngIf="showAdminLogin">
+    <app-login-form (closeModal)="closeLoginModal()"></app-login-form>
+</shared-ui-helpers-modal>

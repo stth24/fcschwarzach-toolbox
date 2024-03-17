@@ -1,0 +1,23 @@
+<div class="news-entry">
+    <ng-container *ngIf="notFound === false else notFoundBlock">
+        <ng-template #loader>
+            <shared-ui-helpers-loader></shared-ui-helpers-loader>
+        </ng-template>
+
+        <ng-container *ngIf="newsItem; else loader">
+            <img class="news-pic" [src]="newsItem.image.path" />
+            <div class="header">
+                <h1>{{newsItem.title}}</h1>
+                <span class="news-modified">{{newsItem.modified | date: 'dd.MM.yyyy HH:mm'}} Uhr</span>
+            </div>
+            <div class="news-text" [innerHtml]="newsItem.text | safeHtml"></div>
+        </ng-container>
+    </ng-container>
+    
+    <ng-template #notFoundBlock>
+        <div class="not-found">
+            <h1>Sorry, es scheint keinen News-Artikel unter dieser URL zu geben!</h1>
+            <h2><a href="#news" class="clickable-link">Zurück zur Startseite</a></h2>
+        </div>
+    </ng-template>
+</div>
