@@ -43,7 +43,7 @@
               "with": "apps/toolbox-frontend/src/environments/environment.prod.ts"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "none"
         },
         "development": {
           "optimization": false,
