@@ -3,7 +3,7 @@
 <div class="sponsor-container" [id]="SPONSOR_CONTAINER_ID">
     <ng-container *ngIf="sponsors && sponsors.length > 0">
         <div class="sponsor-tile" *ngFor="let sponsor of sponsors" [title]="sponsor.name">
-            <a class="sponsor-img" [href]="sponsor.url || '#'">
+            <a class="sponsor-img tile-form" [href]="sponsor.url || '#'">
                 <img [src]="sponsor?.image?.path" [alt]="sponsor.name" />
             </a>
         </div>

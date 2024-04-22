@@ -1,6 +1,6 @@
 <ng-container *ngFor="let team of teams">
     <ng-container *ngFor="let game of team.events">
-        <div class="game-tile" 
+        <div class="game-tile tile-form" 
             [class.location-home]="game.location.value.includes('Schwarzach') || game.location.value.includes('Wolfurt')">
             <div class="game-date-description">
                 <span class="game-date">{{game.dtstart.value | weekday}} {{game.dtstart.value | date:'dd.MM.yyyy'}} {{game.dtstart.value | date:'HH:mm'}} Uhr</span>

@@ -30,7 +30,7 @@
   padding: 10px;
 
   &:hover {
-    background-color: var(--dark-blue);
+    background-color: var(--dark-gray);
     color: white;
     cursor: pointer;
   }
@@ -42,11 +42,11 @@
 }
 
 .admin-entries {
-  border-top: 2px solid var(--dark-blue);
+  border-top: 2px solid var(--dark-gray);
 }
 
 .admin-login {
-  border-top: 2px solid var(--dark-blue);
+  border-top: 2px solid var(--dark-gray);
 
   &:hover {
     background-color: var(--dark-gray);
