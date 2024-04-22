@@ -34,7 +34,7 @@
                 <div>{{currentDayEntry.date | date: 'dd.MM.yyyy'}}</div>
             </div>
             <ng-container *ngFor="let event of currentDayEntry.events">
-                <div class="event-entry" 
+                <div class="event-entry tile-form" 
                     [class.event-home]="(event.timeDetail.location.includes('Schwarzach') || event.timeDetail.location.includes('Wolfurt')) && event.type === eventType.oneTime"
                     [class.single-event]="event.type === eventType.oneTime"
                     [style]="'background-color: ' +  (event.type !== eventType.oneTime ? uiState.get(event.timeDetail.weeklyEventid) : '')">

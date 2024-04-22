@@ -51,7 +51,7 @@
                         <ng-container *ngFor="let team of gameday.teams">
                             <td [class.withoutGameTd]="team.events.length < 1"
                             [class.withGame]="team.events.length > 0">
-                                <div class="match-event" 
+                                <div class="match-event tile-form" 
                                     [class.location-home-game]="team.events[0].location.value.includes('Schwarzach') || team.events[0].location.value.includes('Wolfurt')" 
                                     *ngIf="team.events.length > 0">
                                     <p><b>{{team.events[0].summary.value}}</b></p>
