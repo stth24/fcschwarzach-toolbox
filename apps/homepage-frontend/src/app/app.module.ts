@@ -27,6 +27,10 @@ const routes: Routes = [
         component: TeamPageComponent,
     },
     {
+        path: ':navigationId',
+        component: ContentComponent
+    },
+    {
         path: '**',
         redirectTo: '',
     }

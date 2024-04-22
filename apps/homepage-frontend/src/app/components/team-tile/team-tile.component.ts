@@ -13,6 +13,6 @@ export class TeamTileComponent {
     constructor(private router: Router, private route: ActivatedRoute) { }
 
     navigateToTeamPage(team: Mannschaft) {
-        this.router.navigate(['team', team.id], { relativeTo: this.route });
+        this.router.navigate(['team', team.id]);
     }
 }

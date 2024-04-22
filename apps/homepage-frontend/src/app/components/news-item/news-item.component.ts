@@ -15,6 +15,6 @@ export class NewsItemComponent {
     constructor(private router: Router, private route: ActivatedRoute) { }
 
     navigateToNewsItem(newsItem: News) {
-        this.router.navigate(['news', newsItem.id], { relativeTo: this.route });
+        this.router.navigate(['news', newsItem.id]);
     }
 }
