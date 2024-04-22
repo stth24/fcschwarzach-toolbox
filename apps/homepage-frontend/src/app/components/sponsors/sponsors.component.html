@@ -1,6 +1,8 @@
 <shared-ui-helpers-loader *ngIf="!sponsors || sponsors.length < 1"></shared-ui-helpers-loader>
 
-<div class="sponsor-container" [id]="SPONSOR_CONTAINER_ID">
+<div class="divider" *ngIf="withDivider()"></div>
+
+<div class="sponsor-container" [id]="SPONSOR_CONTAINER_ID" [class.with-divider]="withDivider()">
     <ng-container *ngIf="sponsors && sponsors.length > 0">
         <div class="sponsor-tile" *ngFor="let sponsor of sponsors" [title]="sponsor.name">
             <a class="sponsor-img tile-form" [href]="sponsor.url || '#'">

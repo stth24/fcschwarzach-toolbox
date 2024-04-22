@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { ApiService } from '../../api/api.service';
 import { Sponsor } from '../../model/model';
 
@@ -8,6 +8,8 @@ import { Sponsor } from '../../model/model';
     styleUrls: ['./sponsors.component.scss']
 })
 export class SponsorsComponent implements OnInit {
+
+    public withDivider = input<boolean>(false);
 
     sponsors: Sponsor[] = [];
 
@@ -19,16 +21,7 @@ export class SponsorsComponent implements OnInit {
         this.apiService.getSponsorenFromApi()
             .then(list => {
                 this.sponsors = list;
-                this.calcSponsorContainerAnimationDuration();
             });
-    }
-
-    calcSponsorContainerAnimationDuration() {
-        const sponsorContainerElement = document.getElementById(this.SPONSOR_CONTAINER_ID);
-
-        if (sponsorContainerElement) {
-            sponsorContainerElement.style.animationDuration = this.sponsors.length * 2 + 's';
-        }
     }
 
 }

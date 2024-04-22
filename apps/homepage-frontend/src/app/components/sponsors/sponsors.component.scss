@@ -2,6 +2,7 @@
     display: flex;
     width: 100%;
     overflow: auto;
+    flex-direction: column;
     
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
@@ -15,13 +16,17 @@
     width: 100%;
 
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min-content, 300px));
+    grid-template-columns: repeat(auto-fill, minmax(min-content, 200px));
     gap: 20px;
     justify-content: center;
 }
 
+.with-divider {
+    padding: 20px 0;
+}
+
 .sponsor-tile {
-    height: 100px;
+    height: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -43,7 +48,11 @@
 }
 
 @media only screen and (max-width: 600px) {
+    .sponsor-container {
+        grid-template-columns: repeat(auto-fill, minmax(min-content, 100px));
+    }
+
     .sponsor-tile {
-        height: 80px;
+        height: 30px;
     }
 }
