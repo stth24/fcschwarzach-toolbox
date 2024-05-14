@@ -33,7 +33,7 @@ export class AppComponent {
         else {
             this.darkMode = JSON.parse(darkModeFromLS);
             this.element.classList.toggle('dark-mode', this.darkMode);
-        };
+        }
     }
 
     toggleDarkMode() {

@@ -13,6 +13,21 @@
       }
     </script>
   </head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QQRV95P6GL"></script>
+  <script>
+    // do not send analytics data when running in dev mode
+    if(window.location.hostname.includes('fcschwarzach')) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+  
+      gtag('config', 'G-QQRV95P6GL');
+    }
+  </script>
+
+
   <body>
     <app-root></app-root>
   </body>
