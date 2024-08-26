@@ -1,9 +1,9 @@
-<div class="person-tile tile-form" *ngIf="person">
+<div class="person-tile tile-form" *ngIf="person() as person">
     <img class="person-tile-img" [src]="person.image.path" />
     <div class="person-tile-text-container">
         <span class="funktion-text">{{person.funktion}}</span>
         <span class="tile-title">{{person.name}}</span>
-        <span [title]="person.email">E-Mail: {{person.email}}</span>
-        <span>Tel.: {{person.phone}}</span>
+        <span [title]="person.email">E-Mail: {{person.email ?? '-'}}</span>
+        <span>Tel.: {{person.phone ?? '-'}}</span>
     </div>
 </div>

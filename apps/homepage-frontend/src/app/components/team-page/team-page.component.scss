@@ -16,7 +16,11 @@
     gap: 20px;
 }
 
-.player-grid {
+.info-text {
+    word-wrap: break-word;
+}
+
+.person-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min-content, 300px));
     gap: 10px;

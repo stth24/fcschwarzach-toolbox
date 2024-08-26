@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs';
 import { Subject } from 'rxjs/internal/Subject';
 import { ApiService } from '../../api/api.service';
 import { TEAM_ID_ROUTE_PARAM } from '../../app.module';
-import { Mannschaft, Spieler, Vorstandsmitglied } from '../../model/model';
+import { Mannschaft, Spieler, Trainer } from '../../model/model';
 
 @Component({
     selector: 'app-team-page',
@@ -17,7 +17,7 @@ export class TeamPageComponent implements OnInit {
 
     teamItem: Mannschaft | undefined;
     spieler: Spieler[] = [];
-    trainer: Vorstandsmitglied | undefined;
+    public trainers = signal<Trainer[]>([]);
 
     notFound = false;
 
@@ -36,20 +36,14 @@ export class TeamPageComponent implements OnInit {
                             // GET Spieler
                             this.apiService.getSpielerFromApi()
                                 .then(list => {
-                                    this.spieler = list.filter(player => {
-                                        let match = false;
-                                        this.teamItem?.spieler?.forEach(element => {
-                                            if (element._id === player.id) match = true;
-                                        });
-                                        return match;
-                                    })
+                                    this.spieler = list.filter(player => !!this.teamItem?.spieler?.some(element => element._id === player.id));
                                 })
 
                             // check if team has trainer
                             if (this.teamItem.trainer) {
                                 // GET Trainer
-                                this.apiService.getSingleTrainerFromApi(this.teamItem.trainer._id)
-                                    .then(trainer => this.trainer = { ...trainer, funktion: 'Trainer' });
+                                Promise.all(this.teamItem.trainer.map(trainer => this.apiService.getSingleTrainerFromApi(trainer._id)))
+                                    .then(trainers => this.trainers.set(trainers));
                             }
                         })
                         .catch(() => this.notFound = true)

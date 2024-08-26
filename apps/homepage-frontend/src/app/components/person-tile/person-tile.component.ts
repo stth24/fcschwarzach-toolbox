@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { Vorstandsmitglied } from '../../model/model';
 
 @Component({
@@ -7,5 +7,5 @@ import { Vorstandsmitglied } from '../../model/model';
     styleUrls: ['./person-tile.component.scss']
 })
 export class PersonTileComponent {
-    @Input() person?: Vorstandsmitglied;
+    public person = input.required<Vorstandsmitglied>();
 }

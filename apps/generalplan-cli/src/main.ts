@@ -4,9 +4,9 @@ import { createSimpleHomePlan } from "./app/createSimpleHomePlan";
 import { AsyncWait } from "./app/helpers/asyncWait";
 import { fetchTeamDataFromApi } from "./app/helpers/fetchFromWebcal";
 
-const startDate = new Date('2024-01-01');
+const startDate = new Date('2024-08-01');
 startDate.setHours(0, 0, 0, 0);
-const endDate = new Date('2024-06-30');
+const endDate = new Date('2024-12-01');
 const outputPath = path.join('dist', 'apps', 'generalplan-cli');
 
 const asyncWait = new AsyncWait();

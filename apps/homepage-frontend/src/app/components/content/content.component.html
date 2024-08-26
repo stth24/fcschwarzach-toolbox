@@ -48,7 +48,7 @@
                 <h2 class="part-region-content-header">Nachwuchsleitung</h2>
                 <div [innerHtml]="nwinfo.text | safeHtml"></div>
                 <div class="funktionen-content">
-                    <app-person-tile [person]="nachwuchsleiter"></app-person-tile>
+                    <app-person-tile *ngIf="nachwuchsleiter" [person]="nachwuchsleiter"></app-person-tile>
                 </div>
             </ng-container>
         </div>

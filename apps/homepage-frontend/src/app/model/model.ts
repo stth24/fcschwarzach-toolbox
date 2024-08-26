@@ -24,8 +24,8 @@ export interface ClubHistory {
 export interface Vorstandsmitglied {
     name: string,
     funktion: string,
-    email: string,
-    phone: string,
+    email: string | null,
+    phone: string | null,
     image: Asset,
 }
 
@@ -42,7 +42,8 @@ export interface Mannschaft {
     name: string,
     image: Asset,
     spieler: CollectionLink[],
-    trainer?: CollectionLink
+    trainer?: CollectionLink[],
+    info?: string
 }
 
 export interface Spieler {
@@ -51,13 +52,7 @@ export interface Spieler {
     image: Asset
 }
 
-export interface Trainer {
-    id: string,
-    name: string,
-    image: Asset,
-    phone: string,
-    email: string
-}
+export type Trainer = Vorstandsmitglied;
 
 export interface Sponsor {
     name: string,

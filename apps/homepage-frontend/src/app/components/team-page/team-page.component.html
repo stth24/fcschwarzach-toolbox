@@ -5,13 +5,21 @@
         <img class="team-img" [src]="teamItem.image.path" />
         <div class="team-content">
             <h1>{{teamItem.name}}</h1>
-            <ng-container *ngIf="trainer">
-                <app-person-tile [person]="trainer"></app-person-tile>
-            </ng-container>
+            <div *ngIf="teamItem.info" class="info-text" [innerHtml]="teamItem.info | safeHtml"></div>
+
+            @if (trainers().length > 0) {
+                <h1>Trainerstab</h1>
+                <div class="person-grid">
+                    @for (trainer of trainers(); track $index) {
+                        <app-person-tile [person]="trainer"></app-person-tile>
+                    }
+                </div>
+            }
+            <h1>Trainerstab</h1>
 
             <ng-container *ngIf="spieler.length > 0">
                 <h1>Spieler</h1>
-                <div class="player-grid" >
+                <div class="person-grid">
                     <div class="player-card tile-form" *ngFor="let player of spieler">
                         <img class="player-img" [src]="player.image.path" />
                         <div class="player-name">
